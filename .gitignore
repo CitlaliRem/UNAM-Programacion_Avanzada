@@ -1,4 +1,8 @@
+# Eclipse stuff
 .metadata
+*.settings
+*.cproject
+*.project
 
 # Object files
 *.o
