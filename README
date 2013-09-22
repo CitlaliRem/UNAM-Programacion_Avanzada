@@ -4,7 +4,7 @@ Vamos agregando lo que necesitemos....
 
 Jerarquía de carpetas
 ---------------------
-	De momento es necesario que cada proyecto tenga su propia carpeta, es decir, cada program
-	necesita su propia carpeta debajo del root de repositorio. Esto es dado a que Eclipse maneja
-	todo debajo root. De otra forma esta IDE entra en conflictos, por lo menos hasta donde sé yo.
-	Tal vez hay otra solución mejor para esto.
+De momento es necesario que cada proyecto tenga su propia carpeta, es decir, cada program
+necesita su propia carpeta debajo del root de repositorio. Esto es dado a que Eclipse maneja
+todo debajo root. De otra forma esta IDE entra en conflictos, por lo menos hasta donde sé yo.
+Tal vez hay otra solución mejor para esto.
