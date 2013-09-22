@@ -1,5 +1,0 @@
-http://stackoverflow.com/questions/1810327/cant-use-gcc-in-os-x-terminal,http://un.am/30dj0
-http://www.mkyong.com/mac/how-to-install-gcc-compiler-on-mac-os-x/,http://un.am/fjie2
-http://www.tutorialspoint.com/c_standard_library/c_function_fopen.htm,http://un.am/dlw032
-http:/whoknows.com,http://un.am/s4h8
-http://www.commandlinefu.com/commands/view/7743/terrorist-threat-level-text,http://un.am/0s012
