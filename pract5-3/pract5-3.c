@@ -1,3 +1,11 @@
+/*
+ * pract_5-3.c
+ *
+ *  Created on: Sep 22, 2013
+ *      Authors: César Alberto Trejo Juárez, Magnus Henkel
+ *
+ */
+
 #include <stdio.h>
 
 int main(){
