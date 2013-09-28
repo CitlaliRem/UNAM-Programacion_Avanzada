@@ -31,23 +31,17 @@ int main() {
 void swapColumns(int ceroCol,float A[3][3]) {
 	float temp[1][3];
 	int i, j;
-	for(i=0; i<3; i++){
-			for(j=0; j<3; j++){
-				printf("dentro de la funcion: %0.2f\t", A[i][j]);
-			}
-			printf("| %0.2f\n", B[i]);
-		}
 
+	printMatrix(A);
 	printf("ceroCol: %i\n", ceroCol);
 	int l;
-
-	//printf("\nA[ceroCol][1] %0.2f", A[1][1]);
 
 	for(l=0;l<3;l++) {
 		temp[1][l] = A[ceroCol][l];
 		A[ceroCol][l] = A[ceroCol+1][l];
 		A[ceroCol+1][l] = temp[1][l];
 	}
+
 	printf("hasta aqui");
 
 }
