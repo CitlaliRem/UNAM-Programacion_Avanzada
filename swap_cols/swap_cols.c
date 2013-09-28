@@ -22,7 +22,7 @@ int main() {
 	int i, j ,k;
 
 	swapColumns(2, A);
-
+	printf("\n");
 	printMatrix(A);
 
 	return 0;
@@ -30,19 +30,15 @@ int main() {
 
 void swapColumns(int ceroCol,float A[3][3]) {
 	float temp[1][3];
-	int i, j;
-
-	printMatrix(A);
-	printf("ceroCol: %i\n", ceroCol);
 	int l;
 
-	for(l=0;l<3;l++) {
-		temp[1][l] = A[ceroCol][l];
-		A[ceroCol][l] = A[ceroCol+1][l];
-		A[ceroCol+1][l] = temp[1][l];
-	}
+	printMatrix(A);
 
-	printf("hasta aqui");
+	for(l=0;l<3;l++) {
+		temp[0][l] = A[ceroCol][l];
+		A[ceroCol][l] = A[ceroCol+1][l];
+		A[ceroCol+1][l] = temp[0][l];
+	}
 
 }
 
