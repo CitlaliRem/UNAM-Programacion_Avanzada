@@ -20,11 +20,12 @@ int main(){
 	int i, j ,k;
 
 	/** Aquí debe haber un test si en la columna 0 o 1 A[i][i] se hace cero.
-	 * Si es el caso se ejecuta swapColumns.
-	 * Despues se ejecuta el código que sigue.
+	 * Si es el caso se ejecuta swapColumns con el número del renglón en cuestión.
+	 * De momento se ejecuta de forma estática con el renglón 2 que sabemos que se
+	 * hace cero A[i][i].
 	 */
 
-	swapColumns(1);
+	swapColumns(1); // Aquí se debe asignar el argumente dependiendo del resultado del test
 
 	for(i=0; i<3;i++){
 	    for(j=i+1; j<3; j++){
