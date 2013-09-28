@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 
-void swapRows(int zeroCol);
+void swapRows(int zeroRow);
 void printMatrix();
 
 float A[3][3] = {{1,2,3},{-2,-4,8},{3,1,2}};
@@ -47,23 +47,23 @@ int main(){
 /*****************************/
 /* funtion swapRows       */
 /*****************************/
-void swapRows(int zeroCol) {
+void swapRows(int zeroRow) {
 	float temp[1][3];
 	float Btemp1;
 	int l;
 
 	printMatrix();
 
-	if(zeroCol<2) { // asegurando que no intenta
+	if(zeroRow<2) { // asegurando que no intenta
 		for(l=0;l<3;l++) {
-			temp[0][l] = A[zeroCol][l];
-			A[zeroCol][l] = A[zeroCol+1][l];
-			A[zeroCol+1][l] = temp[0][l];
+			temp[0][l] = A[zeroRow][l];
+			A[zeroRow][l] = A[zeroRow+1][l];
+			A[zeroRow+1][l] = temp[0][l];
 		}
 
-		Btemp1 = B[zeroCol];
-		B[zeroCol] = B[zeroCol+1];
-		B[zeroCol+1] = Btemp1;
+		Btemp1 = B[zeroRow];
+		B[zeroRow] = B[zeroRow+1];
+		B[zeroRow+1] = Btemp1;
 	}
 
 	printMatrix();
