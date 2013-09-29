@@ -10,6 +10,8 @@
 
 void swapRows(int zeroRow);
 void printMatrix();
+int test();
+void reset();
 
 float A[3][3] = {{1,2,3},{-2,-4,8},{3,1,2}};
 float B[3] ={ 2.4,6.4,7.6};
@@ -18,10 +20,17 @@ float cte;
 int main(){
 
 	int i, j ,k;
+	int zero;
 
+<<<<<<< HEAD
 
 
 	swapRows(1); // Aquí se debe asignar el argumente dependiendo del resultado del test
+=======
+	zero = test();
+	reset();
+	swapRows(zero); // Aquí se debe asignar el argumente dependiendo del resultado del test
+>>>>>>> c6ec6bb540428e266c5f307c216492cfbbddc1e0
 
 	for(i=0; i<3;i++){
 	    for(j=i+1; j<3; j++){
@@ -41,7 +50,7 @@ int main(){
 }
 
 /*****************************/
-/* funtion swapRows       */
+/* funtion swapRows          */
 /*****************************/
 void swapRows(int zeroRow) {
 	float temp[1][3];
@@ -78,4 +87,33 @@ void printMatrix() {
 		printf("| %0.2f\n", B[i]);
 	}
 	printf("\n");
+}
+
+/*****************************/
+/* funtion test 	         */
+/*****************************/
+int test(){
+
+	for(i=0; i<3;i++){
+		if (A[i][i]==0) {
+			printf("Exists 0 in main diagonal\n");
+			return 1;
+		}
+	    for(j=i+1; j<3; j++){
+		cte = A[j][i]/A[i][i];
+		for(k=i; k<3; k++){
+			A[j][k] = A[j][k] - cte * A[i][k];
+		}
+		B[j] = B[j] - cte * B[i];
+	    }
+	}
+	return 0;
+}
+
+/*****************************/
+/* funtion reset 	         */
+/*****************************/
+void reset(){
+	A[3][3] = {{1,2,3},{-2,-4,8},{3,1,2}};
+	B[3] ={ 2.4,6.4,7.6};
 }
