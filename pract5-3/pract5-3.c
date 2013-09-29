@@ -22,7 +22,15 @@ int main(){
 	int j = 0;
 	int k = 0;
 
+<<<<<<< HEAD
 	swapRows(test());
+=======
+	do{
+	zero = test();
+	reset();
+	swapRows(zero); // Aquí se debe asignar el argumente dependiendo del resultado del test
+	}while (zero == 1);
+>>>>>>> b2cac590129df1c11a1fbb17cb6f9e113ffba297
 
 	for(i=0; i<3;i++){
 	    for(j=i+1; j<3; j++){
@@ -36,7 +44,7 @@ int main(){
 	}
 
 	printMatrix();
-	printf("\nx_3 value: %0.2f", B[2]/A[2][2]);
+	printf("\nx_3 value: %0.2f\n", B[2]/A[2][2]);
 
 	return 0;
 }
@@ -49,8 +57,15 @@ void swapRows(int zeroRow) {
 	float Btemp1;
 	int l;
 
+<<<<<<< HEAD
 	if(zeroRow<2) { // asegurando que no intenta cambiar el último renglón con el que sigue
 		for(l=0;l<3;l++) {
+=======
+	printMatrix();
+
+	if(zeroRow<2) { // asegurando que no intenta
+		for(l=0;l<3;l++) {  // aqui esta el problema
+>>>>>>> b2cac590129df1c11a1fbb17cb6f9e113ffba297
 			temp[0][l] = A[zeroRow][l];
 			A[zeroRow][l] = A[zeroRow+1][l];
 			A[zeroRow+1][l] = temp[0][l];
@@ -66,12 +81,12 @@ void swapRows(int zeroRow) {
 /* funtion printMatrix       */
 /*****************************/
 void printMatrix() {
-	int i, j;
-	for(i=0; i<3; i++){
-		for(j=0; j<3; j++){
-			printf("%0.2f\t", A[i][j]);
+	int z, x;
+	for(z=0; z<3; z++){
+		for(x=0; x<3; x++){
+			printf("%0.2f\t", A[z][x]);
 		}
-		printf("| %0.2f\n", B[i]);
+		printf("| %0.2f\n", B[z]);
 	}
 	printf("\n");
 }
@@ -80,6 +95,7 @@ void printMatrix() {
 /* funtion test 	         */
 /*****************************/
 int test(){
+<<<<<<< HEAD
 	int i,j,k;
 	float Atemp[3][3];
 	float Btemp[3];
@@ -103,7 +119,34 @@ int test(){
 			Atemp[j][k] = Atemp[j][k] - cte * Atemp[i][k];
 		}
 		Btemp[j] = Btemp[j] - cte * Btemp[i];
+=======
+	int m, p, o;
+	int cnst;
+
+	for(m=0; m<3;m++){
+		if (A[m][m]==0) {
+			printf("Exists 0 in main diagonal\n");
+			return 1;
+		}
+	    for(p=m+1; p<3; p++){
+		cnst = A[p][m]/A[m][m];
+		for(o=m; o<3; o++){
+			A[p][o] = A[p][o] - cte * A[m][o];
+		}
+		B[p] = B[p] - cte * B[m];
+>>>>>>> b2cac590129df1c11a1fbb17cb6f9e113ffba297
 	    }
 	}
-	return 0;
+	return 2;
 }
+<<<<<<< HEAD
+=======
+
+/*****************************/
+/* funtion reset 	         */
+/*****************************/
+void reset() {
+	float A[3][3] = {{1,2,3},{-2,-4,8},{3,1,2}};
+	float B[3] = { 2.4,6.4,7.6};
+}
+>>>>>>> b2cac590129df1c11a1fbb17cb6f9e113ffba297
