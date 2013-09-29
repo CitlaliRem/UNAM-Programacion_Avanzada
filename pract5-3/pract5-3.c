@@ -21,6 +21,7 @@ int main(){
 
 	int i, j ,k;
 	int zero;
+
 	do{
 	zero = test();
 	reset();
@@ -104,7 +105,7 @@ int test(){
 		B[p] = B[p] - cte * B[m];
 	    }
 	}
-	return 0;
+	return 2;
 }
 
 /*****************************/
