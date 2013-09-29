@@ -21,10 +21,11 @@ int main(){
 
 	int i, j ,k;
 	int zero;
-
+	do{
 	zero = test();
 	reset();
 	swapRows(zero); // Aquí se debe asignar el argumente dependiendo del resultado del test
+	}while (zero == 1);
 
 	for(i=0; i<3;i++){
 	    for(j=i+1; j<3; j++){
@@ -38,7 +39,7 @@ int main(){
 	}
 
 	printMatrix();
-	printf("\nx_3 value: %0.2f", B[2]/A[2][2]);
+	printf("\nx_3 value: %0.2f\n", B[2]/A[2][2]);
 
 	return 0;
 }
@@ -54,7 +55,7 @@ void swapRows(int zeroRow) {
 	printMatrix();
 
 	if(zeroRow<2) { // asegurando que no intenta
-		for(l=0;l<3;l++) {
+		for(l=0;l<3;l++) {  // aqui esta el problema
 			temp[0][l] = A[zeroRow][l];
 			A[zeroRow][l] = A[zeroRow+1][l];
 			A[zeroRow+1][l] = temp[0][l];
@@ -73,12 +74,12 @@ void swapRows(int zeroRow) {
 /* funtion printMatrix       */
 /*****************************/
 void printMatrix() {
-	int i, j;
-	for(i=0; i<3; i++){
-		for(j=0; j<3; j++){
-			printf("%0.2f\t", A[i][j]);
+	int z, x;
+	for(z=0; z<3; z++){
+		for(x=0; x<3; x++){
+			printf("%0.2f\t", A[z][x]);
 		}
-		printf("| %0.2f\n", B[i]);
+		printf("| %0.2f\n", B[z]);
 	}
 	printf("\n");
 }
@@ -87,18 +88,20 @@ void printMatrix() {
 /* funtion test 	         */
 /*****************************/
 int test(){
+	int m, p, o;
+	int cnst;
 
-	for(i=0; i<3;i++){
-		if (A[i][i]==0) {
+	for(m=0; m<3;m++){
+		if (A[m][m]==0) {
 			printf("Exists 0 in main diagonal\n");
 			return 1;
 		}
-	    for(j=i+1; j<3; j++){
-		cte = A[j][i]/A[i][i];
-		for(k=i; k<3; k++){
-			A[j][k] = A[j][k] - cte * A[i][k];
+	    for(p=m+1; p<3; p++){
+		cnst = A[p][m]/A[m][m];
+		for(o=m; o<3; o++){
+			A[p][o] = A[p][o] - cte * A[m][o];
 		}
-		B[j] = B[j] - cte * B[i];
+		B[p] = B[p] - cte * B[m];
 	    }
 	}
 	return 0;
@@ -107,7 +110,7 @@ int test(){
 /*****************************/
 /* funtion reset 	         */
 /*****************************/
-void reset(){
-	A[3][3] = {{1,2,3},{-2,-4,8},{3,1,2}};
-	B[3] ={ 2.4,6.4,7.6};
+void reset() {
+	float A[3][3] = {{1,2,3},{-2,-4,8},{3,1,2}};
+	float B[3] = { 2.4,6.4,7.6};
 }
