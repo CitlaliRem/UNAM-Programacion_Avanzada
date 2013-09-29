@@ -94,11 +94,14 @@ int test(){
 	}
 
 	for(i=0; i<3;i++){
+
 		if (Atemp[i][i]==0) {
 			return i;
 		}
+
 	    for(j=i+1; j<3; j++){
 		cte = Atemp[j][i]/Atemp[i][i];
+
 		for(k=i; k<3; k++){
 			Atemp[j][k] = Atemp[j][k] - cte * Atemp[i][k];
 		}
