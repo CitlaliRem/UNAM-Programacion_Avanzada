@@ -8,4 +8,11 @@
  *      sistemas de 3 incógnitas.
  */
 
+#include<stdio.h>
 
+float A[3][3] = {{1,2,3},{-2,-4,8},{3,1,2}};
+float B[3] ={ 2.4,6.4,7.6};
+
+main() {
+
+}
