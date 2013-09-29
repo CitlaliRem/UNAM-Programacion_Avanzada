@@ -11,7 +11,6 @@
 void swapRows(int zeroRow);
 void printMatrix();
 int test();
-void reset();
 
 float A[3][3] = {{1,2,3},{-2,-4,8},{3,1,2}};
 float B[3] ={ 2.4,6.4,7.6};
@@ -19,18 +18,11 @@ float cte;
 
 int main(){
 
-	int i, j ,k;
-	int zero;
+	int i = 0;
+	int j = 0;
+	int k = 0;
 
-<<<<<<< HEAD
-
-
-	swapRows(1); // Aquí se debe asignar el argumente dependiendo del resultado del test
-=======
-	zero = test();
-	reset();
-	swapRows(zero); // Aquí se debe asignar el argumente dependiendo del resultado del test
->>>>>>> c6ec6bb540428e266c5f307c216492cfbbddc1e0
+	swapRows(test());
 
 	for(i=0; i<3;i++){
 	    for(j=i+1; j<3; j++){
@@ -57,9 +49,7 @@ void swapRows(int zeroRow) {
 	float Btemp1;
 	int l;
 
-	printMatrix();
-
-	if(zeroRow<2) { // asegurando que no intenta
+	if(zeroRow<2) { // asegurando que no intenta cambiar el último renglón con el que sigue
 		for(l=0;l<3;l++) {
 			temp[0][l] = A[zeroRow][l];
 			A[zeroRow][l] = A[zeroRow+1][l];
@@ -70,9 +60,6 @@ void swapRows(int zeroRow) {
 		B[zeroRow] = B[zeroRow+1];
 		B[zeroRow+1] = Btemp1;
 	}
-
-	printMatrix();
-
 }
 
 /*****************************/
@@ -93,27 +80,30 @@ void printMatrix() {
 /* funtion test 	         */
 /*****************************/
 int test(){
+	int i,j,k;
+	float Atemp[3][3];
+	float Btemp[3];
+
+	/* Hacemos una copia de la matriz para el test*/
+	for(i=0; i<3; i++){
+		for(j=0; j<3; j++){
+			Atemp[i][j] = A[i][j];
+			Btemp[i] = B[i];
+
+		}
+	}
 
 	for(i=0; i<3;i++){
-		if (A[i][i]==0) {
-			printf("Exists 0 in main diagonal\n");
-			return 1;
+		if (Atemp[i][i]==0) {
+			return i;
 		}
 	    for(j=i+1; j<3; j++){
-		cte = A[j][i]/A[i][i];
+		cte = Atemp[j][i]/Atemp[i][i];
 		for(k=i; k<3; k++){
-			A[j][k] = A[j][k] - cte * A[i][k];
+			Atemp[j][k] = Atemp[j][k] - cte * Atemp[i][k];
 		}
-		B[j] = B[j] - cte * B[i];
+		Btemp[j] = Btemp[j] - cte * Btemp[i];
 	    }
 	}
 	return 0;
-}
-
-/*****************************/
-/* funtion reset 	         */
-/*****************************/
-void reset(){
-	A[3][3] = {{1,2,3},{-2,-4,8},{3,1,2}};
-	B[3] ={ 2.4,6.4,7.6};
 }
