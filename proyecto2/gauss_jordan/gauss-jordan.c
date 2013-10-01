@@ -1,11 +1,16 @@
-// Project #2
-// Gauss-Jordan
-// Authors: Magnus Henkel & César Alberto Trejo Juárez
-// Universidad Nacional Autónoma de México
-// Programación Avanzada y Métodos Numéricos
-// Created on: Monday 30 September 2013
-// ©
-// 
+/*
+ *	Project #2
+ *	Gauss-Jordan
+ *
+ *	Authors: 
+ *	 *	Magnus Henkel (magnus.henkel@zoho.com) 
+ *	 *	César Alberto Trejo Juárez (cesaratj27@gmail.com)
+ *
+ *	Universidad Nacional Autónoma de México
+ *	Programación Avanzada y Métodos Numéricos
+ *	Created on: Monday 30 September 2013
+ */
+
 
 #include <stdio.h>
 
@@ -15,23 +20,23 @@ float A[5][5] = {{2.0,1.0,3.0,6.0,-10.0},{-9.0,-4.0,-6.0,12.0,4.0},{-1.0,0.0,5.0
 float B[5] = {56.0,70.0,12.0,-30.0,45.0};
 
 /*********************/
-/*   Funtion Main    */
+/*   function main   */
 /*********************/
 int main(int argc, char const *argv[])
 {
 	int i, j, k;
 	float cte;
 
-	printf("Matriz:");
+	printf("Matrix:");
 	printf("\n---------\n");
 	printMatrix();
 	for(i = 0; i < 5; i++){
 
-		//Normalizamos el renglon pivote
+		//Normalizamos el renglón pivote
 		cte = A[i][i];
 		for (j = 0; j < 5; j++)
 		{
-			A[i][j] = A[i][j]/cte;
+			A[i][j] = A[i][j] / cte;
 		}
 		B[i] = B[i] / cte;
 		//Fin normalizar
@@ -58,13 +63,13 @@ int main(int argc, char const *argv[])
 			B[j] = B[j] - cte * B[i];
 		}
 	}
-	printf("\nResultados: ");
+	printf("\nSolution: ");
 	printf("\n--------------\n");
 	printMatrix();
 }
 
 /*****************************/
-/* funtion printMatrix       */
+/* function printMatrix      */
 /*****************************/
 void printMatrix() {
 	int i, j;
