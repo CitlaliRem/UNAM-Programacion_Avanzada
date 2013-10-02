@@ -16,7 +16,7 @@
 
 void enterCoefficients(int unknowns);
 void enterIndTerm(int unknowns);
-void printMatrix(float matrix[3][3], char name);
+void printMatrix(float matrix[5][5], char name);
 
 float M[5][5];
 float B[5];
@@ -48,7 +48,7 @@ int main () {
 
 
 		threshold = fabsf(x[0] - prev_x[0]);
-		for(i=1; i<3; i++) {
+		for(i=1; i<5; i++) {
 			threshold = threshold > (fabsf(x[i] - prev_x[i])) ? threshold : fabsf((x[i] - prev_x[i]));
 		}
 
