@@ -11,24 +11,26 @@
  *
  */
 
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h>
 
 void enterCoefficients(int unknowns);
 void enterIndTerm(int unknowns);
 void printMatrix(float matrix[5][5], char name);
+void test(float matrix[5][5]);
 
 float M[5][5];
 float B[5];
 
-float x[5] = {0,0,0,0,0};
-float prev_x[5] = {0,0,0,0,0};
+float x[5];// = {0,0,0,0,0};  >>>SI SE DECLARAN COMO GLOBALES, C POR DEFAULT LAS INICIALIZA EN 0
+float prev_x[5]; //= {0,0,0,0,0};
 
 int main () {
 
 	int i = 0;
 	float threshold = 1;
 
+	test(M[5][5]);
 	enterCoefficients(5);
 	enterIndTerm(5);
 
@@ -62,6 +64,9 @@ int main () {
 	return 0;
 }
 
+/*****************************/
+/* funtion enterCoefficients */
+/*****************************/
 void enterCoefficients(int unknowns){
 	int i;
 	int j;
@@ -76,6 +81,9 @@ void enterCoefficients(int unknowns){
 	}
 }
 
+/*****************************/
+/*   funtion enterIndTerm    */
+/*****************************/
 void enterIndTerm(int unknowns){
 	int i;
 
@@ -87,6 +95,9 @@ void enterIndTerm(int unknowns){
 	printMatrix(M, 'M');
 }
 
+/*****************************/
+/*    funtion printMatrix    */
+/*****************************/
 void printMatrix(float matrix[5][5], char name) {
 	int m = 0;
 	int n = 0;
@@ -98,4 +109,11 @@ void printMatrix(float matrix[5][5], char name) {
 		}
 	printf("%0.2f\n", B[m]);
 	}
+}
+
+/*****************************/
+/*       funtion test        */
+/*****************************/
+void test(float matrix[5][5]){
+
 }
