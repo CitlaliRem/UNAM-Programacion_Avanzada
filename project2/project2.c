@@ -141,7 +141,7 @@ void gaussSeidel() {
 	            threshold = threshold > (fabsf(x[i] - prev_x[i])) ? threshold : fabsf((x[i] - prev_x[i]));
 	        }
 
-	    } while(threshold > 0.000001);  /* preción */
+	    } while(threshold > 0.000001);  /* precisión */
 
 	    printf("Solution:\n");
 	    printf("x_1: %0.5f\t\n", x[0]);
