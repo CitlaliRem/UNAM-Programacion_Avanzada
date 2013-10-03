@@ -17,8 +17,8 @@
 void gaussJordan();
 void gaussSeidel();
 void printMatrix(float matrix[5][5], char name);
-//void enterCoefficients(int unknowns);
-//void enterIndTerm(int unknowns);
+/*void enterCoefficients(int unknowns); */
+/*void enterIndTerm(int unknowns); */
 
 float M[5][5] = {{12,1,8,3,-10},{-9,7,-6,1,4},{-1,0,5,13,-17},{1,2,3,24,9},{3,4,5,7,19}};
 float B[5] = {56.0,70.0,12.0,-30.0,45.0};
@@ -30,8 +30,8 @@ float B[5] = {56.0,70.0,12.0,-30.0,45.0};
 int main(int argc, char const *argv[]) {
 	int answer;
 
-//	enterCoefficients(5);
-//	enterIndTerm(5);
+/*	enterCoefficients(5); */
+/*	enterIndTerm(5);      */
 
 	printf("Resolve with Gauss-Jordan (1) or Gauss-Seidel (2)?\n");
 	printf("Answer (1/2): \n");
@@ -76,7 +76,7 @@ void gaussJordan() {
 	printf("\n");
 
 	for(i = 0; i < 5; i++){
-		//Normalizamos el renglón pivote
+		/* Normalizamos el renglón pivote */
 		cte = M[i][i];
 
 		for (j = 0; j < 5; j++) {
@@ -84,9 +84,9 @@ void gaussJordan() {
 		}
 
 		B[i] = B[i] / cte;
-		//Fin normalizar
+		/*Fin normalizar */
 
-		// Eliminación gaussiana
+		/* Eliminación gaussiana */
 		for (j = i+1; j < 5; j++) {
 			cte = M[j][i] / M[i][i];
 
@@ -98,7 +98,7 @@ void gaussJordan() {
 		}
 	}
 
-	// Eliminacion inversa
+	/* Eliminacion inversa */
 	for ( i = 4; i >= 0; i--)
 	{
 		for (j = i -1; j >= 0; j--)
