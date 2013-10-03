@@ -144,11 +144,9 @@ void gaussSeidel() {
 	    } while(threshold > 0.000001);  /* preción */
 
 	    printf("Solution:\n");
-	    printf("x_1: %0.5f\t\n", x[0]);
-	    printf("x_2: %0.5f\t\n", x[1]);
-	    printf("x_3: %0.5f\t\n", x[2]);
-	    printf("x_4: %0.5f\t\n", x[3]);
-	    printf("x_5: %0.5f\t\n", x[4]);
+	    for(i=0; i<5; i++) {
+	    	printf("x_%d: %0.5f\t\n", i+1, x[i]);
+	    }
 }
 
 /****** Estas funciones podrían usarse para ingesar la matriz manualmente.
