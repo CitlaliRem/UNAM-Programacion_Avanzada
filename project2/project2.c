@@ -151,7 +151,7 @@ void gaussSeidel() {
 
 /****** Estas funciones podrían usarse para ingesar la matriz manualmente.
  ****** Cómo el sistema tiene que converger para el método Gauss-Seidel, no toda matriz
- ****** puede ser resuelta. Por eso y por cuestiones de usuabilidad quitamos
+ ****** puede ser resuelta. Por eso y por cuestiones de usabilidad quitamos
  ****** estas funciones y la matriz para resolver se codificó estáticamente.
  ******/
 /**********************************/
