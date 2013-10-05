@@ -29,7 +29,7 @@ while inp_err > -1:
         raise ValueError()
     except ValueError:
         if inp_err == 0:
-            print("To many tries. Exiting...")
+            print("Too many tries. Exiting...")
             sys.exit()
         print("Please enter one of the following integers (3/5))")
         inp_err -= 1
