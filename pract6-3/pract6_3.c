@@ -62,6 +62,10 @@ void enterCoefficients(int unknowns){
 
 	for(i=0; i<unknowns; i++) {
 		for(j=0; j<unknowns; j++) {
+			printf("*************************************************************\n");
+			printf("Notice that the mayor coefficient has to be in the diagonal,\n");
+			printf("otherwise the system cannot be resolved by this method.\n");
+			printf("*************************************************************\n");
 			printf("%d. coefficient of row %d: \n", j+1, i+1);
 			scanf("%f", &M[i][j]);
 		}
