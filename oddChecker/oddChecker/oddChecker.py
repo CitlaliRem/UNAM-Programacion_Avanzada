@@ -9,12 +9,12 @@ import sys
 
 M1 = [[212,13,3],
      [3,7,16],
-     [4,23,1]]
+     [0,23,1]]
 
 M2 = [[1,3,6,4,3],
      [7,13,24,67,2],
      [8,23,16,1,35],
-     [2,3,1,11,5],
+     [2,3,0,11,5],
      [9,23,1,31,25]]
 
 dimension = 0
@@ -49,12 +49,12 @@ def CheckDiagonal():
     print("Diagonal")
     row = 0
     col = 0
-    print("Row  Column")
+    print("Row  Column  Number")
     while row < dimension:
         if M[row][col] % 2 == 0:
-            print("[",row,"][",col,"]: even")
+            print("[",row,"][",col,"]:  even")
         else:
-            print("[",row,"][",col,"]: uneven")
+            print("[",row,"][",col,"]:  odd")
     
         col += 1
         row += 1
@@ -64,13 +64,13 @@ def CheckMatrix():
     print("\nWhole Matrix")
     row = 0
     col = 0
-    print("Row  Column")
+    print("Row  Column  Number")
     for row in range(dimension):
         for col in range(dimension):
             if M[row][col] % 2 == 0:
-                print("[",row,"][",col,"]: even")
+                print("[",row,"][",col,"]:  even")
             else:
-                print("[",row,"][",col,"]: uneven")
+                print("[",row,"][",col,"]:  odd")
     
 
 CheckDiagonal()
