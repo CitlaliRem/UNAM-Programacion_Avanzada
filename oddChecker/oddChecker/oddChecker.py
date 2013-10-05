@@ -40,7 +40,7 @@ if selection == 3:
     print(dimension)
     M = M1
 elif selection == 5:
-    print("You choose matrix {0}x{0}\n".format(selection))
+    print("You choose a matrix of {0}x{0}\n".format(selection))
     dimension = len(M2)
     M = M2
 
