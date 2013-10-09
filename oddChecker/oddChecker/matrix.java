@@ -11,8 +11,9 @@ public class matrix{
 	public void print(int size){
 		for (int i = 0; i < size ; i++) {
 			for (int j = 0; j < size; j++) {
-				System.out.print("[" + i + "]" + "[" + j + "]-" + [i][j]mat);
+				System.out.print([i][j]mat + " ");
 			}
+			System.out.println();
 		}
 	}
 
