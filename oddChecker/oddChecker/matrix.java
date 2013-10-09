@@ -1,17 +1,23 @@
 public class matrix{
 	
-	//*** Propiedades
-	int [][]mat={{2,56,77},{4,80,2},{7,9,32}};
+	//*** Propiedades		={{2,56,77},{4,80,2},{7,9,32}};
+	static int [][]mat={{2,56,77},{4,80,2},{7,9,32}};
 
+	// Constructor
+	public matrix(){
+		System.out.print("Creando matriz…\n");
+		//print();
+	}
+	
 
-	//**** Definición de métodos
-
+	//**** Definición de métodos ****
 
 	// Método para imprimir la matriz
-	public void print(int size){
-		for (int i = 0; i < size ; i++) {
-			for (int j = 0; j < size; j++) {
-				System.out.print([i][j]mat + " ");
+	public void print(){
+
+		for(int i = 0 ; i < 3 ; i++){
+			for(int j = 0 ; j < 3 ; j++){
+				System.out.print(mat[i][j] + " ");
 			}
 			System.out.println();
 		}
@@ -19,32 +25,32 @@ public class matrix{
 
 
 	//Metodo para obtener la diagonal de la matriz
-	public int diagonalizar(int size){
-		int [sizeof][]diag;
+	public int diagonalizar(){
+		int []diag = new int [3];
 
-		for (int k = 0; k < sizeof ; k++) {
-			[k][]diag = [k][k]mat;
+		for(int k = 0; k < 3 ; k++){
+			diag[k] = mat[k][k];
 		}
 
-		return [k][]diag;
+		return (diag[]);
 	}
 
 
 	//Metodo para verificar si los elementos del arreglo son par o impar
-	public void check(int [int i][int j]matriz){
-		int u = i;
-		int w = j;
+	public void check(int arrayChecked[][]){
 
-		for (int o = 0; o < u; o++) {
-			for (int p = 0; p < w ; p++) {
-				if ([u][w]matriz % 2 == 0) {
-					System.out.println("El elemento " + [u][w]matriz + "  es par");
-				}
-				else{
-					System.out.println("El elemento " + [u][w]matriz + "  es impar");
+		int o, p;
+
+		for(o = 0; o < arrayChecked.lenght; o++){
+			for(p = 0; p < arrayChecked.lenght ; p++){
+				if(arrayChecked[o][p] % 2 == 0){
+					System.out.println("El elemento " + arrayChecked[o][p] + "  es par");
+				}else{
+					System.out.println("El elemento " + arrayChecked[o][p] + "  es impar");
 				}
 			}
 		}
 	}
 
+}
 }
