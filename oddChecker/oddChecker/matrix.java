@@ -24,7 +24,6 @@ public class matrix{
 	// Constructor
 	public matrix(){
 		System.out.print("Creando matriz…\n");
-		//print();
 	}
 	
 
@@ -32,10 +31,10 @@ public class matrix{
 
 	// Método para imprimir la matriz
 	public void print(){
-
+		System.out.print("Matriz:\n");
 		for(int i = 0 ; i < 3 ; i++){
 			for(int j = 0 ; j < 3 ; j++){
-				System.out.print(mat[i][j] + " ");
+				System.out.print(mat[i][j] + "  ");
 			}
 			System.out.println();
 		}
@@ -55,8 +54,8 @@ public class matrix{
 	public void check(int arrayChecked[][]){
 		int o, p;
 
-		for(o = 0; o < arrayChecked.lenght; o++){
-			for(p = 0; p < arrayChecked.lenght; p++){
+		for(o = 0; o < 3; o++){
+			for(p = 0; p < 3; p++){
 				if(arrayChecked[o][p] % 2 == 0){
 					System.out.println("El elemento " + arrayChecked[o][p] + "  es par");
 				}else{
@@ -65,5 +64,4 @@ public class matrix{
 			}
 		}
 	}
-
 }

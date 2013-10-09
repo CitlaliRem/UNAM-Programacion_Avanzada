@@ -5,6 +5,7 @@ public class test{
 	public static void main(String args[]){
 
 		matrix m1=new matrix();
-		// m1.print();
+		m1.print();
+
 	}
 }
