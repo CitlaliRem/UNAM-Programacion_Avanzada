@@ -1,7 +1,10 @@
+import java.util.*;
+
 public class matrix{
 	
 	//*** Propiedades		={{2,56,77},{4,80,2},{7,9,32}};
-	static int [][]mat={{2,56,77},{4,80,2},{7,9,32}};
+	public int [][]mat={{2,56,77},{4,80,2},{7,9,32}};
+	public int [][]diagonal = diagonalizar();
 
 	// Constructor
 	public matrix(){
@@ -32,17 +35,16 @@ public class matrix{
 			diag[k] = mat[k][k];
 		}
 
-		return (diag[]);
+		return diag;
 	}
 
 
 	//Metodo para verificar si los elementos del arreglo son par o impar
 	public void check(int arrayChecked[][]){
-
 		int o, p;
 
 		for(o = 0; o < arrayChecked.lenght; o++){
-			for(p = 0; p < arrayChecked.lenght ; p++){
+			for(p = 0; p < arrayChecked.lenght; p++){
 				if(arrayChecked[o][p] % 2 == 0){
 					System.out.println("El elemento " + arrayChecked[o][p] + "  es par");
 				}else{
