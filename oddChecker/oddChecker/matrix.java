@@ -1,10 +1,25 @@
+/**
+ * matrix.java
+ *
+ * Proyecto que permite conocer si los elementos de una matriz
+ * son pares o impares; o si los elementos de la diagonal de
+ * la matriz, lo son.
+ */
+ 
+/**
+ *
+ * @authors: Magnus Henkel (magnus.henkel at zoho.com)
+ *         César Alberto Trejo Juárez (cesaratj27 at gmail.com) 
+ */
+
+
 import java.util.*;
 
 public class matrix{
 	
 	//*** Propiedades		={{2,56,77},{4,80,2},{7,9,32}};
 	public int [][]mat={{2,56,77},{4,80,2},{7,9,32}};
-	public int [][]diagonal = diagonalizar();
+	public int []diag = new int [3];
 
 	// Constructor
 	public matrix(){
@@ -13,7 +28,7 @@ public class matrix{
 	}
 	
 
-	//**** Definición de métodos ****
+	//**** Métodos ****
 
 	// Método para imprimir la matriz
 	public void print(){
@@ -28,14 +43,11 @@ public class matrix{
 
 
 	//Metodo para obtener la diagonal de la matriz
-	public int diagonalizar(){
-		int []diag = new int [3];
+	public void diagonalizar(){
 
 		for(int k = 0; k < 3 ; k++){
 			diag[k] = mat[k][k];
 		}
-
-		return diag;
 	}
 
 
@@ -54,5 +66,4 @@ public class matrix{
 		}
 	}
 
-}
 }
