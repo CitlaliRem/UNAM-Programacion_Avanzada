@@ -1,17 +1,41 @@
+/**
+ * matrix.java
+ *
+ * Proyecto que permite conocer si los elementos de una matriz
+ * son pares o impares; o si los elementos de la diagonal de
+ * la matriz, lo son.
+ */
+ 
+/**
+ *
+ * @authors: Magnus Henkel (magnus.henkel at zoho.com)
+ *         César Alberto Trejo Juárez (cesaratj27 at gmail.com) 
+ */
+
+
+import java.util.*;
+
 public class matrix{
 	
 	//*** Propiedades
-	int [][]mat={{2,56,77},{4,80,2},{7,9,32}};
+	public int [][]mat={{2,56,77},{4,80,2},{7,9,32}};
+	public int [][]diag = new int [3][1];
 
-
-	//**** Definición de métodos
-
+	// Constructor
+	public matrix(){
+		System.out.print("Creando matriz...\n");
+	}
+	
+	/*
+ 	* Metódos
+ 	*/
 
 	// Método para imprimir la matriz
-	public void print(int size){
-		for (int i = 0; i < size ; i++) {
-			for (int j = 0; j < size; j++) {
-				System.out.print([i][j]mat + " ");
+	public void print(){
+		System.out.print("Matriz:\n");
+		for(int i = 0 ; i < 3 ; i++){
+			for(int j = 0 ; j < 3 ; j++){
+				System.out.print(mat[i][j] + "  ");
 			}
 			System.out.println();
 		}
@@ -19,32 +43,31 @@ public class matrix{
 
 
 	//Metodo para obtener la diagonal de la matriz
-	public int diagonalizar(int size){
-		int [sizeof][]diag;
+	public void diagonalizar(){
 
-		for (int k = 0; k < sizeof ; k++) {
-			[k][]diag = [k][k]mat;
+		for(int k = 0; k < 3 ; k++){
+			diag[k][0] = mat[k][k];
 		}
-
-		return [k][]diag;
 	}
 
 
 	//Metodo para verificar si los elementos del arreglo son par o impar
-	public void check(int [int i][int j]matriz){
-		int u = i;
-		int w = j;
+	public void check(int arrayChecked[][]){
+		int o, p;
 
-		for (int o = 0; o < u; o++) {
-			for (int p = 0; p < w ; p++) {
-				if ([u][w]matriz % 2 == 0) {
-					System.out.println("El elemento " + [u][w]matriz + "  es par");
-				}
-				else{
-					System.out.println("El elemento " + [u][w]matriz + "  es impar");
+		for(o = 0; o < arrayChecked.length; o++){
+			for(p = 0; p < arrayChecked[o].length; p++){
+				if(arrayChecked[o][p] % 2 == 0){
+					System.out.println("El elemento " + arrayChecked[o][p] + "  es par");
+				}else{
+					System.out.println("El elemento " + arrayChecked[o][p] + "  es impar");
 				}
 			}
 		}
 	}
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> 57bf1b96422508a16ae0984b90da123413494140
