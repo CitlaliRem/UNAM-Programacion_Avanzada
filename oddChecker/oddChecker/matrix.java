@@ -17,7 +17,7 @@ import java.util.*;
 
 public class matrix{
 	
-	//*** Propiedades		={{2,56,77},{4,80,2},{7,9,32}};
+	//*** Propiedades
 	public int [][]mat={{2,56,77},{4,80,2},{7,9,32}};
 	public int [][]diag = new int [3][1];
 
@@ -26,8 +26,9 @@ public class matrix{
 		System.out.print("Creando matriz…\n");
 	}
 	
-
-	//**** Métodos ****
+	/*
+ 	* Metódos
+ 	*/
 
 	// Método para imprimir la matriz
 	public void print(){
