@@ -19,7 +19,7 @@ public class matrix{
 	
 	//*** Propiedades		={{2,56,77},{4,80,2},{7,9,32}};
 	public int [][]mat={{2,56,77},{4,80,2},{7,9,32}};
-	public int []diag = new int [3];
+	public int [][]diag = new int [3][1];
 
 	// Constructor
 	public matrix(){
@@ -45,7 +45,7 @@ public class matrix{
 	public void diagonalizar(){
 
 		for(int k = 0; k < 3 ; k++){
-			diag[k] = mat[k][k];
+			diag[k][0] = mat[k][k];
 		}
 	}
 
@@ -54,8 +54,8 @@ public class matrix{
 	public void check(int arrayChecked[][]){
 		int o, p;
 
-		for(o = 0; o < 3; o++){
-			for(p = 0; p < 3; p++){
+		for(o = 0; o < arrayChecked.length; o++){
+			for(p = 0; p < arrayChecked[o].length; p++){
 				if(arrayChecked[o][p] % 2 == 0){
 					System.out.println("El elemento " + arrayChecked[o][p] + "  es par");
 				}else{
