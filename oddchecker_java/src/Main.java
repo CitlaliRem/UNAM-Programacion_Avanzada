@@ -1,3 +1,17 @@
+/*
+ * 	oddChecker.java
+ *  Programa que analiza todos los valores de una matriz si son pares o impares.
+ * 	Primero pide al usuario que eliga el tamaño de matriz (3x3 o 5x5), después  
+ *  evalua el tamañan que el usuario eligió y procesa una de las matrices
+ *  definidas en el mismo programa.
+ *
+ *      Authors: 
+ *      César Alberto Trejo Juárez (cesaratj27 at gmail.com)
+ *      Magnus Henkel (magnus.henkel at zoho.com)
+ *      
+ *  	Created on: Oct 09, 2013
+ */
+
 public class Main {
     double matrix_A[][];
     double matrix_B[][];
@@ -17,6 +31,9 @@ public class Main {
             case 5:
                     matrix_select = this.matrix_B;
                 break;
+            default:
+            	System.out.println("Input not correct");
+            	System.exit(1);
         }
         
         this.doOperations(matrix_select);
