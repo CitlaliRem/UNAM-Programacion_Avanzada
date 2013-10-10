@@ -23,7 +23,7 @@ public class matrix{
 
 	// Constructor
 	public matrix(){
-		System.out.print("Creando matriz…\n");
+		System.out.print("Creando matriz...\n");
 	}
 	
 	/*
