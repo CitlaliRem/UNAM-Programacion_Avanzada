@@ -35,7 +35,7 @@ while inp_err > -1:
         inp_err -= 1
 
 if selection == 3:
-    print("You choose a matrix of {0}x{0}\n".format(selection))
+    print("You chose a matrix of {0}x{0}\n".format(selection))
     dimension = len(M1)
     print(dimension)
     M = M1

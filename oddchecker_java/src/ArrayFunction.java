@@ -1,6 +1,6 @@
 public class ArrayFunction {
     
-    public int getLength(double[][] matrix){
+    public int getLength(double matrix[][]){
         return matrix.length;
     }
     
@@ -9,7 +9,7 @@ public class ArrayFunction {
         return false;
     }
     
-    public String checkDiagonal(double[][] matrix) {
+    public String checkDiagonal(double matrix[][]) {
         String result = "";
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
@@ -22,13 +22,12 @@ public class ArrayFunction {
                    	   result += "\n";
                    }
                 }
-            //result += "\n";
             }
         }
         return result;
     }
     
-    public String checkMatrix(double[][] matrix){
+    public String checkMatrix(double matrix[][]){
         String result = "";
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
@@ -44,7 +43,7 @@ public class ArrayFunction {
         return result;
     }
     
-    public String printMatrix(double[][] matrix){
+    public String printMatrix(double matrix[][]){
         String result = "";
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
