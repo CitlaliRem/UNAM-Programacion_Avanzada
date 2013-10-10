@@ -34,7 +34,6 @@ public class Main {
         System.out.println("Verifying matrix");
         System.out.println(obj.checkMatrix(matrix_select));
         
-        System.out.println("-----------------");
     }
     
     public static void main(String args[]) {
