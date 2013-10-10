@@ -1,0 +1,19 @@
+Nombre:  pract7-1.c
+
+Programadores: 	
+-Magnus Henkel____magnus.henkel@zoho.com
+-César Alberto Trejo Juárez____cesaratj27@gmail.com
+
+Descripción: 
+Este programa permite que el usuario ingrese dos pares de valores
+experimentales (x, f(x) para su interpolación. Primero se ingresan los valores
+de x, después los valores correspondientes de f(x).
+Como último se ingresa el valor que debe ser interpolado. En seguida el programa
+calcula el valor que le corresponde para f(x).
+
+El programa utiliza el método de Interpolación de Lagrange.
+
+Programación avanzada y métodos numéricos.
+Profesor:  Germán Santos Jaimes
+UNIVERSIDAD NACIONAL AUTÓNOMA DE MÉXICO
+FACULTAD DE INGENIERÍA
