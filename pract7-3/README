@@ -1,0 +1,19 @@
+Nombre:  pract7-3.c
+
+Programadores: 	
+-Magnus Henkel____magnus.henkel@zoho.com
+-César Alberto Trejo Juárez____cesaratj27@gmail.com
+
+Descripción: 
+Este programa sirve para la obtención de un polinomio característico que modela
+un conjunto de puntos (valores experimentales) para los cuales no existe
+función.
+El programa permite definir el grado del polinomio y la entrada de los datos (x,
+f(x)). Después el usuario ingresa el punto en el que se debe evaluar.
+Después calcula la aproximación en el punto dado.
+
+
+Programación avanzada y métodos numéricos.
+Profesor:  Germán Santos Jaimes
+UNIVERSIDAD NACIONAL AUTÓNOMA DE MÉXICO
+FACULTAD DE INGENIERÍA
