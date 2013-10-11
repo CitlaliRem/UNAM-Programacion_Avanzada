@@ -1,0 +1,25 @@
+Nombre:  pract7-2.c
+
+Programadores: 	
+-Magnus Henkel____magnus.henkel@zoho.com
+-César Alberto Trejo Juárez____cesaratj27@gmail.com
+
+Descripción: 
+Este programa evalua una tabla de valores de datos experimentales, donde no se
+tiene una función para encontrar valores intermedios, para encontrar un polinomio
+de primer grado y en seguida de segundo grado. Para esto utiliza el método de
+Interpolación de Lagrange.
+
+Observación:
+Se programó de una manera que el algoritmo de Lagrange será fácilmente extendible 
+para encontrar polinomios de mayor orden que 2.
+En dado caso habría que combiar el switch por un método que tome el número del grado
+que se desea encontrar y calcule las combinaciones posibles de este número.
+Se tendría que extender la multiplicación en cada denominador/numerador tantas veces 
+el grado buscado.
+
+
+Programación avanzada y métodos numéricos.
+Profesor:  Germán Santos Jaimes
+UNIVERSIDAD NACIONAL AUTÓNOMA DE MÉXICO
+FACULTAD DE INGENIERÍA
