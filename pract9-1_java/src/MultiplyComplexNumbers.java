@@ -4,7 +4,7 @@
  * 		César Alberto Trejo Juárez (cesaratj27 at gmail.com)
  * 		Magnus Henkel (magnus.henkel at zoho.com)
  * 
- * Programa que recib3 dos números complejos, y obtiene la multiplicación.
+ * Programa que recibe dos números complejos, y obtiene la multiplicación.
  * 
  */
 
