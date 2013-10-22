@@ -91,6 +91,5 @@ public class EvalMatrix {
 			}
         }
 
-	}
-
-}
+	} /* end of main */
+} /* end of EvalMatrix */
