@@ -32,9 +32,10 @@ public class MultiplyComplexNumbers {
 	
 	double matrix[] = {};
 
-    public MultiplyComplexNumbers(double matrix1[], double matrix2[]) {
-    	this.matrix = matrix1;
-	}
+/*    public MultiplyComplexNumbers(double matrix1[], double matrix2[]) {
+   	 	this.matrix = matrix1;
+     }
+*/
 
       public static DecisionResult FormatDecision(int i, int j) {
 
