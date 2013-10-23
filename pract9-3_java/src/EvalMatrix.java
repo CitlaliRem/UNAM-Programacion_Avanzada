@@ -53,8 +53,7 @@ public class EvalMatrix {
 	public static void main(String args[]) {
 
 		double matrix[][] = new double[3][3]; 
-		int storePosition[][] = new int[3][3];
-		int l = 0; // recorre la matriz storePosition
+
 		java.util.Scanner scr = new java.util.Scanner(System.in);
 
         for (int i = 0; i < 3; i++ ) {
@@ -84,9 +83,6 @@ public class EvalMatrix {
 
         		if (positionCheck == true) {
         			System.out.println("Maximum value at matrix position: [" + (i+1) + "]" + "[" + (j+1) + "]");
-        			storePosition[l][0] = i;
-        			storePosition[l][1] = j;
-        			l++;
         		}
 			}
         }
