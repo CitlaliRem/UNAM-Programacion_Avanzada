@@ -20,6 +20,20 @@ M2 = [[1,3,6,4,3],
 dimension = 0
 inp_err = 2
 
+print("You can choose to analyze one of the following matrices:")
+
+print("Matrix 3x3")
+for row in range(3):
+    for val in M1[row]:
+        print(val, end="   ")
+    print("\n")
+
+print("Matrix 5x5")
+for row in range(5):
+    for val in M2[row]:
+        print(val, end="   ")
+    print("\n")
+
 print("Choose matrix 3x3 or 5x5 (3/5) ")
 while inp_err > -1:
     try:
