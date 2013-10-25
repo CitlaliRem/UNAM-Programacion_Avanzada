@@ -11,44 +11,55 @@ Created on Oct 20, 2013
      Magnus Henkel (magnus.henkel at zoho.com)
 
 '''
-#table= [ [ 0 for i in range(6) ] for j in range(6) ]
-#print(table)
-#for d1 in range(6):
-#    for d2 in range(6):
-#        table[d1][d2]= d1+d2+2
-#print(table)
+import sys
+inp_err = 3
+matrix = []
+rows =  []
 
-#m1 = [ [1, 2, 3, 0], [4, 5, 6, 0], [7, 8, 9, 0] ]
-#m2 = [ [2, 4, 6, 0], [1, 3, 5, 0], [0, -1, -2, 0] ]
-#m3= [ 4*[0] for i in range(3) ]
-
-#for i in range(3):
-#    for j in range(4):
-#        m3[i][j]= m1[i][j]+m2[i][j]
-
-#print("matix 1: ", m1)
-#print("matrix 2: ", m2)
-#print("matrix 3", m3)
-
-
-
-#s = input()
-#m1 = list(map(float, s.split()))
-
-            #print("Enter first row of 4x4 matrix:")
+#try:
 matrix = [[float(input("Enter [{}][{}]: ".format(j+1, i+1))) for i in range(4)] for j in range(4)]
-            #col[] = matrix.append(input(("Enter {}. value of row {}: ".format(i+1, row+1))))
 
+#    for i in range(4):
+#        for j in range(4):
+#            rows = float(input("Enter [{}][{}]: ".format(i, j)))
+#            matrix.append(rows)
+#except ValueError:
+#    if inp_err == 0:
+#        print("Too many tries. Exiting...")
+#        sys.exit()
+#    print("Please enter any positive, negative or zero number")
+#    inp_err -= 1
 
-print("You entered the following matrix:")
-#for row in range(len(matrix)):
-    #print(matrix[row], sep="")
+# Matriz estática para pruebas:
+#matrix = [[1,-6,4,3],
+#     [0,-13,67,2],
+#     [8,-23,0,-35],
+#     [2,3,-0,5]]
 
-for row in matrix:
-    for item in row: 
-        print(item, sep=''),
-#for row in matrix:
-    #print(matrix[row])
-#for row in range(4):
-#    for col in range(4):
-#        print(matrix[row][col], end="   ")
+for row in range(4):
+    for val in matrix[row]:
+        print(val, end="\t")
+    print("\n")
+
+positiveList = []
+negativeList = []
+zeroList = [] 
+
+for row in range(4):
+        for val in matrix[row]:
+            if val > 0:
+                print("Found positive: ", val )
+                positiveList.append(val)
+            elif val < 0:
+                print("Found negative: ", val)
+                negativeList.append(val) 
+            elif val == 0:
+                print("Found zero: ", val)
+                zeroList.append(val)
+            
+print("_" * 30)
+print("Found ", len(positiveList), "positive numbers")
+print("Found ", len(negativeList), "negative nubmers")
+print("Found ", len(zeroList), "zeros")
+                
+
