@@ -47,7 +47,7 @@ public class matrixFour{
 	}
 
 	/**
-	* 	Check how many zeros, negativa or positive
+	* 	Check how many zeros, negative or positive
 	* 	numbers are in a matrix.
 	* 	@return void
 	* 	@para nothing
