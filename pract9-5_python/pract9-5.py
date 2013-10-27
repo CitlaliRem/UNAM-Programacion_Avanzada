@@ -12,54 +12,113 @@ Created on Oct 20, 2013
 
 '''
 import sys
-inp_err = 3
-matrix = []
-rows =  []
 
-#try:
-matrix = [[float(input("Enter [{}][{}]: ".format(j+1, i+1))) for i in range(4)] for j in range(4)]
+buffer = 1 
 
-#    for i in range(4):
-#        for j in range(4):
-#            rows = float(input("Enter [{}][{}]: ".format(i, j)))
-#            matrix.append(rows)
-#except ValueError:
-#    if inp_err == 0:
-#        print("Too many tries. Exiting...")
-#        sys.exit()
-#    print("Please enter any positive, negative or zero number")
-#    inp_err -= 1
+class InitMatrix(object):
+    def __init__(self):
+        self.matrix = matrix = []
+        self.rows = rows = []
+        self.dimension = dimension = 0
+    def printMatrix(self):
+        for row in self.matrix:
+            for item in row:
+                print(item, end="\t")
+            print("\n")
+    def printRow(self):
+        for item in self.rows:
+            print(item, end="\t")
+        print("\n")
 
-# Matriz estática para pruebas:
-#matrix = [[1,-6,4,3],
-#     [0,-13,67,2],
-#     [8,-23,0,-35],
-#     [2,3,-0,5]]
+class FillMatrix(InitMatrix):
+    def __init__(self):
+        InitMatrix.__init__(self)
+        self.rowbuffer = rowbuffer = []
+        self.rowcount = 1
+        self.valcount = 1 
+        self.i = 0
+    def resetCount(self):
+       self.i = 0
+       self.rowcount += 1
+       self.valcount = 1
 
-for row in range(4):
-    for val in matrix[row]:
-        print(val, end="\t")
-    print("\n")
+class ErrorHandling():
+    def __init__(self):
+        self.err_num = err_num = 3
+    def errorcheck(self, dimension):
+        if self.err_num == 0:
+            print("Stop tampering with me! Exiting...")
+            sys.exit()
+        if len(M.matrix) >= M.dimension:
+            print('Please enter any numberic value or "q" to quit entering the first row')
+        else:
+            print("Please enter numeric values only:")
+        self.err_num -= 1
 
-positiveList = []
-negativeList = []
-zeroList = [] 
+class EvalMatrix():
+    def __init__(self):
+        self.positiveList = positiveList = []
+        self.negativeList = negativeList = []
+        self.zeroList = zeroList = [] 
+    def evaluate(self):
+        for row in range(len(M.rows)):
+            for val in M.matrix[row]:
+                if val > 0:
+                    print("Found positive: \t", val )
+                    Eval.positiveList.append(val)
+                elif val < 0:
+                    print("Found negative: \t", val)
+                    Eval.negativeList.append(val) 
+                elif val == 0:
+                    print("Found zero: \t", val)
+                    Eval.zeroList.append(val)
+    def resume(self):
+        print("_" * 30)
+        print("Found ", len(self.positiveList), "positive number(s)")
+        print("Found ", len(self.negativeList), "negative nubmer(s)")
+        print("Found ", len(self.zeroList), "zero(s)")
 
-for row in range(4):
-        for val in matrix[row]:
-            if val > 0:
-                print("Found positive: ", val )
-                positiveList.append(val)
-            elif val < 0:
-                print("Found negative: ", val)
-                negativeList.append(val) 
-            elif val == 0:
-                print("Found zero: ", val)
-                zeroList.append(val)
-            
-print("_" * 30)
-print("Found ", len(positiveList), "positive numbers")
-print("Found ", len(negativeList), "negative nubmers")
-print("Found ", len(zeroList), "zeros")
-                
+        
+M = InitMatrix()
+Err = ErrorHandling()
+F = FillMatrix()
+        
+print('\nEnter numeric values of an arbitrarily-sized matrix, followed by "Enter": '.format(len(M.matrix) + 1))
+print('Press "q" when finished entering the first row')
 
+while buffer is not 'q':
+    try:
+#3matrix = [[float(input("Enter [{}][{}]: ".format(j+1, i+1))) for i in range(4)] for j in range(4)]
+        while buffer: 
+            buffer = input()
+            if buffer == 'q':
+                print("Finished entering first row of matrix")
+                M.dimension = len(M.rows)
+                print("Matrix dimension determined: ", M.dimension, "x", M.dimension) 
+                break
+            M.rows.append(float(buffer))
+            M.printRow()
+    except ValueError:
+        Err.errorcheck(M.dimension)
+
+M.matrix.append(M.rows)
+
+while F.rowcount < M.dimension:
+    while F.i < M.dimension:
+        try:
+            buffer = input('\nEnter {}. value of {} row'.format(F.valcount, F.rowcount))
+            F.rowbuffer.append(float(buffer))
+            #print("DEBUGGING: M.matrix", M.matrix,"M.rowbuffer: ", F.rowbuffer, "i: ", F.i," F.valcount", F.valcount, "F.rowcount", F.rowcount, "Dimension: ", dimension)
+            F.i += 1
+            F.valcount += 1
+        except:
+            Err.errorcheck(M.dimension)
+    F.resetCount()
+    #print("DEBUGGING: F.rowcount", F.rowcount, "F.valcount", F.valcount)
+    M.matrix.append(F.rowbuffer)
+    M.printMatrix()
+    F.rowbuffer = []
+
+Eval = EvalMatrix()
+Eval.evaluate()
+Eval.resume()
