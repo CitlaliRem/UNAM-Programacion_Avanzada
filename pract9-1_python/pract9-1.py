@@ -19,7 +19,7 @@ class complex:
 		self.img = i
 
 	def mostrar(self):
-		print self.real, '+', self.img,'i'
+		print(self.real, '+', self.img,'i')
 
 	def producto(self,z):
 		return complex( self.real * z.real - self.img * z.img, self.real * z.img + self.img * z.real)
