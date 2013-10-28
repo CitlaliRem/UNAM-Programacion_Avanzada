@@ -1,16 +1,45 @@
 '''
 Created on Oct 20, 2013
  
- EvalMatrix.py 
+ pract9-3.py 
 
- Programa que recibe una matriz de 3 x 3, determina el valor máximo, así
- como su posición. Si existen valores iguales, obtiene todas las posiciones.
+ Programa que recibe una matriz de 3 x 3, determina el valor maximo, asi
+ como su posicion. Si existen valores iguales, obtiene todas las posiciones.
 
  Authors: 
-     César Alberto Trejo Juárez (cesaratj27 at gmail.com)
+     Cesar Alberto Trejo Juarez (cesaratj27 at gmail.com)
      Magnus Henkel (magnus.henkel at zoho.com)
   
 '''
 
-if __name__ == '__main__':
-    pass
+class matrix:
+    '''Una simple clase para encontrar el numero maximo dentro de
+    una matriz y mostrar la(s) posicion(es) donde se encuentra'''
+    def __init__(self):
+        self.matrix = [ [212,13,3], [3,212,16], [0,23,312] ]
+        self.maxim = 0
+        self.pos = []
+        print('Creating matrix')
+
+    def findMax(self):
+        for i in range(len(self.matrix)):
+            for j in range(len(self.matrix)):
+                if self.matrix[i][j] > self.maxim:
+                    self.maxim = self.matrix[i][j]
+
+    def posMax(self):
+        for k in range(len(self.matrix)):
+            for l in range(len(self.matrix)):
+                if self.matrix[k][l] == self.maxim:
+                    self.pos.append([k,l])
+
+
+m1 = matrix()
+for j in range(len(m1.matrix)):
+    print m1.matrix[j]
+m1.findMax()
+print 'El numero maximo de la matrix es: ' + str(m1.maxim)
+m1.posMax()
+print 'Las posiciones donde se encuentra el numero mas grande son: '
+for i in range(len(m1.pos)):
+    print m1.pos[i]
