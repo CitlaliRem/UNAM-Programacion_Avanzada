@@ -40,11 +40,12 @@ public class listado{
 		if (listEdo.contains(edo)) {
 			coord = listEdo.indexOf(edo);
 			countCP = listaCP.get(coord);
-			countCP++;
-			listaCP.add(listEdo.indexOf(edo), countCP);
+			countCP++;  //codigo bien, verificar que no se repita el CP dentro de un arraylist
+			listaCP.remove(listaCP.get(coord));
+			listaCP.add(coord, countCP);
 		}else{
 			listEdo.add(edo);
-			listaCP.add(u);
+			listaCP.add(1);
 		}
 	}
 
