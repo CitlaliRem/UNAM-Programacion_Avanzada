@@ -67,11 +67,7 @@ public class listado{
 	* 	@return void
 	* 	@para ArrayList <Integer> & String
 	*/
-<<<<<<< HEAD
 	public void listCPxEdo(ArrayList <String> listEdo, ArrayList <Integer> line_of_file,String edo){
-=======
-	public void listCPxEdo(ArrayList <String> line_of_file,String edo){
->>>>>>> 8094d6d0241db305f8dd57fd2fbccb380e567a79
 		//
 		int k;
 		for (k = 0; k < listEdo.size() ; k++) {

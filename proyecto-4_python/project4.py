@@ -20,15 +20,11 @@ Created on Oct 27, 2013
 
 textfile = open("CPdescarga.txt", "r", encoding="latin1")
 
-category = {1: "zipcode", 4: "township", 5:"state"}
-
-
 class Indexer():
     def __init__(self, textfile):
         self.fileToList = []
         self.filterStates = set() 
         self.i = 2 
-        self.stateIndex = {}  # todavía no está en uso
         for line in textfile:
             listItems = line.split("|")
             self.fileToList.append(listItems)
@@ -38,59 +34,56 @@ class Indexer():
             self.filterStates.add(self.fileToList[self.i][index])
             self.i += 1
 
-#    def createStateIndex(self):
-#        self.i = 2
-#        while self.i < len(Ind.fileToList):
-#            for state in self.filterStates:
-#                if state == Ind.fileToList[self.i][4]:
-#                    self.stateIndex[self.i] = state
-#                    break
-#        self.i += 1
-#        print(self.stateIndex)
-                
-                
-    def search(self, index, criteria):
-        if self.fileToList[index] == criteria:
-            return criteria
-
     def show(self, filteredList):
         for item in sorted(filteredList):
             print(item)
-'''
+
 class SubCatSearch(Indexer):
     def __init__(self):
-        Indexer(textfile).__init__(self)
+        Indexer.__init__(self, textfile)
         self.stateDict = {}
-    def filterFunc(self, index, state):
-        self.i = 2
-        while self.i < len(self.fileToList):
-            if state == self.filterStates[index][4]:
-                self.stateDict = dict((state,self.filterStates[index][4]) for state in Ind.filterStates)
-                break
-            self.i += 1
-        print(self.stateDict)
-'''                   
+        self.stateList = list(Ind.filterStates)
+        self.townshipSet = set()
+        self.townshipDict = {}
 
+    def indexStates(self):
+        i = 1
+        k = 0
+        while i < len(Ind.fileToList) and not k > 31:
+            for subList in Ind.fileToList:
+                if subList[4] == self.stateList[k]:
+#                    print("State", subList[4], "found on line: ", i)
+                    self.stateDict[i] = self.stateList[k]
+                    k += 1
+                    i = 1
+                    break
+                i += 1
+    
+    def printStateIndex(self):
+        print(self.stateDict)
+    
+    def listSubCat(self):
+        townshipNum = 0
+        for index, state in self.stateDict.items():
+            i = index
+            while state == Ind.fileToList[i][4] and i < len(Ind.fileToList) - 1: 
+                self.townshipSet.add(Ind.fileToList[i][3])
+                townshipNum = len(self.townshipSet)
+                i += 1
+            print(townshipNum,"\t\t\t", state) 
+            self.townshipSet = set()
+            townshipNum = 0
+
+                
+    
 Ind = Indexer(textfile)
 Ind.filterFunc(4)
 print("Displaying all {} states of México".format(len(Ind.filterStates)))
+print("\n")
 Ind.show(Ind.filterStates)
-
-#Scs.filterFunc(4, "Tabasco")
-
-stateList = list(Ind.filterStates)
-
-def indexStates():
-    i = 1
-    k = 0
-    while i < len(Ind.fileToList) and not k > 31:
-        for subList in Ind.fileToList:
-            if subList[4] == stateList[k]:
-                print("State", subList[4], "found on line: ", i)
-                k += 1
-                i = 1
-                break
-            i += 1
-
-indexStates()
+ssearch = SubCatSearch()
+ssearch.indexStates()
+print("\n")
+print("# townships\t\tstate")
+ssearch.listSubCat()
     
