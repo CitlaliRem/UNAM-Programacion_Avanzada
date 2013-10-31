@@ -18,8 +18,9 @@ public class listado{
 	int countMuni;
 	int countRanch;
 	int countCP;
+	HashSet listaEdo = new HashSet();
 	ArrayList <String> lineOfFile = new ArrayList <String>();
-	ArrayList <String> listaEdo = new ArrayList <String>();
+	//ArrayList <String> listaEdo = new ArrayList <String>();
 	ArrayList <Integer> listaCP = new ArrayList <Integer>();
 
 
@@ -33,9 +34,12 @@ public class listado{
 	* 	@para ArrayList & String
 	*/
 	public void searchEdo(ArrayList <String> listEdo, String edo){
-		if ( !listEdo.contains(edo) ){
+		/*if ( listEdo.contains(edo) ){
+			
+		}else{
 			listEdo.add(edo);
-		}
+		}*/
+		listEdo.add(edo);
 	}
 
 	/**
@@ -63,13 +67,15 @@ public class listado{
 	* 	@return void
 	* 	@para ArrayList <Integer> & String
 	*/
+<<<<<<< HEAD
 	public void listCPxEdo(ArrayList <String> listEdo, ArrayList <Integer> line_of_file,String edo){
+=======
+	public void listCPxEdo(ArrayList <String> line_of_file,String edo){
+>>>>>>> 8094d6d0241db305f8dd57fd2fbccb380e567a79
 		//
 		int k;
 		for (k = 0; k < listEdo.size() ; k++) {
 			//
 		}
 	}
-
-
 }
