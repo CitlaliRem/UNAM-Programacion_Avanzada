@@ -19,10 +19,10 @@ public class listado{
 	int countRanch;
 	int countCP;
 	HashSet listaEdo = new HashSet();
+	HashSet archivo = new HashSet();
 	ArrayList <String> lineOfFile = new ArrayList <String>();
-	//ArrayList <String> listaEdo = new ArrayList <String>();
 	ArrayList <Integer> listaCP = new ArrayList <Integer>();
-
+	Set inOrderEdo;
 
 	public listado(){
 		System.out.println("List created");
@@ -31,35 +31,28 @@ public class listado{
 	/**
 	* 	searchEdo
 	* 	@return void
-	* 	@para ArrayList & String
+	* 	@para HashSet & String to put it on
 	*/
-	public void searchEdo(ArrayList <String> listEdo, String edo){
-		/*if ( listEdo.contains(edo) ){
-			
-		}else{
-			listEdo.add(edo);
-		}*/
+	public void searchEdo(HashSet listEdo, String edo){
 		listEdo.add(edo);
 	}
 
 	/**
 	* 	setInOrderEdo
 	* 	@return void
-	* 	@para ArrayList <String>
+	* 	@para HashSet to set in order
 	*/
-	public void setInOrderEdo(ArrayList <String> listEdo){
-		/*int k;   //todo esto se recude a una línea
-		int l;
-		String aux;
+	public void setInOrderEdo(HashSet listEdo){		
+    	inOrderEdo = new TreeSet(listEdo);
+	}
 
-		for (l = 0; l < listEdo.size(); l++) {
-			for(k = 0;k < listEdo.size()-l; k++) {
-            	if ( listEdo.get(k).compareTo(listEdo.get(k+1)) > 0) {
-                	Collections.swap(listEdo,k,k+1);
-            	}
-        	}
-    	}*/
-    	Collections.sort(listEdo);
+	/**
+	* 	printInOrder
+	* 	@return void
+	* 	@para Set listEdo in order
+	*/
+	public void printInOrder(Set listEdo){		
+    	System.out.println(listEdo);
 	}
 
 	/**
@@ -67,14 +60,10 @@ public class listado{
 	* 	@return void
 	* 	@para ArrayList <Integer> & String
 	*/
-<<<<<<< HEAD
-	public void listCPxEdo(ArrayList <String> listEdo, ArrayList <Integer> line_of_file,String edo){
-=======
 	public void listCPxEdo(ArrayList <String> line_of_file,String edo){
->>>>>>> 8094d6d0241db305f8dd57fd2fbccb380e567a79
 		//
 		int k;
-		for (k = 0; k < listEdo.size() ; k++) {
+		for (k = 0; k < line_of_file.size() ; k++) {
 			//
 		}
 	}
