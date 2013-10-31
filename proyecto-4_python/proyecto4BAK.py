@@ -20,7 +20,7 @@ Created on Oct 27, 2013
 '''
 import time
 
-textfile = open("CPdescarga.csv", "r", encoding="latin1")
+textfile = open("CPdescarga.txt", "r", encoding="latin1")
 estados = open("estados.txt", "r", encoding="UTF-8")
 
 category = {1: "zipcode", 4: "township", 5:"state"}
@@ -35,7 +35,7 @@ class Indexer():
         self.i = 2 
         self.stateIndex = {} 
         for line in textfile:
-            listItems = line.split(",")
+            listItems = line.split("|")
             self.fileToList.append(listItems)
         for line in estados:
             self.stateList.add(line.strip())
@@ -85,16 +85,17 @@ class SubCatSearch(Indexer):
 
 Ind = Indexer(textfile)
 Ind.filterFunc(4)
-print("Filtering states of México")
+print("Displaying all {} states of México".format(len(Ind.filterStatesErr)))
 Ind.show(Ind.filterStatesErr)
-time.sleep(4)
+#
+#time.sleep(4)
 
-print("\n"*80)
-print("Archive faulty. Cleaning up..\n\n")
-time.sleep(4)
+#print("\n"*80)
+#print("Archive faulty. Cleaning up..\n\n")
+#time.sleep(4)
 
-Ind.cleanList()
-print("Displaying all {} states of México".format(len(Ind.filterStates)))
-Ind.show(Ind.filterStates)
+#Ind.cleanList()
+#print("Displaying all {} states of México".format(len(Ind.filterStates)))
+#Ind.show(Ind.filterStates)
 
 #Scs.filterFunc(4, "Tabasco")
