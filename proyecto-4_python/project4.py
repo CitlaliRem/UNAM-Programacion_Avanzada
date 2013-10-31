@@ -3,7 +3,7 @@ Created on Oct 30, 2013
 
 @author: arytloc
 '''
-from venv import create
+import operator
 '''
    Projecto 4:
    Programa que efectúa una busqueda sobre un archivo de texto (.cvs) y muestra o ordena la lista por los siguientes criterios:
@@ -49,10 +49,12 @@ class SubCatSearch(Indexer):
         Indexer.__init__(self, textfile)
         self.stateDict = {}
         self.stateList = list(Ind.filterStates)
+        self.setItemCount = 0
         self.townshipSet = set()
         #self.townshipDict = {}
         self.zipcodeSet = set()
         self.zipcodeList = [] 
+        self.zipcodeDict = {}
     
     def createDict(self, dictName, keyParam, dictItem):
         dictEntry = dictName[keyParam] = dictItem
@@ -77,33 +79,47 @@ class SubCatSearch(Indexer):
         numSetItems = len(setName)
         return numSetItems
     
-    def listSubCat(self, columnToCompare, columnToAdd, setName, rootFile, linecount):
-        setItemCount = 0
+    def listSubCat(self, columnToCompare, columnToAdd, setName, rootFile, linecount, ordered):
+        #setItemCount = 0
         for index, state in self.stateDict.items():
             while state == rootFile[index][columnToCompare] and index < (linecount - 1): 
                 setName.add(rootFile[index][columnToAdd])
-                setItemCount = self.countSetItems(setName)
+                self.setItemCount = self.countSetItems(setName)
                 index += 1
-            print(setItemCount,"\t\t\t", state) 
+            self.printListSubCat(self.setItemCount, state, ordered)
+            #print(self.setItemCount,"\t\t\t", state) 
             setName = set()
-            setItemCount = 0
-    
+            self.setItemCount = 0
 
+    def printListSubCat(self, itemCount, state, ordered=0):
+        if ordered == 1:
+            self.createDict(self.zipcodeDict, itemCount, state)
+            if len(self.zipcodeDict) == len(self.stateList):
+                sortedDict = sorted(self.zipcodeDict.items(), key=operator.itemgetter(0))
+                #sortedDict = sorted(self.zipcodeDict.items(), key=lambda (k,v): v[1])
+                #print(sortedDict)
+                for key, value in sortedDict:
+                    print(key,"\t\t\t", value)
+        else:
+            print(itemCount, "\t\t\t", state)
+
+    
     
 Ind = Indexer(textfile)
 Ind.filterFunc(4)
 print("Displaying all {} states of México".format(len(Ind.filterStates)))
-print("_"*20)
+print("_"*40)
 Ind.show(Ind.filterStates)
 ssearch = SubCatSearch()
 ssearch.indexStates(4, Ind.countLines(Ind.fileToList)) # entrega como argumentos el indice de la columa y el número de lineas de la lista (archivo)
 print("\n")
 print("Displaying townships (municipios/delegaciones/rancherías):")
-print("_"*20)
+print("_"*40)
 print("# townships\t\tstate")
-ssearch.listSubCat(4, 3, ssearch.townshipSet, Ind.fileToList, Ind.countLines(Ind.fileToList)) # compara con columna 4 (estados) y agrega contenido de columna 3 (municipios,delegaciones, rancherías)
-print("Displaying zipcodes")
-print("_"*20)
+ssearch.listSubCat(4, 3, ssearch.townshipSet, Ind.fileToList, Ind.countLines(Ind.fileToList), 0) # compara con columna 4 (estados) y agrega contenido de columna 3 (municipios,delegaciones, rancherías)
+print("\n")
+print("Displaying zipcodes, ascending order")
+print("_"*40)
 print("# zipcode\t\tstate")
-ssearch.listSubCat(4, 1, ssearch.zipcodeSet, Ind.fileToList, Ind.countLines(Ind.fileToList)) # compara con columna 4 (estados) y agrega contenido de columna 3 (municipios,delegaciones, rancherías)
+ssearch.listSubCat(4, 1, ssearch.zipcodeSet, Ind.fileToList, Ind.countLines(Ind.fileToList), 1) # compara con columna 4 (estados) y agrega contenido de columna 3 (municipios,delegaciones, rancherías)
     
