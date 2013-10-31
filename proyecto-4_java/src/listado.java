@@ -18,8 +18,9 @@ public class listado{
 	int countMuni;
 	int countRanch;
 	int countCP;
-	HashSet listaEdo = new HashSet();
-	HashSet archivo = new HashSet();
+	int coord;
+	
+	ArrayList <String> listaEdo = new ArrayList <String>();
 	ArrayList <String> lineOfFile = new ArrayList <String>();
 	ArrayList <Integer> listaCP = new ArrayList <Integer>();
 	Set inOrderEdo;
@@ -29,20 +30,30 @@ public class listado{
 	}
 
 	/**
-	* 	searchEdo
+	* 	searchEdoCountCP
 	* 	@return void
-	* 	@para HashSet & String to put it on
+	* 	@para ArrayList <String> & String
 	*/
-	public void searchEdo(HashSet listEdo, String edo){
-		listEdo.add(edo);
+	public void searchEdoCountCP(ArrayList <String> listEdo, String edo){
+		int u = 1;
+
+		if (listEdo.contains(edo)) {
+			coord = listEdo.indexOf(edo);
+			countCP = listaCP.get(coord);
+			countCP++;
+			listaCP.add(listEdo.indexOf(edo), countCP);
+		}else{
+			listEdo.add(edo);
+			listaCP.add(u);
+		}
 	}
 
 	/**
 	* 	setInOrderEdo
 	* 	@return void
-	* 	@para HashSet to set in order
+	* 	@para ArrayList <String>
 	*/
-	public void setInOrderEdo(HashSet listEdo){		
+	public void setInOrderEdo(ArrayList <String> listEdo){		
     	inOrderEdo = new TreeSet(listEdo);
 	}
 
@@ -55,16 +66,4 @@ public class listado{
     	System.out.println(listEdo);
 	}
 
-	/**
-	* 	listCPxEdo
-	* 	@return void
-	* 	@para ArrayList <Integer> & String
-	*/
-	public void listCPxEdo(ArrayList <String> listEdo, ArrayList <Integer> line_of_file,String edo){
-		//
-		int k;
-		for (k = 0; k < line_of_file.size() ; k++) {
-			//
-		}
-	}
 }
