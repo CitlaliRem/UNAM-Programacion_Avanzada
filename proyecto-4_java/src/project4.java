@@ -21,14 +21,12 @@ public class project4{
 	*	Main
 	*/
 	public static void main(String args[]){
-		String estado;
 		String cadena; 
 		StringTokenizer str;
 		listado lisTado = new listado();
-		ArrayList <String> lineOfFile = new ArrayList <String>(); //parte del objeto
-		ArrayList <String> listaEdo = new ArrayList <String>(); //parte del objeto
 
 		try{
+
 			FileReader archivo = new FileReader("CPdescarga.txt");
 			BufferedReader entrada = new BufferedReader(archivo);
 			while( (cadena = entrada.readLine()) != null ){
@@ -41,6 +39,7 @@ public class project4{
 				System.out.println(lisTado.lineOfFile.get(0));
 				System.out.println(lisTado.estado);
 			}
+
 		}catch(FileNotFoundException var){
 			System.out.println("No existe el archivo");
 		}catch(IOException var){
