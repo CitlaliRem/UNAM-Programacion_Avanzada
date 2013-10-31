@@ -37,15 +37,22 @@ public class project4{
 				}
 				lisTado.estado = lisTado.lineOfFile.get(4);
 				//funcion de busqueda de estados y almacenamiento sin repetir
-				lisTado.searchEdo(lisTado.listaEdo,lisTado.estado); 
+				lisTado.searchEdoCountCP(lisTado.listaEdo,lisTado.estado);
+				//
 				lisTado.lineOfFile.clear();
 			}
-
+			//Imprimir lista de cantidad de cp
+			System.out.println("CP's List");
+			System.out.println(lisTado.listaCP);
+			System.out.println("\n");
+			System.out.println(lisTado.listaEdo);
+			//
 			//imprimir lista de estados sin repetir
 			lisTado.setInOrderEdo(lisTado.listaEdo);
+			System.out.println("\n");
 			lisTado.printInOrder(lisTado.inOrderEdo);
 			System.out.println(lisTado.inOrderEdo.size());
-			// 
+			//
 
 		}catch(FileNotFoundException var){
 			System.out.println("No existe el archivo");
