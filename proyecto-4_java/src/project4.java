@@ -32,21 +32,20 @@ public class project4{
 			BufferedReader entrada = new BufferedReader(archivo);
 			while( (cadena = entrada.readLine()) != null ){
 				str = new StringTokenizer(cadena);
-				// cadena sera un elemento 0 de un arraylist
 				while( str.hasMoreTokens() ){
 					lisTado.lineOfFile.add( str.nextToken("|") );
 				}
 				lisTado.estado = lisTado.lineOfFile.get(4);
-				// funcion searchEdo
-				lisTado.searchEdo(lisTado.listaEdo,lisTado.estado);
-				//System.out.println(lisTado.lineOfFile.get(0));
-				//System.out.println(lisTado.estado);
+				//funcion de busqueda de estados y almacenamiento sin repetir
+				lisTado.searchEdo(lisTado.listaEdo,lisTado.estado); 
 				lisTado.lineOfFile.clear();
 			}
+
 			//imprimir lista de estados sin repetir
-			Set inOrderEdo = new TreeSet(lisTado.listaEdo);
-			System.out.println(inOrderEdo);
-			System.out.println(lisTado.listaEdo.size());
+			lisTado.setInOrderEdo(lisTado.listaEdo);
+			lisTado.printInOrder(lisTado.inOrderEdo);
+			System.out.println(lisTado.inOrderEdo.size());
+			// 
 
 		}catch(FileNotFoundException var){
 			System.out.println("No existe el archivo");
