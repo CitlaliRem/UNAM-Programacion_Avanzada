@@ -18,8 +18,9 @@ public class listado{
 	int countMuni;
 	int countRanch;
 	int countCP;
+	HashSet listaEdo = new HashSet();
 	ArrayList <String> lineOfFile = new ArrayList <String>();
-	ArrayList <String> listaEdo = new ArrayList <String>();
+	//ArrayList <String> listaEdo = new ArrayList <String>();
 	ArrayList <Integer> listaCP = new ArrayList <Integer>();
 
 
@@ -33,9 +34,12 @@ public class listado{
 	* 	@para ArrayList & String
 	*/
 	public void searchEdo(ArrayList <String> listEdo, String edo){
-		if ( !listEdo.contains(edo) ){
+		/*if ( listEdo.contains(edo) ){
+			
+		}else{
 			listEdo.add(edo);
-		}
+		}*/
+		listEdo.add(edo);
 	}
 
 	/**
@@ -70,6 +74,4 @@ public class listado{
 			//
 		}
 	}
-
-
 }
