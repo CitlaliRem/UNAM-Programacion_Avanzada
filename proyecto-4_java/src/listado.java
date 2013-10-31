@@ -20,10 +20,11 @@ public class listado{
 	int countCP;
 	ArrayList <String> lineOfFile = new ArrayList <String>();
 	ArrayList <String> listaEdo = new ArrayList <String>();
+	ArrayList <Integer> listaCP = new ArrayList <Integer>();
 
 
 	public listado(){
-		System.out.printl("List created");
+		System.out.println("List created");
 	}
 
 	/**
@@ -32,7 +33,7 @@ public class listado{
 	* 	@para ArrayList & String
 	*/
 	public void searchEdo(ArrayList <String> listEdo, String edo){
-		if ( listEdo.contains(edo) == FALSE ){
+		if ( !listEdo.contains(edo) ){
 			listEdo.add(edo);
 		}
 	}
@@ -40,28 +41,35 @@ public class listado{
 	/**
 	* 	setInOrderEdo
 	* 	@return void
-	* 	@para ArrayList & String
+	* 	@para ArrayList <String>
 	*/
 	public void setInOrderEdo(ArrayList <String> listEdo){
-		int k = 0;
+		/*int k;   //todo esto se recude a una línea
+		int l;
 		String aux;
 
-		for(k = 0;k < listEdo.length; k++) {
-            if ( listEdo[k].compareTo(listEdo[k+1]) > 0) {
-                aux = listEdo[k];
-                listEdo[k] = listEdo[k+1];
-                listEdo[k+1] = aux;
-            }
-        }
-
+		for (l = 0; l < listEdo.size(); l++) {
+			for(k = 0;k < listEdo.size()-l; k++) {
+            	if ( listEdo.get(k).compareTo(listEdo.get(k+1)) > 0) {
+                	Collections.swap(listEdo,k,k+1);
+            	}
+        	}
+    	}*/
+    	Collections.sort(listEdo);
 	}
 
 	/**
-	* 	
+	* 	listCPxEdo
 	* 	@return void
-	* 	@para ArrayList & String
+	* 	@para ArrayList <Integer> & String
 	*/
-	public void 
+	public void listCPxEdo(ArrayList <Integer> line_of_file,String edo){
+		//
+		int k;
+		for (k = 0; k < listEdo.size() ; k++) {
+			//
+		}
+	}
 
 
 }
