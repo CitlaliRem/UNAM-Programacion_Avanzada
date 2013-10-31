@@ -63,7 +63,7 @@ public class listado{
 	* 	@return void
 	* 	@para ArrayList <Integer> & String
 	*/
-	public void listCPxEdo(ArrayList <Integer> line_of_file,String edo){
+	public void listCPxEdo(ArrayList <String> listEdo, ArrayList <Integer> line_of_file,String edo){
 		//
 		int k;
 		for (k = 0; k < listEdo.size() ; k++) {

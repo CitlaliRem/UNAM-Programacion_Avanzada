@@ -78,17 +78,18 @@ Ind.show(Ind.filterStates)
 
 #Scs.filterFunc(4, "Tabasco")
 
-stateList = list(sorted(Ind.filterStates))
-print("Debugging: Ind.fileToList[0][4]:::: ", Ind.fileToList[0][4], "stateList[0]", stateList[0])
-
-print(len(Ind.fileToList))
+stateList = list(Ind.filterStates)
 
 def indexStates():
-    i = 0
-    while i < len(Ind.fileToList):
+    i = 1
+    k = 0
+    while i < len(Ind.fileToList) and not k > 31:
         for subList in Ind.fileToList:
-            if subList[4] == stateList[i]:
+            if subList[4] == stateList[k]:
                 print("State", subList[4], "found on line: ", i)
+                k += 1
+                i = 1
+                break
             i += 1
 
 indexStates()
