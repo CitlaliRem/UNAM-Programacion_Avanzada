@@ -53,6 +53,12 @@ public class listado{
 	* 	@return void
 	* 	@para ArrayList <String>
 	*/
+/*	
+	public String removeDuplicates(ArrayList <String> listEdo) {
+		Set<String> set = new HashSet<String>(listEdo);
+
+	}
+*/
 	public void setInOrderEdo(ArrayList <String> listEdo){		
     	inOrderEdo = new TreeSet(listEdo);
 	}
@@ -67,3 +73,4 @@ public class listado{
 	}
 
 }
+

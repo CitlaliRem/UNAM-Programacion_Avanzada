@@ -15,32 +15,54 @@
 
 import java.io.*;
 import java.util.*;
+//import java.util.Scanner;
 
 public class project4{
 	/**
 	*	Main
 	*/
 	public static void main(String args[]){
-		String cadena;
-		int i; 
+		//String cadena;
+		//int i; 
 		StringTokenizer str;
 		listado lisTado = new listado();
 
-		try{
+		File file = new File("CPdescarga.txt");
 
+        try {
+ 
+            Scanner scanner = new Scanner(file, "ISO-8859-1");
+ 
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                //System.out.println(line);
+
+				str = new StringTokenizer(line);
+
+				while(str.hasMoreTokens()){
+					lisTado.lineOfFile.add( str.nextToken("|"));
+				}
+
+            /*
 			FileReader archivo = new FileReader("CPdescarga.txt");
 			BufferedReader entrada = new BufferedReader(archivo);
+
 			while( (cadena = entrada.readLine()) != null ){
 				str = new StringTokenizer(cadena);
 				while( str.hasMoreTokens() ){
 					lisTado.lineOfFile.add( str.nextToken("|") );
 				}
-				lisTado.estado = lisTado.lineOfFile.get(4);
-				//funcion de busqueda de estados y almacenamiento sin repetir
-				lisTado.searchEdoCountCP(lisTado.listaEdo,lisTado.estado);
-				//
-				lisTado.lineOfFile.clear();
+			*/
+			lisTado.estado = lisTado.lineOfFile.get(4);
+			//funcion de busqueda de estados y almacenamiento sin repetir
+			lisTado.searchEdoCountCP(lisTado.listaEdo,lisTado.estado);
+			//
+			lisTado.lineOfFile.clear();
+
 			}
+
+			scanner.close();
 			//Imprimir lista de cantidad de cp
 			System.out.println("CP's List");
 			System.out.println(lisTado.listaCP);
@@ -56,9 +78,10 @@ public class project4{
 
 		}catch(FileNotFoundException var){
 			System.out.println("No existe el archivo");
+            var.printStackTrace();
 		}catch(IOException var){
 			System.out.println("Error en el archivo");
-		}
 		
+		}
 	}
 }
