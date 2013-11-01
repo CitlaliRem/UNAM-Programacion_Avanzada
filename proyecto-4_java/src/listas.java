@@ -6,10 +6,10 @@ import java.util.TreeSet;
 public class listas{
 	 
 	 SortedSet <data> listaAmostrar = new TreeSet <data>();
-	 SortedSet <String> archivo = new TreeSet <String>();
-	 Set <String> estados = new HashSet <String>();
-	 Set <String> cP = new HashSet <String>();
-	 Set <String> delMunRan = new HashSet <String>();
+	 SortedSet <String> archivo = new TreeSet <String>(); //relacion->textFile
+	 Set <String> estados = new HashSet <String>(); //relacion->setName
+	 Set <String> cP = new HashSet <String>(); //relacion->setName
+	 Set <String> delMunRan = new HashSet <String>(); //relacion->setName
 
 	 public listas(){
 
@@ -29,8 +29,16 @@ public class listas{
 	 }
 
 	 public void forLoops(Set <String> setName, SortedSet <String> textFile){
-	 	for (String s: setName) {
-	 		System.out.println("Element in SortedSet: " + s);
+	 	
+	 	for (String line: textFile) {
+			String[] result = line.split("\\|");
+			System.out.println(result[4]);
+	 		/*for (String s: setName) {
+	 			aqui revisamos si el elemento 0, 3, 4 ya existen en un set
+	 			en caso de no existir en el set, entonces contamos +1
+	 			en los respectivos contadores de cp y delgMunRanch
+	 		}*/
 	 	}
+	 	
 	 }
 }
