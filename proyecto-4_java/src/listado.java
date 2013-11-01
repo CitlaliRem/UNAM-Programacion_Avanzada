@@ -14,15 +14,16 @@ import java.util.*;
 public class listado{
 
 	String estado;
+	String cp;
 	int countDeleg;
 	int countMuni;
 	int countRanch;
 	int countCP;
 	int coord;
 	
-	ArrayList <String> listaEdo = new ArrayList <String>();
 	ArrayList <String> lineOfFile = new ArrayList <String>();
-	ArrayList <Integer> listaCP = new ArrayList <Integer>();
+	HashSet <String> listaEdo = new HashSet <String>();
+	HashSet <String> listaCP = new HashSet <String>();
 	Set inOrderEdo;
 
 	public listado(){
@@ -34,27 +35,25 @@ public class listado{
 	* 	@return void
 	* 	@para ArrayList <String> & String
 	*/
-	public void searchEdoCountCP(ArrayList <String> listEdo, String edo){
-		int u = 1;
-
-		if (listEdo.contains(edo)) {
-			coord = listEdo.indexOf(edo);
-			countCP = listaCP.get(coord);
-			countCP++;  //codigo bien, verificar que no se repita el CP dentro de un arraylist
-			listaCP.remove(listaCP.get(coord));
-			listaCP.add(coord, countCP);
-		}else{
-			listEdo.add(edo);
-			listaCP.add(1);
-		}
+	public void setEdo(HashSet <String> listEdo, String edo){
+		listEdo.add(edo);
 	}
 
 	/**
-	* 	setInOrderEdo
+	* 	setCP
+	* 	@return void
+	* 	@para ArrayList <String> & String
+	*/
+	public void setCP(HashSet <String> listCP, String cp){
+		listCP.add(cp);
+	}
+
+	/**
+	* 	setInOrderEdo mostrar alfabeticamente
 	* 	@return void
 	* 	@para ArrayList <String>
 	*/
-	public void setInOrderEdo(ArrayList <String> listEdo){		
+	public void setInOrderEdo(HashSet <String> listEdo){		
     	inOrderEdo = new TreeSet(listEdo);
 	}
 
