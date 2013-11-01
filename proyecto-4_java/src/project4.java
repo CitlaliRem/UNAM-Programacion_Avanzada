@@ -1,7 +1,7 @@
 /**      
  *     Proyecto 4:
  *     Programa que efectua una busqueda sobre un archivo de texto (.txt) y muestra u ordena
- *	   la lista por los siguientes criterios:
+ *           la lista por los siguientes criterios:
  *              -> muestra la lista de estados (sin repeticón)
  *              -> muestra número de delegaciones, municipios, rancherías por estados
  *              -> ordena los estados por la cantidad de códigos postales
@@ -15,67 +15,64 @@
 
 import java.io.*;
 import java.util.*;
+//import java.util.Scanner;
 
 public class project4{
-	/**
-	*	Main
-	*/
-	public static void main(String args[]){
-		String cadena;
-		int i = 0; 
-		String debug;
-		ArrayList <Integer> df = new ArrayList <Integer>();
-		StringTokenizer str;
-		listado lisTado = new listado();
+        /**
+        *        Main
+        */
+        public static void main(String args[]){
+                //String cadena;
+                //int i; 
+                StringTokenizer str;
+                listado lisTado = new listado();
 
-		try{
+                File file = new File("CPdescarga.txt");
 
-			FileReader archivo = new FileReader("CPdescarga.txt");
-			BufferedReader entrada = new BufferedReader(archivo);
-			while( (cadena = entrada.readLine()) != null ){
-				str = new StringTokenizer(cadena);
-				while( str.hasMoreTokens() ){
-					lisTado.lineOfFile.add( str.nextToken("|") );
-				}
-				lisTado.estado = lisTado.lineOfFile.get(4);
+        try {
+ 
+            Scanner scanner = new Scanner(file, "ISO-8859-1");
+ 
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
 
-				//debugg
-				if (lisTado.estado.equals("Distrito Federal")) {
-					if( df.contains(Integer.parseInt(lisTado.lineOfFile.get(0))) ){
-						
-					}else{
-						df.add(Integer.parseInt(lisTado.lineOfFile.get(0)));
-						i++;
-					}
+                //System.out.println(line);
 
-				}
-				//debugg
+                str = new StringTokenizer(line);
 
-				//funcion de busqueda de estados y almacenamiento sin repetir
-				lisTado.searchEdoCountCP(lisTado.listaEdo,lisTado.estado);
-				//
-				lisTado.lineOfFile.clear();
-			}
-			//Imprimir lista de cantidad de cp
-			System.out.println("CP's List");
-			System.out.println(i);
-			System.out.println(lisTado.listaCP);
-			System.out.println(lisTado.listaCP.size());
-			System.out.println("\n");
-			System.out.println(lisTado.listaEdo);
-			//
-			//imprimir lista de estados sin repetir
-			lisTado.setInOrderEdo(lisTado.listaEdo);
-			System.out.println("\n");
-			lisTado.printInOrder(lisTado.inOrderEdo);
-			System.out.println(lisTado.inOrderEdo.size());
-			//
+                while(str.hasMoreTokens()){
+                        lisTado.lineOfFile.add( str.nextToken("|"));
+                }
 
-		}catch(FileNotFoundException var){
-			System.out.println("No existe el archivo");
-		}catch(IOException var){
-			System.out.println("Error en el archivo");
-		}
-		
-	}
+                lisTado.estado = lisTado.lineOfFile.get(4);
+                lisTado.cp = lisTado.lineOfFile.get(0);
+                //funcion de busqueda de estados y almacenamiento sin repetir
+                lisTado.setEdo(lisTado.listaEdo,lisTado.estado);
+                lisTado.setCP(lisTado.listaCP,lisTado.cp);
+                //
+                lisTado.lineOfFile.clear();
+
+            }
+            scanner.close();
+            //Imprimir lista de cantidad de cp
+            System.out.println("CP's List");
+            System.out.println(lisTado.listaCP);
+            System.out.println("\n");
+            System.out.println(lisTado.listaEdo);
+            //
+            //imprimir lista de estados sin repetir
+            //lisTado.setInOrderEdo(lisTado.listaEdo);
+            //System.out.println("\n");
+            //lisTado.printInOrder(lisTado.inOrderEdo);
+            //System.out.println(lisTado.inOrderEdo.size());
+            //
+
+            }catch(FileNotFoundException var){
+                System.out.println("No existe el archivo");
+                var.printStackTrace();
+            }catch(IOException var){
+                System.out.println("Error en el archivo");
+            
+            }
+        }
 }
