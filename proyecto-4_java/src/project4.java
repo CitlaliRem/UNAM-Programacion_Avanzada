@@ -2,9 +2,9 @@
  *     Proyecto 4:
  *     Programa que efectua una busqueda sobre un archivo de texto (.txt) y muestra u ordena
  *           la lista por los siguientes criterios:
- *              -> muestra la lista de estados (sin repeticón)
- *              -> muestra número de delegaciones, municipios, rancherías por estados
- *              -> ordena los estados por la cantidad de códigos postales
+ *              -> muestra la lista de states (sin repeticón)
+ *              -> muestra número de delegaciones, municipios, rancherías por states
+ *              -> ordena los states por la cantidad de códigos postales
  * 
  *      @authors: 
  *      César Alberto Trejo Juárez (cesaratj27 at gmail.com)
@@ -18,62 +18,66 @@ import java.util.*;
 //import java.util.Scanner;
 
 public class project4{
-        /**
-        *        Main
-        */
-        public static void main(String args[]){
-                //String cadena;
-                //int i; 
-                StringTokenizer str;
-                listado lisTado = new listado();
 
-                File file = new File("CPdescarga.txt");
+public static void main(String args[]) throws FileNotFoundException{
+	//StringTokenizer str;
+	Actions act = new Actions();
+	
+	File file = new File("CPdescarga.txt");
+	Scanner scanStates = new Scanner(file, "ISO-8859-1");
+	
+	while (scanStates.hasNextLine()) {
+		act.lineOfFile = act.ScanFile(scanStates);
+		//System.out.println("Debuugg: " + act.lineOfFile);
+	
+	    act.state = act.lineOfFile.get(4);
+	    
+	    //System.out.println(act.state);
+	    
+	    act.stateSet.add(act.state);
+	    
+	
+	    //act.setEdo(act.stateList,act.state);
+	    //act.addToSet(4, 3, act.zipCodeList, act.state);
+	
+	    act.lineOfFile.clear();
+	
+	}
+	scanStates.close();
+	
+	System.out.println("Displaying all " + act.stateSet.size() + " states of México:");
+	
+	for (String s : act.stateSet) {
+		System.out.println(s);
+	}	
+	
+		//System.out.println("Printing stateList: " + act.stateList);
+		/*
+         def listSubCat(self, columnToCompare, columnToAdd, setName, rootFile, linecount, ordered):
+		#setItemCount = 0
+		for index, state in self.stateDict.items():
+		    while state == rootFile[index][columnToCompare] and index < (linecount - 1): 
+		        setName.add(rootFile[index][columnToAdd])
+		        self.setItemCount = self.countSetItems(setName)
+		        index += 1
+		    self.printListSubCat(self.setItemCount, state, ordered)
+		    #print(self.setItemCount,"\t\t\t", state) 
+		    setName = set()
+		    self.setItemCount = 0	
+		    */
 
-        try {
+	int i = 0; // representa la linea del archivo
+
+	act.myset.toArray(new String[0]);
+		 
+         //Scanner scanner = new Scanner(file, "ISO-8859-1");
  
-            Scanner scanner = new Scanner(file, "ISO-8859-1");
- 
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
+	Scanner scanSubCats = new Scanner(file, "ISO-8859-1");
 
-                //System.out.println(line);
+	while (scanSubCats.hasNextLine()) {
+		act.lineOfFile = act.ScanFile(scanSubCats); /// create a new linebuffer
+	}
 
-                str = new StringTokenizer(line);
-
-                while(str.hasMoreTokens()){
-                        lisTado.lineOfFile.add( str.nextToken("|"));
-                }
-
-                lisTado.estado = lisTado.lineOfFile.get(4);
-                lisTado.cp = lisTado.lineOfFile.get(0);
-                //funcion de busqueda de estados y almacenamiento sin repetir
-                lisTado.setEdo(lisTado.listaEdo,lisTado.estado);
-                lisTado.setCP(lisTado.listaCP,lisTado.cp);
-                //
-                lisTado.lineOfFile.clear();
-
-            }
-            scanner.close();
-            //Imprimir lista de cantidad de cp
-            System.out.println("Counting elements: ");
-            lisTado.CountElements(lisTado.listaEdo, lisTado.lineOfFile);
-            //System.out.println(lisTado.listaCP);
-            System.out.println("\n");
-            System.out.println(lisTado.listaEdo);
-            //
-            //imprimir lista de estados sin repetir
-            //lisTado.setInOrderEdo(lisTado.listaEdo);
-            //System.out.println("\n");
-            //lisTado.printInOrder(lisTado.inOrderEdo);
-            //System.out.println(lisTado.inOrderEdo.size());
-            //
-
-            }catch(FileNotFoundException var){
-                System.out.println("No existe el archivo");
-                var.printStackTrace();
-            }catch(IOException var){
-                System.out.println("Error en el archivo");
-            
-            }
-        }
+	}
+       
 }
