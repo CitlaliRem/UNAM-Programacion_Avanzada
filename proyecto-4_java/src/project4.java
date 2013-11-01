@@ -55,8 +55,9 @@ public class project4{
             }
             scanner.close();
             //Imprimir lista de cantidad de cp
-            System.out.println("CP's List");
-            System.out.println(lisTado.listaCP);
+            System.out.println("Counting elements: ");
+            lisTado.CountElements(lisTado.listaEdo, lisTado.lineOfFile);
+            //System.out.println(lisTado.listaCP);
             System.out.println("\n");
             System.out.println(lisTado.listaEdo);
             //

@@ -29,6 +29,12 @@ public class listado{
 	public listado(){
 		System.out.println("List created");
 	}
+	
+	public void CountElements(HashSet <String> setName, ArrayList <String> textFile) {
+			System.out.println("I arrived :)");
+			for (String s: setName)
+				System.out.println("element en ArrayList: " + s);
+	}
 
 	/**
 	* 	searchEdoCountCP
