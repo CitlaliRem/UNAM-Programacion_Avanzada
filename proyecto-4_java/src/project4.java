@@ -22,7 +22,9 @@ public class project4{
 	*/
 	public static void main(String args[]){
 		String cadena;
-		int i; 
+		int i = 0; 
+		String debug;
+		ArrayList <Integer> df = new ArrayList <Integer>();
 		StringTokenizer str;
 		listado lisTado = new listado();
 
@@ -36,6 +38,19 @@ public class project4{
 					lisTado.lineOfFile.add( str.nextToken("|") );
 				}
 				lisTado.estado = lisTado.lineOfFile.get(4);
+
+				//debugg
+				if (lisTado.estado.equals("Distrito Federal")) {
+					if( df.contains(Integer.parseInt(lisTado.lineOfFile.get(0))) ){
+						
+					}else{
+						df.add(Integer.parseInt(lisTado.lineOfFile.get(0)));
+						i++;
+					}
+
+				}
+				//debugg
+
 				//funcion de busqueda de estados y almacenamiento sin repetir
 				lisTado.searchEdoCountCP(lisTado.listaEdo,lisTado.estado);
 				//
@@ -43,7 +58,9 @@ public class project4{
 			}
 			//Imprimir lista de cantidad de cp
 			System.out.println("CP's List");
+			System.out.println(i);
 			System.out.println(lisTado.listaCP);
+			System.out.println(lisTado.listaCP.size());
 			System.out.println("\n");
 			System.out.println(lisTado.listaEdo);
 			//
