@@ -66,11 +66,13 @@ public static void main(String args[]) throws FileNotFoundException{
 		    self.setItemCount = 0	
 		    */
 
-	int i = 0; // representa la linea del archivo
 
-	act.myset.toArray(new String[0]);
-		 
-         //Scanner scanner = new Scanner(file, "ISO-8859-1");
+	String stateList[] = act.stateSet.toArray(new String[act.stateSet.size()]);		 
+	
+		for (int i = 0; i < stateList.length; i++) {
+			System.out.println("Found state on position:  " + stateList[i]);
+		}
+		
  
 	Scanner scanSubCats = new Scanner(file, "ISO-8859-1");
 

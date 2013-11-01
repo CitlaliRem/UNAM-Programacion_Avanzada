@@ -25,7 +25,7 @@ public class Actions{
 //	int coord;
 	
 	ArrayList <String> lineOfFile = new ArrayList <String>();
-	ArrayList <String> stateList = new ArrayList <String>();
+	//ArrayList <String> stateList = new ArrayList <String>();
 	ArrayList <String> townshipList = new ArrayList <String>();
 	ArrayList <String> zipCodeList = new ArrayList <String>();
 	HashSet <String> stateSet = new HashSet <String>();
@@ -63,7 +63,7 @@ public class Actions{
 
 	// Metodo que recibe un Set y un objeto de clase data
 	// que permite almacenar el objeto en el set
-	public void aMostrar(SortedSet <data> listToShow, data dato){
+	public void saveToSet(SortedSet <data> listToShow, data dato){
 		listToShow.add(dato);
 	}
 	
