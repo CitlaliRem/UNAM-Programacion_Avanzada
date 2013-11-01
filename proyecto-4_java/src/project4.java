@@ -42,7 +42,7 @@ public class project4{
 
 				while(str.hasMoreTokens()){
 					lisTado.lineOfFile.add( str.nextToken("|"));
-				}
+					}
 
 				lisTado.estado = lisTado.lineOfFile.get(4);
 
