@@ -21,7 +21,7 @@ public class project4{
 	/**
 	*	Main
 	*/
-	public static void main(String args[]){
+	public static void main(String args[]) throws IOException{
 		//String cadena;
 		//int i; 
 		StringTokenizer str;
@@ -44,21 +44,12 @@ public class project4{
 					lisTado.lineOfFile.add( str.nextToken("|"));
 				}
 
-            /*
-			FileReader archivo = new FileReader("CPdescarga.txt");
-			BufferedReader entrada = new BufferedReader(archivo);
+				lisTado.estado = lisTado.lineOfFile.get(4);
 
-			while( (cadena = entrada.readLine()) != null ){
-				str = new StringTokenizer(cadena);
-				while( str.hasMoreTokens() ){
-					lisTado.lineOfFile.add( str.nextToken("|") );
-				}
-			*/
-			lisTado.estado = lisTado.lineOfFile.get(4);
-			//funcion de busqueda de estados y almacenamiento sin repetir
-			lisTado.searchEdoCountCP(lisTado.listaEdo,lisTado.estado);
-			//
-			lisTado.lineOfFile.clear();
+				//funcion de busqueda de estados y almacenamiento sin repetir
+				lisTado.searchEdoCountCP(lisTado.listaEdo,lisTado.estado);
+				//
+				lisTado.lineOfFile.clear();
 
 			}
 
@@ -79,9 +70,6 @@ public class project4{
 		}catch(FileNotFoundException var){
 			System.out.println("No existe el archivo");
             var.printStackTrace();
-		}catch(IOException var){
-			System.out.println("Error en el archivo");
-		
 		}
 	}
 }
