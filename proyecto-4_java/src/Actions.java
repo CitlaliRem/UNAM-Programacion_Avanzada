@@ -63,7 +63,7 @@ public class Actions{
 
 	// Metodo que recibe un Set y un objeto de clase data
 	// que permite almacenar el objeto en el set
-	public <data> void aMostrar(SortedSet <data> listToShow, data dato){
+	public void aMostrar(SortedSet <data> listToShow, data dato){
 		listToShow.add(dato);
 	}
 	
