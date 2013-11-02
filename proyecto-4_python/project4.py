@@ -10,6 +10,11 @@ import operator
        * muestra la lista de estados (sin repetición)
        * muestra número de delegaciones, municipios, rancherías por estados
        * ordena los estados por la cantidad de códigos postales
+       
+       Dato para corroborar (computados con Excel): 
+       Cantidad de códigos postales
+       DF 1444
+       Aguascalientes 420
 
     Authors: 
     César Alberto Trejo Juárez (cesaratj27 at gmail.com)
@@ -61,14 +66,14 @@ class SubCatSearch(Indexer):
         return dictEntry
 
     def indexStates(self, column, linecount):
-        i = 1 # i representa las indices de las sublistas a recorrer (o visto de otra forma las lineas del archivo)
+        i = 0 # i representa las indices de las sublistas a recorrer (o visto de otra forma las lineas del archivo)
         k = 0 # k representa cada estado en la lista de estados 
-        while i < linecount and not k > 31:
+        while i <= linecount and not k > 31:
             for subList in Ind.fileToList:
                 if subList[column] == self.stateList[k]:
                     self.createDict(self.stateDict, i, self.stateList[k])
                     k += 1
-                    i = 1
+                    i = 0
                     break
                 i += 1
     
@@ -97,7 +102,6 @@ class SubCatSearch(Indexer):
             if len(self.zipcodeDict) == len(self.stateList):
                 sortedDict = sorted(self.zipcodeDict.items(), key=operator.itemgetter(0))
                 #sortedDict = sorted(self.zipcodeDict.items(), key=lambda (k,v): v[1])
-                #print(sortedDict)
                 for key, value in sortedDict:
                     print(key,"\t\t\t", value)
         else:
@@ -121,5 +125,5 @@ print("\n")
 print("Displaying zipcodes, ascending order")
 print("_"*40)
 print("# zipcode\t\tstate")
-ssearch.listSubCat(4, 1, ssearch.zipcodeSet, Ind.fileToList, Ind.countLines(Ind.fileToList), 1) # compara con columna 4 (estados) y agrega contenido de columna 3 (municipios,delegaciones, rancherías)
+ssearch.listSubCat(4, 0, ssearch.zipcodeSet, Ind.fileToList, Ind.countLines(Ind.fileToList), 1) # compara con columna 4 (estados) y agrega contenido de columna 3 (municipios,delegaciones, rancherías)
     
