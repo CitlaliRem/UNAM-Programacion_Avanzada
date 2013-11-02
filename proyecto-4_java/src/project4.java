@@ -27,9 +27,7 @@ public class project4{
         File file = new File("CPdescarga.txt");
 
         try {
- 
             Scanner scanner = new Scanner(file, "ISO-8859-1");
- 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 listaS.archivo.add(line);
@@ -38,13 +36,10 @@ public class project4{
             scanner.close();
             listaS.forLoops(listaS.cP, listaS.estados, listaS.delMunRan, listaS.archivo); //Albert
             System.out.println("Estados con conteos:\n");
-            System.out.println(listaS.listaAmostrar);
-            
+            System.out.println(listaS.listaAmostrar);    
         }catch(FileNotFoundException var){
             System.out.println("No existe el archivo");
             var.printStackTrace();
-        }catch(IOException var){
-            System.out.println("Error en el archivo");
         }
     }
 }
