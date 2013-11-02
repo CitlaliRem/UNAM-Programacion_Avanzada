@@ -25,7 +25,7 @@ public class Data implements Comparable<Data>{
         @Override
     public String toString() {
 
-        return nameEdo + "\t\t\t" + cpCountedData + "\t\t\t" + delMunData + "\n";
+        return delMunData + "\t\t\t\t\t" + cpCountedData + "\t\t\t\t\t" + nameEdo + "\n";
     }
 
     @Override
@@ -54,11 +54,11 @@ public class Data implements Comparable<Data>{
         if (this.cpCountedData != other.cpCountedData) {
                 return false;
         }
-
+/*
         if (!Objects.equals(this.nameEdo, other.nameEdo)) {
             return false;
         }
-
+*/
         if (this.cpCountedData != other.cpCountedData) {
                 return false;
         }

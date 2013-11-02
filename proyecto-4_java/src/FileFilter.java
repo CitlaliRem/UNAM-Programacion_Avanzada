@@ -37,8 +37,8 @@ public class FileFilter{
             scanner.close();
             listObj.forLoops(listObj.zipcodeSet, listObj.stateSet, listObj.townshipSet, listObj.textFile); 
             System.out.println("\nStates of México sorted by number of zipcodes (ascending order)\n");
-            System.out.println(" State\t\t\t\tNumber of zipcodes\t\t\tTownship");
-            System.out.println("---------------------------------------------------------------------------------");
+            System.out.println(" Number of townships\t\t\tNumber of zipcodes\t\t\tState");
+            System.out.println("-----------------------------------------------------------------------------------------------------");
             System.out.println(listObj.listDisplay);
         }catch(FileNotFoundException var){
             System.out.println("File not found");

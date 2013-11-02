@@ -24,7 +24,7 @@ public class ListTools{
 
 	 // Metodo que recibe un Set y un objeto de clase data,
 	 // que permite almacenar el objeto en el set
-	public void addObjToSet(HashSet <Data> setName, Data dataObj){
+	public void addObjToSet(SortedSet <Data> setName, Data dataObj){
 	 	setName.add(dataObj);
 	}
 
@@ -68,7 +68,7 @@ public class ListTools{
 					
 				}
 	 		}
-	 		Data finalInfo = new Data(id, item, setCount1, setCount2);
+	 		Data finalInfo = new Data(setCount1, item, setCount2, id);
 	 		addObjToSet(listDisplay, finalInfo);
 	 		id++;	 	
 	 		temp1.clear();
