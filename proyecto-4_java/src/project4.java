@@ -22,6 +22,7 @@ public class project4{
     */
     public static void main(String args[]) throws IOException{
 
+        StringTokenizer str;
         listas listaS = new listas();
         File file = new File("CPdescarga.txt");
 
@@ -30,15 +31,16 @@ public class project4{
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 listaS.archivo.add(line);
-                
             }
             scanner.close();
             listaS.forLoops(listaS.cP, listaS.estados, listaS.delMunRan, listaS.archivo); //Albert
-            System.out.println("Estados con conteos:\n");
+            System.out.println("\n>>>Estados con conteos<<<\n");
+            System.out.println(" Estado\t\t\t\tCP\t\t\tDelegaciones/Municipios");
+            System.out.println("---------------------------------------------------------------------------------");
             System.out.println(listaS.listaAmostrar);
-            
-            }catch(FileNotFoundException var){
-                System.out.println("No existe el archivo");
-            }
+        }catch(FileNotFoundException var){
+            System.out.println("No existe el archivo");
+            var.printStackTrace();
+        }
     }
 }
