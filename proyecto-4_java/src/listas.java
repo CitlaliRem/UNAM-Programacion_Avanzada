@@ -5,30 +5,30 @@ import java.util.TreeSet;
 
 public class listas{
 	 
-	 TreeSet <data> listaAmostrar = new TreeSet <data>();
-	 SortedSet <String> archivo = new TreeSet <String>(); //relacion->textFile
-	 Set <String> estados = new HashSet <String>(); //relacion->setName
-	 Set <String> cP = new HashSet <String>(); //relacion->setName
-	 Set <String> delMunRan = new HashSet <String>(); //relacion->setName
+	TreeSet <data> listaAmostrar = new TreeSet <data>();
+	SortedSet <String> archivo = new TreeSet <String>(); //relacion->textFile
+	Set <String> estados = new HashSet <String>(); //relacion->setName
+	Set <String> cP = new HashSet <String>(); //relacion->setName
+	Set <String> delMunRan = new HashSet <String>(); //relacion->setName
 
-	 public listas(){
+	public listas(){
 
-	 }
+	}
 
 	 // Metodo que recibe un Set y un objeto de clase data,
 	 // que permite almacenar el objeto en el set
-	 public void aMostrar(TreeSet <data> listToShow, data dato){
+	public void aMostrar(TreeSet <data> listToShow, data dato){
 	 	listToShow.add(dato);
-	 }
+	}
 
 	 // Metodo que recibe un Set y un String para
 	 // almacenar el String en el respectivo Set 
 	 // que no permite elementos repetidos
-	 public void toSets(Set <String> setName, String element){
+	public void toSets(Set <String> setName, String element){
 	 	setName.add(element);
-	 }
+	}
 
-	 public void forLoops(Set <String> setNameCP, Set <String> setNameEdo, Set <String> setNameDel, SortedSet <String> textFile){
+	public void forLoops(Set <String> setNameCP, Set <String> setNameEdo, Set <String> setNameDel, SortedSet <String> textFile){
 	 	
 	 	int cpCount = 0;
 	 	int delCount = 0;
@@ -64,17 +64,12 @@ public class listas{
 	 		System.out.println("Estado: " + eleMent + "-->CantidadCPs: " + cpCount + "-->CantidadDels: " + delCount);
 
 	 		data finalInfo = new data(id, eleMent, cpCount, delCount);
-	 		//aMostrar(listaAmostrar, finalInfo);
+	 		aMostrar(listaAmostrar, finalInfo);
 	 		//listaAmostrar.add(finalInfo);
 	 		id++;	 	
 	 		tempCP.clear();
 	 		tempDel.clear();
-
-	 			/*aqui revisamos si el elemento 0, 3, 4 ya existen en un set
-	 			en caso de no existir en el set, entonces contamos +1
-	 			en los respectivos contadores de cp y delgMunRanch */
-	 			
 	 	}
 	 			
-	 }
+	}
 }
