@@ -20,10 +20,10 @@ public class project4{
     /**
     *        Main
     */
-    public static void main(String args[]){
+    public static void main(String args[]) throws IOException{
         //String cadena;
         //int i; 
-        StringTokenizer str;
+        //StringTokenizer str;
         //listado lisTado = new listado();
         listas listaS = new listas();
         File file = new File("CPdescarga.txt");
@@ -81,9 +81,6 @@ public class project4{
             }catch(FileNotFoundException var){
                 System.out.println("No existe el archivo");
                 var.printStackTrace();
-            }catch(IOException var){
-                System.out.println("Error en el archivo");
-            
             }
         }
 }
