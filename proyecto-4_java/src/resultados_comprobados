@@ -1,0 +1,73 @@
+
+Displaying townships (municipios/delegaciones/rancherías):
+________________________________________
+# townships		state
+16 			 Distrito Federal
+10 			 Colima
+38 			 Coahuila de Zaragoza
+18 			 Sinaloa
+106 		 Yucatán
+217 		 Puebla
+58 			 Zacatecas
+18 			 Querétaro
+125 		 México
+17 			 Tabasco
+43 			 Tamaulipas
+570 		 Oaxaca
+39 			 Durango
+11 			 Campeche
+67 			 Chihuahua
+60 			 Tlaxcala
+5 			 Baja California Sur
+118 		 Chiapas
+5 			 Baja California
+125 		 Jalisco
+10 			 Quintana Roo
+11 			 Aguascalientes
+113 		 Michoacán de Ocampo
+58 			 San Luis Potosí
+51 			 Nuevo León
+46 			 Guanajuato
+20 			 Nayarit
+212 		 Veracruz de Ignacio de la Llave
+81 			 Guerrero
+84 			 Hidalgo
+33 			 Morelos
+72 			 Sonora
+
+
+Displaying zipcodes, ascending order
+________________________________________
+# zipcode		state
+280 			 Colima
+288 			 Campeche
+306 			 Quintana Roo
+339 			 Baja California Sur
+397 			 Tlaxcala
+418 			 Aguascalientes
+432 			 Morelos
+457 			 Nayarit
+505 			 Yucatán
+516 			 Baja California
+525 			 Querétaro
+529 			 Tabasco
+557 			 Zacatecas
+965 			 Sinaloa
+985 			 San Luis Potosí
+990 			 Sonora
+1006 			 Tamaulipas
+1054 			 Durango
+1067 			 Chiapas
+1072 			 Coahuila de Zaragoza
+1087 			 Chihuahua
+1110 			 Nuevo León
+1153 			 Hidalgo
+1391 			 Guerrero
+1418 			 Guanajuato
+1444 			 Distrito Federal
+1566 			 Puebla
+1787 			 Oaxaca
+1934 			 Michoacán de Ocampo
+1959 			 Jalisco
+2233 			 Veracruz de Ignacio de la Llave
+2381 			 México
