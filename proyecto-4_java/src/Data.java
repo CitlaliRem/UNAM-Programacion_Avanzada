@@ -22,7 +22,7 @@ public class Data implements Comparable<Data>{
                 this.idData = id;
         }
 
-        @Override
+    @Override
     public String toString() {
 
         return delMunData + "\t\t\t\t\t" + cpCountedData + "\t\t\t\t\t" + nameEdo + "\n";
