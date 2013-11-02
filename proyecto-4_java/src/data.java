@@ -1,5 +1,4 @@
 //import java.util.Objects;
-=======
 /**      
  *     A simple class wich save the final data to print
  * 
