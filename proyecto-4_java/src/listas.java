@@ -16,7 +16,7 @@ import java.util.TreeSet;
 
 public class listas{
 	 
-	Set <data> listaAmostrar = new HashSet <data>();
+	HashSet <data> listaAmostrar = new HashSet <data>();
 	SortedSet <String> archivo = new TreeSet <String>(); //relacion->textFile
 	Set <String> estados = new HashSet <String>(); //relacion->setName
 	Set <String> cP = new HashSet <String>(); //relacion->setName
@@ -28,7 +28,7 @@ public class listas{
 
 	 // Metodo que recibe un Set y un objeto de clase data,
 	 // que permite almacenar el objeto en el set
-	public void aMostrar(Set <data> listToShow, data dato){
+	public void aMostrar(HashSet <data> listToShow, data dato){
 	 	listToShow.add(dato);
 	}
 
@@ -72,8 +72,6 @@ public class listas{
 					
 				}
 	 		}
-	 		System.out.println("Estado: " + eleMent + "\t\t\t-->CantidadCPs: " + cpCount + "\t\t\t-->CantidadDels: " + delCount);
-
 	 		data finalInfo = new data(id, eleMent, cpCount, delCount);
 	 		aMostrar(listaAmostrar, finalInfo);
 	 		id++;	 	
