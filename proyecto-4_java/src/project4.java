@@ -51,34 +51,62 @@ public static void main(String args[]) throws FileNotFoundException{
 		System.out.println(s);
 	}	
 	
-		//System.out.println("Printing stateList: " + act.stateList);
-		/*
-         def listSubCat(self, columnToCompare, columnToAdd, setName, rootFile, linecount, ordered):
-		#setItemCount = 0
-		for index, state in self.stateDict.items():
-		    while state == rootFile[index][columnToCompare] and index < (linecount - 1): 
-		        setName.add(rootFile[index][columnToAdd])
-		        self.setItemCount = self.countSetItems(setName)
-		        index += 1
-		    self.printListSubCat(self.setItemCount, state, ordered)
-		    #print(self.setItemCount,"\t\t\t", state) 
-		    setName = set()
-		    self.setItemCount = 0	
-		    */
-
 
 	String stateList[] = act.stateSet.toArray(new String[act.stateSet.size()]);		 
 	
+	/*
 		for (int i = 0; i < stateList.length; i++) {
-			System.out.println("Found state on position:  " + stateList[i]);
+			System.out.println("Found state on position " + (i+1) + ":" + stateList[i]);
 		}
 		
+		*/
  
+	File file1 = new File("CPdescarga.txt");
+	Scanner s = new Scanner(file1, "ISO-8859-1");
+
+	ArrayList<String> wholeFile = new ArrayList<String>();
+	while (s.hasNextLine()){
+		act.ScanFile(s);
+        //System.out.println("dEBuGG lineOfText: " + lineOfText);
+	}
+	s.close();
+	
+	//System.out.println(wholeFile);
+	for (String elem : wholeFile) {
+		System.out.println("Printing lines of wholeFile: " + elem);
+	}
+		
+	
+	/*
+	
 	Scanner scanSubCats = new Scanner(file, "ISO-8859-1");
 
 	while (scanSubCats.hasNextLine()) {
 		act.lineOfFile = act.ScanFile(scanSubCats); /// create a new linebuffer
-	}
+		
+		int k = 0;
+		//for (int stateindex = 0; stateindex < stateList.length; stateindex++) {
+		while(k < stateList.length) {
+			System.out.println("Processing: " + stateList[k]);	
+			String state = act.lineOfFile.get(4);
+			System.out.println("state: " + state);
+			String township = act.lineOfFile.get(3);
+	
+			if(stateList[k] == state) {
+				act.AddToSet(act.townshipSet, township);
+			}	
+			//System.out.println("state: " + stateList[k] + " number of township; " + act.townshipSet.size());
+			k += 1;
+		}
+		
+	/*	
+		for (int k = 0; k < stateList.length; k++) {
+			while(stateList[k] == act.lineOfFile.get[4]) {
+				
+			}
+			*/
+
+//	}
 
 	}
        

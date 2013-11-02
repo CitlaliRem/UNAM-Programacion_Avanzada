@@ -34,7 +34,7 @@ public class Actions{
 
 
 	public ArrayList<String> ScanFile(Scanner scannerObj){
-
+		System.out.println("Debugging: inside ScanFile:");
 		ArrayList <String> lineReader = new ArrayList <String>();
         String lineOfText = scannerObj.nextLine();
         //System.out.println("dEBuGG lineOfText: " + lineOfText);
@@ -70,7 +70,7 @@ public class Actions{
 	// Metodo que recibe un Set y un String para
 	// almacenar el String en el respectivo Set 
 	// que no permite elementos repetidos
-	public void toSets(Set <String> setName, String element){
+	public void AddToSet(Set <String> setName, String element){
 		setName.add(element);
 	}
 	
