@@ -10,32 +10,32 @@
 import java.util.*;
 
 public class Data implements Comparable<Data>{
-        private int idData;
-        private int cpCountedData;
+        private int id;
+        private int zipCode;
         private int delMunData;
-        private String nameEdo;
+        private String state;
 
         public Data(int cp, String edo, int delMun, int id){
-                this.cpCountedData = cp;
-                this.nameEdo = edo;
-                this.delMunData = delMun;
-                this.idData = id;
+                this.zipCode = cp;
+                this.state = edo;
+                this.township = delMun;
+                this.id = id;
         }
 
         @Override
     public String toString() {
 
-        return delMunData + "\t\t\t\t\t" + cpCountedData + "\t\t\t\t\t" + nameEdo + "\n";
+        return township + "\t\t\t\t\t" + zipCode + "\t\t\t\t\t" + state + "\n";
     }
 
     @Override
     public int compareTo(Data o) {
-            return this.cpCountedData-o.cpCountedData;
+            return this.zipCode-o.zipCode;
     }
 
     @Override
     public int hashCode() {
-            return cpCountedData + nameEdo.hashCode() + idData;
+            return zipCode + state.hashCode() + id;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Data implements Comparable<Data>{
 
         final Data other = (Data) obj;
 
-        if (this.cpCountedData != other.cpCountedData) {
+        if (this.zipCode != other.zipCode) {
                 return false;
         }
 /*
@@ -59,7 +59,7 @@ public class Data implements Comparable<Data>{
             return false;
         }
 */
-        if (this.cpCountedData != other.cpCountedData) {
+        if (this.zipCode != other.zipCode) {
                 return false;
         }
         return true;
