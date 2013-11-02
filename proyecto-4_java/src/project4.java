@@ -15,7 +15,6 @@
 
 import java.io.*;
 import java.util.*;
-//import java.util.Scanner;
 
 public class project4{
     /**
@@ -25,10 +24,8 @@ public class project4{
         //String cadena;
         //int i; 
         StringTokenizer str;
-        listado lisTado = new listado();
+        //listado lisTado = new listado();
         listas listaS = new listas();
-
-
         File file = new File("CPdescarga.txt");
 
         try {
@@ -40,11 +37,15 @@ public class project4{
 
                 //System.out.println(line);
 
-                str = new StringTokenizer(line);
-                listaS.archivo.add(line);
+                //str = new StringTokenizer(line);
+                
+                listaS.archivo.add(line); //albert
+                
+
+                /*
                 while(str.hasMoreTokens()){
                         lisTado.lineOfFile.add( str.nextToken("|"));
-                }
+                } */
 
                 /*
                 lisTado.estado = lisTado.lineOfFile.get(4);
@@ -58,7 +59,9 @@ public class project4{
                 */ 
             }
             scanner.close();
-            listaS.forLoops(listaS.estados, listaS.archivo);
+            listaS.forLoops(listaS.cP, listaS.estados, listaS.delMunRan, listaS.archivo); //Albert
+            System.out.println("Estados con conteos:\n");
+            System.out.println(listaS.listaAmostrar);
             //System.out.println(lisTado.file.get(0));
             //System.out.println(lisTado.listaDeleg);
             //Imprimir lista de cantidad de cp
