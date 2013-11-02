@@ -7,7 +7,6 @@
  *      
  *          Created on: Oct 31, 2013
  */
-import java.util.*;
 
 public class data{
 	public int idData;

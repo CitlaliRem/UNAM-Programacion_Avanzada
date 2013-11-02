@@ -1,6 +1,6 @@
 /**      
  *     Proyecto 4:
- *     Programa que efectua una busqueda sobre un archivo de texto (.txt) y muestra u ordena
+ *     Programa que efectua una busqueda sobre un textFile de texto (.txt) y muestra u ordena
  *           la lista por los siguientes criterios:
  *              -> muestra la lista de estados (sin repeticón)
  *              -> muestra número de delegaciones, municipios, rancherías por estados
@@ -16,31 +16,32 @@
 import java.io.*;
 import java.util.*;
 
-public class project4{
+public class FileFilter{
     /**
     *        Main
     */
     public static void main(String args[]) throws IOException{
+    	
+    	System.out.println("Hold the line, your request is being attended...");
+    	
 
-        StringTokenizer str;
-        listas listaS = new listas();
+        ListTools listObj = new ListTools();
         File file = new File("CPdescarga.txt");
 
         try {
             Scanner scanner = new Scanner(file, "ISO-8859-1");
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                listaS.archivo.add(line);
+                listObj.textFile.add(line);
             }
             scanner.close();
-            listaS.forLoops(listaS.cP, listaS.estados, listaS.delMunRan, listaS.archivo); //Albert
-            System.out.println("\n>>>Estados con conteos<<<\n");
-            System.out.println(" Estado\t\t\t\tCP\t\t\tDelegaciones/Municipios");
+            listObj.forLoops(listObj.zipcodeSet, listObj.stateSet, listObj.townshipSet, listObj.textFile); 
+            System.out.println("\nStates of México sorted by number of zipcodes (ascending order)\n");
+            System.out.println(" State\t\t\t\tNumber of zipcodes\t\t\tTownship");
             System.out.println("---------------------------------------------------------------------------------");
-            System.out.println(listaS.listaAmostrar);
+            System.out.println(listObj.listDisplay);
         }catch(FileNotFoundException var){
-            System.out.println("No existe el archivo");
-            var.printStackTrace();
+            System.out.println("File not found");
         }
     }
 }

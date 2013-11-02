@@ -14,32 +14,29 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class listas{
+public class ListTools{
 	 
-	HashSet <data> listaAmostrar = new HashSet <data>();
-	SortedSet <String> archivo = new TreeSet <String>(); //relacion->textFile
-	Set <String> estados = new HashSet <String>(); //relacion->setName
-	Set <String> cP = new HashSet <String>(); //relacion->setName
-	Set <String> delMunRan = new HashSet <String>(); //relacion->setName
+	HashSet <data> listDisplay = new HashSet <data>();
+	SortedSet <String> textFile = new TreeSet <String>(); //relacion->textFile
+	Set <String> stateSet = new HashSet <String>(); //relacion->setName
+	Set <String> zipcodeSet = new HashSet <String>(); //relacion->setName
+	Set <String> townshipSet = new HashSet <String>(); //relacion->setName
 
-	public listas(){
-
-	}
 
 	 // Metodo que recibe un Set y un objeto de clase data,
 	 // que permite almacenar el objeto en el set
-	public void aMostrar(HashSet <data> listToShow, data dato){
-	 	listToShow.add(dato);
+	public void addObjToSet(HashSet <data> setName, data dataObj){
+	 	setName.add(dataObj);
 	}
 
 	 // Metodo que recibe un Set y un String para
 	 // almacenar el String en el respectivo Set 
 	 // que no permite elementos repetidos
-	public void toSets(Set <String> setName, String element){
-	 	setName.add(element);
+	public void addStringToSet(Set <String> setName, String string){
+	 	setName.add(string);
 	}
 
-	public void forLoops(Set <String> setNameCP, Set <String> setNameEdo, Set <String> setNameDel, SortedSet <String> textFile){
+	public void forLoops(Set <String> setNameCP, Set <String> referenceSet, Set <String> setNameDel, SortedSet <String> textFile){
 	 	
 	 	int cpCount = 0;
 	 	int delCount = 0;
@@ -49,12 +46,12 @@ public class listas{
 
 	 	for (String line: textFile) {
 			String[] result = line.split("\\|");
-			toSets(setNameCP,result[0]);
-			toSets(setNameDel,result[3]);
-			toSets(setNameEdo,result[4]);
+			addStringToSet(referenceSet,result[4]);
+			addStringToSet(setNameCP,result[0]);
+			addStringToSet(setNameDel,result[3]);
 	 	}
 
-	 	for (String eleMent: setNameEdo) {
+	 	for (String eleMent: referenceSet) {
 	 		cpCount = 0;
 	 		delCount = 0;
 	 		
@@ -73,7 +70,7 @@ public class listas{
 				}
 	 		}
 	 		data finalInfo = new data(id, eleMent, cpCount, delCount);
-	 		aMostrar(listaAmostrar, finalInfo);
+	 		addObjToSet(listDisplay, finalInfo);
 	 		id++;	 	
 	 		tempCP.clear();
 	 		tempDel.clear();
