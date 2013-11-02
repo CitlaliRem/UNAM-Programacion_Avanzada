@@ -9,7 +9,7 @@
  */
 import java.util.*;
 
-public class data{
+public abstract class data implements Comparable{
 	public int idData;
 	public int cpCountedData;
 	public int delMunData;
@@ -28,4 +28,8 @@ public class data{
         return nameEdo + "\t\t\t" + cpCountedData + "\t\t\t" + delMunData + "\n";
     }
 
+    
+    public int compareTo(data o) {
+        return this.cpCountedData-o.cpCountedData;
+    }
 }
