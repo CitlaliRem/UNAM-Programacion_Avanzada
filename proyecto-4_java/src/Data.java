@@ -8,13 +8,14 @@
  *          Created on: Oct 31, 2013
  */
 
-public abstract class data implements Comparable{
+//public abstract class data implements Comparable{
+public class Data implements Comparable<Object>{
 	public int idData;
 	public int cpCountedData;
 	public int delMunData;
 	public String nameEdo;
 
-	public data(int id, String edo, int cp, int delMun){
+	public Data(int id, String edo, int cp, int delMun){
 		this.idData = id;
 		this.nameEdo = edo;
 		this.cpCountedData = cp;
@@ -23,12 +24,12 @@ public abstract class data implements Comparable{
 
 	@Override
     public String toString() {
-
-        return nameEdo + "\t\t\t" + cpCountedData + "\t\t\t" + delMunData + "\n";
+        return delMunData + "\t\t\t\t" + cpCountedData + "\t\t\t\t" + nameEdo + "\n";
     }
 
     
-    public int compareTo(data o) {
-        return this.cpCountedData-o.cpCountedData;
+    public int compareTo(Object o) {
+        //return this.cpCountedData-o.cpCountedData;
+        return 0;
     }
 }
