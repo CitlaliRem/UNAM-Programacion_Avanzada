@@ -22,6 +22,7 @@ public class ListTools{
 	Set <String> zipcodeSet = new HashSet <String>(); //relacion->setName
 	Set <String> townshipSet = new HashSet <String>(); //relacion->setName
 
+
 	 // Metodo que recibe un Set y un objeto de clase data,
 	 // que permite almacenar el objeto en el set
 	public void addObjToSet(HashSet <data> setName, data dataObj){
@@ -45,7 +46,7 @@ public class ListTools{
 
 	 	for (String line: textFile) {
 			String[] result = line.split("\\|");
-			addStringToSet(referenceSet,result[4]);
+			addStringToSet(referenceSet,result[4]); /* el set estados en la columna 4 sirve de referencia */
 			addStringToSet(setNameCP,result[0]);
 			addStringToSet(setNameDel,result[3]);
 	 	}
