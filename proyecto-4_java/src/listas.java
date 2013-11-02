@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public class listas{
 	 
-	 SortedSet <data> listaAmostrar = new TreeSet <data>();
+	 TreeSet <data> listaAmostrar = new TreeSet <data>();
 	 SortedSet <String> archivo = new TreeSet <String>(); //relacion->textFile
 	 Set <String> estados = new HashSet <String>(); //relacion->setName
 	 Set <String> cP = new HashSet <String>(); //relacion->setName
@@ -17,7 +17,7 @@ public class listas{
 
 	 // Metodo que recibe un Set y un objeto de clase data,
 	 // que permite almacenar el objeto en el set
-	 public void aMostrar(SortedSet <data> listToShow, data dato){
+	 public void aMostrar(TreeSet <data> listToShow, data dato){
 	 	listToShow.add(dato);
 	 }
 
@@ -46,10 +46,10 @@ public class listas{
 	 	for (String eleMent: setNameEdo) {
 	 		cpCount = 0;
 	 		delCount = 0;
-
+	 		
 	 		for (String line: textFile) {
 				String[] result = line.split("\\|");
-				if (result[4] == eleMent) {
+				if (result[4].equals(eleMent)) {
 					if (!tempCP.contains(result[0])) {
 						tempCP.add(result[0]);
 						cpCount++;
@@ -61,11 +61,14 @@ public class listas{
 					
 				}
 	 		}
+	 		System.out.println("Estado: " + eleMent + "-->CantidadCPs: " + cpCount + "-->CantidadDels: " + delCount);
 
 	 		data finalInfo = new data(id, eleMent, cpCount, delCount);
-	 		aMostrar(listaAmostrar, finalInfo);
+	 		//aMostrar(listaAmostrar, finalInfo);
 	 		//listaAmostrar.add(finalInfo);
-	 		id++;
+	 		id++;	 	
+	 		tempCP.clear();
+	 		tempDel.clear();
 
 	 			/*aqui revisamos si el elemento 0, 3, 4 ya existen en un set
 	 			en caso de no existir en el set, entonces contamos +1
