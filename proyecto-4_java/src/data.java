@@ -9,17 +9,17 @@
  */
 import java.util.*;
 
-public abstract class data implements Comparable{
-	public int idData;
-	public int cpCountedData;
-	public int delMunData;
-	public String nameEdo;
+public class data implements Comparable<data>{
+	private int idData;
+	private int cpCountedData;
+	private int delMunData;
+	private String nameEdo;
 
-	public data(int id, String edo, int cp, int delMun){
-		this.idData = id;
-		this.nameEdo = edo;
+	public data(int cp, String edo, int delMun, int id){
 		this.cpCountedData = cp;
+		this.nameEdo = edo;
 		this.delMunData = delMun;
+		this.idData = id;
 	}
 
 	@Override
@@ -28,8 +28,40 @@ public abstract class data implements Comparable{
         return nameEdo + "\t\t\t" + cpCountedData + "\t\t\t" + delMunData + "\n";
     }
 
-    
+    @Override
     public int compareTo(data o) {
-        return this.cpCountedData-o.cpCountedData;
+    	return this.cpCountedData-o.cpCountedData;
+    }
+
+    @Override
+    public int hashCode() {
+    	return cpCountedData + nameEdo.hashCode() + idData;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == null) {
+        	return false;
+        }
+
+        if (getClass() != obj.getClass()) {
+        	return false;
+        }
+
+        final data other = (data) obj;
+
+        if (this.cpCountedData != other.cpCountedData) {
+        	return false;
+        }
+
+        if (!Objects.equals(this.nameEdo, other.nameEdo)) {
+            return false;
+        }
+
+        if (this.cpCountedData != other.cpCountedData) {
+        	return false;
+        }
+        return true;
     }
 }
