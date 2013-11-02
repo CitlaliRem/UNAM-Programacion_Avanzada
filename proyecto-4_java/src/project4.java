@@ -27,6 +27,7 @@ public class project4{
         //listado lisTado = new listado();
         listas listaS = new listas();
         File file = new File("CPdescarga.txt");
+        
 
         try {
  
