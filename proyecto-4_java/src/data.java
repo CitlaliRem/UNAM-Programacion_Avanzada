@@ -25,6 +25,7 @@ public class data{
 	@Override
     public String toString() {
 
-        return "Estado: " + nameEdo + "\t\tNo CPs: " + cpCountedData + "\t\tNo Delegaciones/Municipios: "+ delMunData +"\n";
+        return nameEdo + "\t\t\t" + cpCountedData + "\t\t\t" + delMunData + "\n";
     }
+
 }
