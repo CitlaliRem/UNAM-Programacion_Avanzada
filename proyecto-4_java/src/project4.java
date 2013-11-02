@@ -26,9 +26,7 @@ public class project4{
         File file = new File("CPdescarga.txt");
 
         try {
- 
             Scanner scanner = new Scanner(file, "ISO-8859-1");
- 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 listaS.archivo.add(line);

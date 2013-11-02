@@ -1,3 +1,14 @@
+/**      
+ *     A simple class wich works with Sets to order States by
+ *	   the number of CP.
+ * 
+ *      @authors: 
+ *      César Alberto Trejo Juárez (cesaratj27 at gmail.com)
+ *      Magnus Henkel (magnus.henkel at zoho.com)
+ *      
+ *          Created on: Oct 31, 2013
+ */
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.SortedSet;
@@ -5,7 +16,7 @@ import java.util.TreeSet;
 
 public class listas{
 	 
-	TreeSet <data> listaAmostrar = new TreeSet <data>();
+	Set <data> listaAmostrar = new HashSet <data>();
 	SortedSet <String> archivo = new TreeSet <String>(); //relacion->textFile
 	Set <String> estados = new HashSet <String>(); //relacion->setName
 	Set <String> cP = new HashSet <String>(); //relacion->setName
@@ -17,7 +28,7 @@ public class listas{
 
 	 // Metodo que recibe un Set y un objeto de clase data,
 	 // que permite almacenar el objeto en el set
-	public void aMostrar(TreeSet <data> listToShow, data dato){
+	public void aMostrar(Set <data> listToShow, data dato){
 	 	listToShow.add(dato);
 	}
 
@@ -61,15 +72,13 @@ public class listas{
 					
 				}
 	 		}
-	 		System.out.println("Estado: " + eleMent + "-->CantidadCPs: " + cpCount + "-->CantidadDels: " + delCount);
+	 		System.out.println("Estado: " + eleMent + "\t\t\t-->CantidadCPs: " + cpCount + "\t\t\t-->CantidadDels: " + delCount);
 
 	 		data finalInfo = new data(id, eleMent, cpCount, delCount);
 	 		aMostrar(listaAmostrar, finalInfo);
-	 		//listaAmostrar.add(finalInfo);
 	 		id++;	 	
 	 		tempCP.clear();
 	 		tempDel.clear();
 	 	}
-	 			
 	}
 }
