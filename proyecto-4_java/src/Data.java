@@ -12,7 +12,7 @@ import java.util.*;
 public class Data implements Comparable<Data>{
         private int id;
         private int zipCode;
-        private int delMunData;
+        private int township;
         private String state;
 
         public Data(int cp, String edo, int delMun, int id){
