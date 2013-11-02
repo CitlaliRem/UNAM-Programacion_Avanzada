@@ -16,17 +16,30 @@ import java.util.TreeSet;
 
 public class ListTools{
 	 
+<<<<<<< HEAD:proyecto-4_java/src/ListTools.java.orig
 	HashSet <data> listDisplay = new HashSet <data>();
 	SortedSet <String> textFile = new TreeSet <String>(); //relacion->textFile
 	Set <String> stateSet = new HashSet <String>(); //relacion->setName
 	Set <String> zipcodeSet = new HashSet <String>(); //relacion->setName
 	Set <String> townshipSet = new HashSet <String>(); //relacion->setName
+=======
+	SortedSet <data> listaAmostrar = new TreeSet <data>();
+	SortedSet <String> archivo = new TreeSet <String>(); //relacion->textFile
+	Set <String> estados = new HashSet <String>(); //relacion->setName
+	Set <String> cP = new HashSet <String>(); //relacion->setName
+	Set <String> delMunRan = new HashSet <String>(); //relacion->setName
+>>>>>>> 62979c212cf1299d5909e4787c620e606df2119a:proyecto-4_java/src/listas.java
 
 
 	 // Metodo que recibe un Set y un objeto de clase data,
 	 // que permite almacenar el objeto en el set
+<<<<<<< HEAD:proyecto-4_java/src/ListTools.java.orig
 	public void addObjToSet(HashSet <data> setName, data dataObj){
 	 	setName.add(dataObj);
+=======
+	public void aMostrar(SortedSet <data> listToShow, data dato){
+	 	listToShow.add(dato);
+>>>>>>> 62979c212cf1299d5909e4787c620e606df2119a:proyecto-4_java/src/listas.java
 	}
 
 	 // Metodo que recibe un Set y un String para
@@ -69,8 +82,13 @@ public class ListTools{
 					
 				}
 	 		}
+<<<<<<< HEAD:proyecto-4_java/src/ListTools.java.orig
 	 		data finalInfo = new data(id, eleMent, cpCount, delCount);
 	 		addObjToSet(listDisplay, finalInfo);
+=======
+	 		data finalInfo = new data(cpCount,eleMent, delCount, id);
+	 		aMostrar(listaAmostrar, finalInfo);
+>>>>>>> 62979c212cf1299d5909e4787c620e606df2119a:proyecto-4_java/src/listas.java
 	 		id++;	 	
 	 		tempCP.clear();
 	 		tempDel.clear();

@@ -16,7 +16,7 @@ import java.util.TreeSet;
 
 public class ListTools{
 	 
-	HashSet <Data> listDisplay = new HashSet <Data>();
+	SortedSet <Data> listDisplay = new TreeSet <Data>();
 	SortedSet <String> textFile = new TreeSet <String>(); //relacion->textFile
 	Set <String> stateSet = new HashSet <String>(); //relacion->setName
 	Set <String> zipcodeSet = new HashSet <String>(); //relacion->setName
