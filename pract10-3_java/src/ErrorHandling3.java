@@ -1,7 +1,9 @@
 /**
- * 
+ * Práctica 10-3: Errorhandling3.java 
  *
- * @author arytloc
+ * @authors 
+ *	César Alberto Trejo Juárez (cesaratj27 at gmail.com)
+ *	Magnus Henkel (magnus.henkel at zoho.com)
  *
  */
 

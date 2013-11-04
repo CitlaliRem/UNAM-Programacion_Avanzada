@@ -1,4 +1,4 @@
-Nombre:  ErrorHandling3.java
+Nombre:  Errorhandling3.java
 Parte de la práctia 10
 
 Programadores:         
