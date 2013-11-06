@@ -13,7 +13,7 @@ public class Division{
 
     public static void main(String args[]){
 
-        double x, y, z;
+        int x, y, z;
         Scanner teclado = new Scanner(System.in);
 
         try{
