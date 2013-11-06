@@ -20,9 +20,9 @@ public class ErrorHandling3{
 	            System.out.println("arr["+i+"]: "+arr[i]);
 	         }
     	 } catch(ArrayIndexOutOfBoundsException var) {
-    		 System.out.println("Exception caught. Reason:");
+    		 System.out.println("Exception caught");
     		 var.printStackTrace();
-    		 System.out.println("Argument of type integer requiered");
+    		 System.out.println("Reason: Argument of type integer required");
     	 }
       }
 }

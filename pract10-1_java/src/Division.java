@@ -1,29 +1,76 @@
-/**
- *	Práctica 10-1: Division.java 
+/** *	Práctica 10-1: Division.java 
  * 
+ * El siguiente código:
+ * 
+ *	   	public class Division{
+ *	      	public static void main(String args[]){
+ *	         int x,y,z;
+ *	         x=2;
+ *	         y=0;
+ *	         z=x/y;
+ *	         System.out.println("El resultado es: "+z);
+ *			} 
+ *		}
+ *
+ *	genera una excepción al ejecutarse.¿Qué excepción se genera? ¿Por qué?
+ *	Modifique el código utilizando try-catch, para que despliegue en pantalla la
+ *	razón de la excepción. Además, haga que el programa reciba parámetros desde
+ *	la línea de comandos.
+ *
  * @authors 
  *	César Alberto Trejo Juárez (cesaratj27 at gmail.com)
  *	Magnus Henkel (magnus.henkel at zoho.com)
  *
  */
+
+import java.util.*;
+
 public class Division{
 
-    public static void main(String args[]){
+	public static int lectureData(){
+		Scanner teclado = new Scanner(System.in);
+		int w;
+		
+		w = teclado.nextInt();
+		return w;
+	}
+	
+	public static void main(String args[]) throws InterruptedException {
 
-        int x, y, z;
+	    int x = 2;
+	    int y = 0;
+	    int z;
+	
+	    try{
+	
+	        z = x / y;
+	        System.out.println("'x' divided by 'y' equals: " + z);
+	
+	    }catch(ArithmeticException var){
+	    	System.out.println("x value: " + x + "\ny value: " + y);
+	    	System.out.println("Trying the following operation: x/y");
+	    	for (int i = 0; i < 3; i++) {
+	    		System.out.print(".");
+	    		Thread.sleep(1000);
+			}
 
-        try{
-            x = 2;
-            y = 0;
-            z = x / y;
-            System.out.println("El resultado es: " + z);
-        }catch(ArithmeticException lol){
-            System.out.println("Error division por cero [0]");
-        }
-        /*
-            Genera java.lang.ArithmeticException: / by zero
-            Se generá porque no se puede dividir por 0
+	        System.out.println("\nERROR! (Division by zero). \n\nEnter any value except zero for 'y'\n");
 
-        */
-    }
+	    }finally{
+	    	try{
+		        System.out.println("x value:");
+		        x = Division.lectureData();
+		        System.out.println("y value:");
+		        y = Division.lectureData();
+		        z = x / y;
+		        System.out.println("Result: " + z);
+	    	}catch (ArithmeticException var){
+	    		System.out.println( "Input invalid. Exiting...");
+	    		System.exit(1);
+		    }catch(InputMismatchException var){
+		    	System.out.println("Input invalid.Enter numeric values only\n");
+		    	System.exit(1);
+		    }
+	    }
+	}
 }
