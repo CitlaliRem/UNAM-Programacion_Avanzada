@@ -6,19 +6,26 @@
  *	Magnus Henkel (magnus.henkel at zoho.com)
  *
  */
+import java.io.*;
+import java.util.*;
+
 public class Division{
 
     public static void main(String args[]){
 
-        int x, y, z;
+        double x, y, z;
+        Scanner teclado = new Scanner(System.in);
 
         try{
-            x = 2;
-            y = 0;
-            z = x / y;
+            System.out.println("Ingrese primer valor:");
+        	x = teclado.nextInt();
+        	System.out.println("Ingrese segundo valor:");
+        	y = teclado.nextInt();
+        	z = x / y;
             System.out.println("El resultado es: " + z);
         }catch(ArithmeticException lol){
             System.out.println("Error division por cero [0]");
+            lol.printStackTrace();
         }
         /*
             Genera java.lang.ArithmeticException: / by zero
