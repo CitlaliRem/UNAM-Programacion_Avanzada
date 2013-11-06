@@ -22,16 +22,15 @@
  *	Magnus Henkel (magnus.henkel at zoho.com)
  *
  */
-
 import java.util.*;
 
 public class Division{
 
-	public static int lectureData(){
-		Scanner teclado = new Scanner(System.in);
+	public static int ReadData(){
+		Scanner keyb = new Scanner(System.in);
 		int w;
 		
-		w = teclado.nextInt();
+		w = keyb.nextInt();
 		return w;
 	}
 	
@@ -59,16 +58,16 @@ public class Division{
 	    }finally{
 	    	try{
 		        System.out.println("x value:");
-		        x = Division.lectureData();
+		        x = Division.ReadData();
 		        System.out.println("y value:");
-		        y = Division.lectureData();
+		        y = Division.ReadData();
 		        z = x / y;
 		        System.out.println("Result: " + z);
 	    	}catch (ArithmeticException var){
 	    		System.out.println( "Input invalid. Exiting...");
 	    		System.exit(1);
 		    }catch(InputMismatchException var){
-		    	System.out.println("Input invalid.Enter numeric values only\n");
+		    	System.out.println("Input invalid. Exiting");
 		    	System.exit(1);
 		    }
 	    }
