@@ -15,6 +15,7 @@ public class ClientHandler extends Thread{
     int id;
     DataInputStream userInput;
     String nickname;
+    String passwd;
     String inputString;
     ClientHandler clientCount[];
 
@@ -39,10 +40,15 @@ public class ClientHandler extends Thread{
             userInput = new DataInputStream(clientSocket.getInputStream());
             serverOutput = new PrintStream(clientSocket.getOutputStream());
 
-			//PasswordCheck pwAuth = new PasswordCheck();
-            serverOutput.println("Please enter your password");
-            String passwd = userInput.readLine();
-			Boolean validPass = PasswordCheck.PWInput(passwd);
+            serverOutput.println("**********************************");
+            serverOutput.println("*** Welcome to the Chat Server ***");
+            serverOutput.println("**********************************");
+            serverOutput.print("Nick: ");
+            nickname = userInput.readLine();
+            serverOutput.print("Password: ");
+            passwd = userInput.readLine();
+
+			Boolean validPass = PasswordCheck.checkCredentials(nickname, passwd);
 			
 			if (validPass == false) {
 				serverOutput.println("Sorry, you have no access to this chat");
@@ -51,10 +57,8 @@ public class ClientHandler extends Thread{
 				clientSocket.close();
 				numSockets -= 1;
 			}
-            serverOutput.println("*** Welcome to the Chat Server ***");
-            serverOutput.print("Choose alias: ");
-            nickname = Tools.capitalizeFirstLetter(userInput.readLine());
-            serverOutput.println("SERVER: Welcome " + nickname);
+            nickname = Tools.capitalizeFirstLetter(nickname);
+            serverOutput.println("\nSERVER:\tHi " + nickname + "\n>> : ");
 
             for(i=0; i<10; i++) {
                 if(clientCount[i]!=null && clientCount[i]!= this)
@@ -62,22 +66,22 @@ public class ClientHandler extends Thread{
             }
 
             while(true) {
-            	serverOutput.print(">> : ");
+            	serverOutput.print(">> :\t");
                 inputString = userInput.readLine();
 
                 if(inputString.startsWith("/exit")) {
-                	serverOutput.println("Goodbye " + nickname);
+                	serverOutput.println("SERVER:\tGoodbye " + nickname);
                 	break;
                 }
                 for(i=0; i<10; i++) {
                     if(clientCount[i]!=null && clientCount[i]!= this)
-                    	clientCount[i].serverOutput.print("\n" + nickname +": " + inputString + "\n>> :");
+                    	clientCount[i].serverOutput.print("\n" + nickname +": " + inputString + "\n>> : ");
                 }
             }
 
             for(i=0; i<10;i++){
                 if(clientCount[i]!=null && clientCount[i]!= this)
-                	clientCount[i].serverOutput.print("\n++ " + nickname + " left ++\n>> :");
+                	clientCount[i].serverOutput.print("\n++ " + nickname + " left ++\n>> : ");
                 	userInput.close();
 		            serverOutput.close();
 		            clientSocket.close();

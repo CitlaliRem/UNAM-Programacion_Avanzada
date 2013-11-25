@@ -1,19 +1,28 @@
 import java.util.*;  
+import java.io.*;
 import java.lang.String;  
 import java.lang.Character;  
 
 public class PasswordCheck { 
 
-	public static boolean PWInput(String passwd) {
-       //Scanner input = new Scanner(System.in);  
-       //String password = input.next();  
-        if (isValid(passwd)) {  
-            return true;
-        } else {  
-            return false; 
-        }  
-	}
-    private static boolean isValid(String password) {  
+    static boolean checkCredentials(String nick, String password) { 
+    	 Properties prop = new Properties();
+         try {
+			prop.load(new FileInputStream("users.properties"));
+		} catch (FileNotFoundException var) {
+			var.printStackTrace();
+		} catch (IOException var) {
+			var.printStackTrace();
+		}
+         String userPass = prop.getProperty(nick);
+         if (! password.equals(userPass)) {
+        	 System.out.println("Password not correct");
+        	 return false;
+         }
+        return true;  
+    }
+
+    static boolean isValid(String password) { 
         //return true if and only if password:
         //1. have at least eight characters.
         //2. consists of only letters and digits.
@@ -36,7 +45,7 @@ public class PasswordCheck {
             if (count < 2)   {     
                 return false;  
             }     
-        }  
-        return true;  
-    }  
+        }
+        return true;
+    }
 }
