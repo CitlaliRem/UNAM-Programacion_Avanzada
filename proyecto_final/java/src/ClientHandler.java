@@ -4,6 +4,7 @@
  */
 
 import java.net.*;
+import java.util.Properties;
 import java.io.*;
 //import java.util.*; // no se necesita de momento
 
@@ -12,8 +13,8 @@ public class ClientHandler extends Thread{
     Socket clientSocket;
     static int numSockets;
     PrintStream serverOutput;
-    int id;
     DataInputStream userInput;
+    int id;
     String nickname;
     String passwd;
     String inputString;
@@ -45,6 +46,20 @@ public class ClientHandler extends Thread{
             serverOutput.println("**********************************");
             serverOutput.print("Nick: ");
             nickname = userInput.readLine();
+            
+            Boolean signedUp = PasswordCheck.checkSignUp(nickname);
+
+            if (signedUp == false) {
+            	serverOutput.println("Do you want to register? (y/n)");
+            	String option = userInput.readLine();
+            	System.out.println("LOG: User choose option: " + option);
+            	serverOutput.print("Choose your nickname: ");
+            	String newNickname = userInput.readLine();
+            	serverOutput.print("Choose your password: ");
+            	String newPassword = userInput.readLine();
+            	PasswordCheck.propSetter(newNickname, newPassword);
+            }
+
             serverOutput.print("Password: ");
             passwd = userInput.readLine();
 

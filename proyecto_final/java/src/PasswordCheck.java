@@ -5,6 +5,33 @@ import java.lang.Character;
 
 public class PasswordCheck { 
 
+	static boolean checkSignUp(String nick) {
+		Properties prop = new Properties();
+		try {
+			prop.load(new FileInputStream("users.properties"));
+		} catch (FileNotFoundException var) {
+			var.printStackTrace();
+		} catch (IOException var) {
+			var.printStackTrace();
+		}
+		
+		String userName = prop.getProperty(nick);
+		if(userName == null) {
+			System.out.println("LOG: Nickname does not exist");
+			return false;
+		}
+		return true;
+	}
+
+	static void propSetter(String nick, String password) {
+
+        	Properties prop = new Properties();
+        	prop.store(new FileOutputStream("users.properties"),null);	
+
+    		prop.setProperty(nick, password);
+			System.out.println("You can now log in with your password");
+	}
+
     static boolean checkCredentials(String nick, String password) { 
     	 Properties prop = new Properties();
          try {
@@ -16,7 +43,7 @@ public class PasswordCheck {
 		}
          String userPass = prop.getProperty(nick);
          if (! password.equals(userPass)) {
-        	 System.out.println("Password not correct");
+        	 System.out.println("LOG: User entered incorrect password");
         	 return false;
          }
         return true;  
