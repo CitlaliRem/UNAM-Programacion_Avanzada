@@ -10,6 +10,7 @@ import java.util.*;
 
 public class Server{
 
+
     static Socket client;
     static ClientHandler clientCount[] = new ClientHandler[10];
 
