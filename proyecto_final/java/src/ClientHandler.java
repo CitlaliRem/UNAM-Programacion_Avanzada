@@ -58,6 +58,12 @@ public class ClientHandler extends Thread{
             	serverOutput.print("Choose your password: ");
             	String newPassword = userInput.readLine();
             	PasswordCheck.propSetter(newNickname, newPassword);
+
+	        	Properties prop = new Properties();
+	    		prop.put(newNickname, newPassword);
+					prop.store(new FileOutputStream("users.properties"),null);
+	
+			System.out.println("You can now log in with your password");
             }
 
             serverOutput.print("Password: ");

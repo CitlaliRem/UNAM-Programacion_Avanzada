@@ -25,11 +25,6 @@ public class PasswordCheck {
 
 	static void propSetter(String nick, String password) {
 
-        	Properties prop = new Properties();
-        	prop.store(new FileOutputStream("users.properties"),null);	
-
-    		prop.setProperty(nick, password);
-			System.out.println("You can now log in with your password");
 	}
 
     static boolean checkCredentials(String nick, String password) { 
