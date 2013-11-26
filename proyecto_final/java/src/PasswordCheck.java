@@ -2,45 +2,94 @@ import java.util.*;
 import java.io.*;
 import java.lang.String;  
 import java.lang.Character;  
-
+/*import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+//import java.util.Enumeration;
+import java.util.Properties;
+*/
 public class PasswordCheck { 
 
 	static boolean checkSignUp(String nick) {
-		Properties prop = new Properties();
-		try {
-			prop.load(new FileInputStream("users.properties"));
-		} catch (FileNotFoundException var) {
-			var.printStackTrace();
-		} catch (IOException var) {
-			var.printStackTrace();
-		}
-		
-		String userName = prop.getProperty(nick);
-		if(userName == null) {
-			System.out.println("LOG: Nickname does not exist");
-			return false;
-		}
+
+			try {
+				File file = new File("users.xml");
+				FileInputStream fileInput = new FileInputStream(file);
+				Properties properties = new Properties();
+				properties.loadFromXML(fileInput);
+				fileInput.close();
+	
+				String userName = properties.getProperty(nick);
+	/*
+				Enumeration enuKeys = properties.keys();
+				while (enuKeys.hasMoreElements()) {
+					String key = (String) enuKeys.nextElement();
+					String value = properties.getProperty(key);
+					System.out.println(key + ": " + value);
+			}
+					*/
+			if(userName == null) {
+				System.out.println("LOG: Nickname does not exist");
+				return false;
+			}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 		return true;
 	}
 
 	static void propSetter(String nick, String password) {
 
-	}
+			try {
+				
+				File file = new File("users.xml");
+				FileInputStream fileInput = new FileInputStream(file);
+				Properties properties = new Properties();
+				properties.loadFromXML(fileInput);
+				fileInput.close();
+
+				properties.setProperty(nick, password);
+
+				FileOutputStream fileOut = new FileOutputStream(file);
+				properties.storeToXML(fileOut, "User Access");
+				fileOut.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		  }
 
     static boolean checkCredentials(String nick, String password) { 
-    	 Properties prop = new Properties();
-         try {
-			prop.load(new FileInputStream("users.properties"));
-		} catch (FileNotFoundException var) {
-			var.printStackTrace();
-		} catch (IOException var) {
-			var.printStackTrace();
-		}
-         String userPass = prop.getProperty(nick);
-         if (! password.equals(userPass)) {
-        	 System.out.println("LOG: User entered incorrect password");
-        	 return false;
+
+    	System.out.println("Debugg: " + nick + " " + password);
+    	
+    	try {
+			File file = new File("users.xml");
+			FileInputStream fileInput = new FileInputStream(file);
+			Properties properties = new Properties();
+			properties.loadFromXML(fileInput);
+			fileInput.close();
+
+			String userPass = properties.getProperty(nick);
+
+	        System.out.println("Userpass: " + userPass);
+	         if (! password.equals(userPass)) {
+	        	 System.out.println("LOG: User entered incorrect password");
+	        	 return false;
          }
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
         return true;  
     }
 

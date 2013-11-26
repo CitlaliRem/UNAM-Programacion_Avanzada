@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>User Access</comment>
+<entry key="nick">2222</entry>
+<entry key="brenda">1234</entry>
+<entry key="oscar">9999</entry>
+<entry key="alberto">4321</entry>
+<entry key="magnus">4444</entry>
+<entry key="lola">666</entry>
+</properties>

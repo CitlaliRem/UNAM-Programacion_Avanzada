@@ -50,20 +50,25 @@ public class ClientHandler extends Thread{
             Boolean signedUp = PasswordCheck.checkSignUp(nickname);
 
             if (signedUp == false) {
+            	serverOutput.println(nickname + " not found in database");
             	serverOutput.println("Do you want to register? (y/n)");
             	String option = userInput.readLine();
-            	System.out.println("LOG: User choose option: " + option);
-            	serverOutput.print("Choose your nickname: ");
-            	String newNickname = userInput.readLine();
-            	serverOutput.print("Choose your password: ");
-            	String newPassword = userInput.readLine();
-            	PasswordCheck.propSetter(newNickname, newPassword);
+            	if(! option.equals("y")) {
+            		userInput.close();
+    				serverOutput.close();
+    				clientSocket.close();
+    				numSockets -= 1;
+            	} else {
+	            	System.out.println("LOG: User choose option: " + option);
+	            	serverOutput.print("Choose your nickname: ");
+	            	String newNickname = userInput.readLine();
+	            	serverOutput.print("Choose your password: ");
+	            	String newPassword = userInput.readLine();
+	            	PasswordCheck.propSetter(newNickname, newPassword);
+	            	nickname = newNickname;
+	            	serverOutput.println("You can now log in with your password");
+            	}
 
-	        	Properties prop = new Properties();
-	    		prop.put(newNickname, newPassword);
-					prop.store(new FileOutputStream("users.properties"),null);
-	
-			System.out.println("You can now log in with your password");
             }
 
             serverOutput.print("Password: ");

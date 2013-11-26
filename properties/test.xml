@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Favorite Things</comment>
+<entry key="favCol3">black</entry>
+<entry key="favoriteSeason">summer</entry>
+<entry key="favCol2">blue</entry>
+<entry key="favoriteDay">today</entry>
+<entry key="favoriteFruit">pomegranate</entry>
+</properties>
