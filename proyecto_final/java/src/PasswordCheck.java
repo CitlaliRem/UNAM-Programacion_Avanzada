@@ -2,14 +2,7 @@ import java.util.*;
 import java.io.*;
 import java.lang.String;  
 import java.lang.Character;  
-/*import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-//import java.util.Enumeration;
-import java.util.Properties;
-*/
+
 public class PasswordCheck { 
 
 	static boolean checkSignUp(String nick) {
