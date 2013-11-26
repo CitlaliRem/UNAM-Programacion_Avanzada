@@ -60,8 +60,6 @@ public class PasswordCheck {
 
     static boolean checkCredentials(String nick, String password) { 
 
-    	System.out.println("Debugg: " + nick + " " + password);
-    	
     	try {
 			File file = new File("users.xml");
 			FileInputStream fileInput = new FileInputStream(file);
