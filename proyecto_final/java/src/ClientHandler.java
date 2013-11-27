@@ -1,8 +1,7 @@
-
 import java.net.*;
 import java.io.*;
 
-import java.util.*; // no se necesita de momento
+import java.util.*; 
 
 public class ClientHandler extends Thread{
 
@@ -15,15 +14,13 @@ public class ClientHandler extends Thread{
     String passwd;
     String inputString;
     //ClientHandler clientCount[];
-    ArrayList clientCount = new ArrayList();
+    ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();//generamos un arraylist de objetos,
+	 //es lo que hiso german pero con arreglos con esto ya nos funciona el outPut y el this
 
-    public ClientHandler(){
-
-    }
-    public ClientHandler(Socket socket){
+    public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient){
 
         this.clientSocket = socket;
-        //this.clientCount = tmpClient;
+        this.clientCount = tmpClient;
         numSockets = numSockets + 1;
         id = numSockets;
         System.out.println(this);
@@ -62,7 +59,7 @@ public class ClientHandler extends Thread{
 
             for(i=0; i<clientCount.size(); i++) {
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
-                	serverOutput.print(clientCount.get(i)+"\n++ " + nickname  + " entered the room ++\n>> :");
+                	clientCount.get(i).serverOutput.print("\n++ " + nickname  + " entered the room ++\n>> :");
             }
 
             while(true) {
@@ -75,20 +72,21 @@ public class ClientHandler extends Thread{
                 }
                 for(i=0; i<clientCount.size(); i++) {
                     if(clientCount.get(i)!=null && clientCount.get(i)!= this)
-                    	serverOutput.print(clientCount.get(i)+"\n" + nickname +": " + inputString + "\n>> : ");
+                    	clientCount.get(i).serverOutput.print("\n" + nickname +": " + inputString + "\n>> : ");
                 }
             }
 
             for(i=0; i<clientCount.size();i++){
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
-                	serverOutput.print(clientCount.get(i)+"\n++ " + nickname + " left ++\n>> : ");
+                	clientCount.get(i).serverOutput.print("\n++ " + nickname + " left ++\n>> : ");
                 	userInput.close();
 		            serverOutput.close();
 		            clientSocket.close();
             }
             
             for(i=0; i<clientCount.size(); i++) {
-                if(clientCount.get(i) == this) clientCount.remove(null);
+                if(clientCount.get(i) == this) clientCount.set(i,null);///tengo duda en esta linea de codigo, para 
+					 //que la estamos implementando
             }
 
         }catch(IOException var){
