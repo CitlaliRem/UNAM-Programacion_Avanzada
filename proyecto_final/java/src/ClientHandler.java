@@ -127,11 +127,11 @@ public class ClientHandler extends Thread{
 
             for(i=0; i<clientCount.size(); i++) {
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
-                	serverOutput.print(clientCount.get(i)+"\n++ " + nickname  + " entered the room ++");
+                	serverOutput.print(clientCount.get(i)+"\n++ " + nickname  + " entered the room ++\n");
             }
 
             while(true) {
-            	serverOutput.print(">> :\t");
+            	serverOutput.print(">># :\t");
                 inputString = userInput.readLine();
 
                 if(inputString.startsWith("/exit")) {
@@ -140,13 +140,15 @@ public class ClientHandler extends Thread{
                 }
                 for(i=0; i<clientCount.size(); i++) {
                     if(clientCount.get(i)!=null && clientCount.get(i)!= this)
-                    	serverOutput.print(clientCount.get(i)+"\n" + nickname +": " + inputString + "\n>> : ");
+                    	//serverOutput.print(clientCount.get(i)+"\n" + nickname +": " + inputString);
+                    	serverOutput.print("\n" + nickname +": " + inputString + "\n");
                 }
             }
 
             for(i=0; i<clientCount.size();i++){
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
-                	serverOutput.print(clientCount.get(i)+"\n++ " + nickname + " left ++");
+                	//serverOutput.print(clientCount.get(i)+"\n++ " + nickname + " left ++\n>>: ");
+                	serverOutput.print("\n++ " + nickname + " left ++\n>>: ");
                 	userInput.close();
 		            serverOutput.close();
 		            clientSocket.close();
