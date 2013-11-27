@@ -1,5 +1,4 @@
 import java.net.*;
-//import java.util.Scanner;
 import java.util.*; 
 import java.io.*; // no se necesita de momento
 public class Server{
@@ -7,8 +6,9 @@ public class Server{
     //ArrayList clientes = new ArrayList();
     static Socket client;
     //ClientHandler lista=new ClientHandler();
-    //static ClientHandler clientCount[] = new ClientHandler[10];
-
+	 static ArrayList<ClientHandler> listOfClients = new ArrayList<ClientHandler>();//generamos una lista
+    //static ClientHandler clientCount[] = new ClientHandler[10];                 que nos acepte guardar
+//                                                                               objetos en ella
     public static void main(String args[]){
         int i=0;
         //String shutdown = null ; // variable para entrada del usuario 
@@ -20,16 +20,16 @@ public class Server{
 
             while(true){
                 client = chatServer.accept();
-                ClientHandler clientObj = new ClientHandler(client);
+                ClientHandler clientObj = new ClientHandler(client,listOfClients);
                 //clientCount[i] = clientObj;
-                clientObj.clientCount.add(client);
-                clientObj.start();
+                listOfClients.add(clientObj);//agregamos el cliente objeto a la lista dentro de la clase
+                clientObj.start();//clientehandler
                 i++;
 
 
             }
 
-            /* TODO: este código espera una entrada del usuario para salir
+            /* TODO: este cÃ³digo espera una entrada del usuario para salir
              * Para que funcione necesitamos que chatServer.accept() trabaje el en background 
              * porque de otra forma esta esperando a dos eventos a la vez: la
              * entrada del usuario y un nuevo cliente que se conecte
