@@ -127,7 +127,7 @@ public class ClientHandler extends Thread{
 
             for(i=0; i<clientCount.size(); i++) {
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
-                	serverOutput.print(clientCount.get(i)+"\n++ " + nickname  + " entered the room ++\n>> :");
+                	serverOutput.print(clientCount.get(i)+"\n++ " + nickname  + " entered the room ++");
             }
 
             while(true) {
@@ -146,7 +146,7 @@ public class ClientHandler extends Thread{
 
             for(i=0; i<clientCount.size();i++){
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
-                	serverOutput.print(clientCount.get(i)+"\n++ " + nickname + " left ++\n>> : ");
+                	serverOutput.print(clientCount.get(i)+"\n++ " + nickname + " left ++");
                 	userInput.close();
 		            serverOutput.close();
 		            clientSocket.close();
