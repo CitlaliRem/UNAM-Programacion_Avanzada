@@ -14,8 +14,10 @@ public class ClientHandler extends Thread{
     String passwd;
     String inputString;
     //ClientHandler clientCount[];
-    ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();//generamos un arraylist de objetos,
+    //ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();//generamos un arraylist de objetos,
 	 //es lo que hiso german pero con arreglos con esto ya nos funciona el outPut y el this
+   //ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();
+   ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler> ();
 
     public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient){
 
