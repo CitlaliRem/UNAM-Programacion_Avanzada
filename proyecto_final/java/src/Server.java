@@ -6,16 +6,18 @@
 import java.net.*;
 //import java.util.Scanner;
 import java.util.*; 
-//import java.io.*; // no se necesita de momento
+import java.io.*; // no se necesita de momento
+
 
 public class Server{
 
-
+    //ArrayList clientes = new ArrayList();
     static Socket client;
-    static ClientHandler clientCount[] = new ClientHandler[10];
+    //ClientHandler lista=new ClientHandler();
+    //static ClientHandler clientCount[] = new ClientHandler[10];
 
     public static void main(String args[]){
-        int i=0;
+        // int i = 0; // ya no se usa
         //String shutdown = null ; // variable para entrada del usuario 
 
         try{
@@ -23,12 +25,13 @@ public class Server{
             ServerSocket chatServer = new ServerSocket(8888);
             System.out.println("Server up and running!!");
 
-            while(i<10){
+            while(true){
                 client = chatServer.accept();
-                ClientHandler clientObj = new ClientHandler(client, clientCount);
-                clientCount[i] = clientObj;
+                ClientHandler clientObj = new ClientHandler(client);
+                //clientCount[i] = clientObj;
+                clientObj.clientCount.add(client);
                 clientObj.start();
-                i++;
+                //i++;
 
 
             }

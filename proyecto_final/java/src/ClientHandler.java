@@ -6,8 +6,9 @@
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.net.Socket;
+import java.net.*;
 //import java.util.*; // no se necesita de momento
+import java.util.ArrayList;
 
 public class ClientHandler extends Thread{
 
@@ -19,13 +20,16 @@ public class ClientHandler extends Thread{
     String nickname;
     String passwd;
     String inputString;
-    ClientHandler clientCount[];
+    //ClientHandler clientCount[];
+    ArrayList clientCount = new ArrayList();
 
-    public ClientHandler(Socket socket, ClientHandler clientCount[]){
+    public ClientHandler(){
+
+    }
+    public ClientHandler(Socket socket){
 
         this.clientSocket = socket;
-        this.clientCount = clientCount;
-
+        //this.clientCount = tmpClient;
         numSockets = numSockets + 1;
         id = numSockets;
         System.out.println(this);
@@ -121,9 +125,9 @@ public class ClientHandler extends Thread{
             nickname = Tools.capitalizeFirstLetter(nickname);
             serverOutput.println("\nSERVER:\tHi " + nickname + "\n>> : ");
 
-            for(i=0; i<10; i++) {
-                if(clientCount[i]!=null && clientCount[i]!= this)
-                	clientCount[i].serverOutput.print("\n++ " + nickname  + " entered the room ++\n>> :");
+            for(i=0; i<clientCount.size(); i++) {
+                if(clientCount.get(i)!=null && clientCount.get(i)!= this)
+                	serverOutput.print(clientCount.get(i)+"\n++ " + nickname  + " entered the room ++\n>> :");
             }
 
             while(true) {
@@ -134,37 +138,34 @@ public class ClientHandler extends Thread{
                 	serverOutput.println("SERVER:\tGoodbye " + nickname);
                 	break;
                 }
-                for(i=0; i<10; i++) {
-                    if(clientCount[i]!=null && clientCount[i]!= this)
-                    	clientCount[i].serverOutput.print("\n" + nickname +": " + inputString + "\n>> : ");
+                for(i=0; i<clientCount.size(); i++) {
+                    if(clientCount.get(i)!=null && clientCount.get(i)!= this)
+                    	serverOutput.print(clientCount.get(i)+"\n" + nickname +": " + inputString + "\n>> : ");
                 }
             }
 
-            for(i=0; i<10;i++){
-                if(clientCount[i]!=null && clientCount[i]!= this)
-                	clientCount[i].serverOutput.print("\n++ " + nickname + " left ++\n>> : ");
+            for(i=0; i<clientCount.size();i++){
+                if(clientCount.get(i)!=null && clientCount.get(i)!= this)
+                	serverOutput.print(clientCount.get(i)+"\n++ " + nickname + " left ++\n>> : ");
                 	userInput.close();
 		            serverOutput.close();
 		            clientSocket.close();
             }
             
-
-            for(i=0; i<10; i++) {
-                if(clientCount[i] == this) clientCount[i] = null;
+            for(i=0; i<clientCount.size(); i++) {
+                if(clientCount.get(i) == this) clientCount.remove(null);
             }
 
         }catch(IOException var){
-
-
         }
-    }
+    }    
+//}
 
 	/**
 	 * 
 	 */
 	private void readPassword() {
 		// TODO Auto-generated method stub
-		
-	}
-    
+	}	
+	
 }
