@@ -8,7 +8,7 @@ public class PasswordCheck {
 	static boolean checkSignUp(String nick) {
 
 			try {
-				File file = new File("users.xml");
+				File file = new File("./users.xml");
 				FileInputStream fileInput = new FileInputStream(file);
 				Properties properties = new Properties();
 				properties.loadFromXML(fileInput);
@@ -40,7 +40,7 @@ public class PasswordCheck {
 
 			try {
 				
-				File file = new File("users.xml");
+				File file = new File("./users.xml");
 				FileInputStream fileInput = new FileInputStream(file);
 				Properties properties = new Properties();
 				properties.loadFromXML(fileInput);
@@ -61,7 +61,7 @@ public class PasswordCheck {
     static boolean checkCredentials(String nick, String password) { 
 
     	try {
-			File file = new File("users.xml");
+			File file = new File("./users.xml");
 			FileInputStream fileInput = new FileInputStream(file);
 			Properties properties = new Properties();
 			properties.loadFromXML(fileInput);

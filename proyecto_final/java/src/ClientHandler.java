@@ -24,7 +24,8 @@ public class ClientHandler extends Thread{
     //ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();//generamos un arraylist de objetos,
 	 //es lo que hiso german pero con arreglos con esto ya nos funciona el outPut y el this
    //ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();
-   ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler> ();
+   ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler>();
+   ArrayList<String> chatLog = new ArrayList<String>();
 
     public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient){
 
@@ -133,6 +134,7 @@ public class ClientHandler extends Thread{
             while(true) {
             	serverOutput.print(">> : ");
                 inputString = userInput.readLine();
+                chatLog.add(nickname + ": " + inputString + "\n");
 
                 if(inputString.startsWith("/exit")) {
                 	serverOutput.println("SERVER:\tGoodbye " + nickname);
@@ -144,6 +146,14 @@ public class ClientHandler extends Thread{
                 }
             }
 
+            /*
+            for(i=0; i<clientCount.size();i++){
+                if(clientCount.get(i)!=null && clientCount.get(i) == this)
+
+               	 chatLog.add(nickname + ": " + inputString + "\n");  
+            }
+            */
+
             for(i=0; i<clientCount.size();i++){
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
                 	clientCount.get(i).serverOutput.print("\n++ " + nickname + " left ++\n>> : ");
@@ -152,10 +162,16 @@ public class ClientHandler extends Thread{
 		            clientSocket.close();
             }
             
+            
             for(i=0; i<clientCount.size(); i++) {
                 if(clientCount.get(i) == this) clientCount.set(i,null);///tengo duda en esta linea de codigo, para 
 					 //que la estamos implementando
             }
+            
+            for (int j = 0; j < chatLog.size(); j++) {
+            	String temp = chatLog.get(j);
+            	System.out.println("pos: " + j + ", " + temp);
+			}
 
         }catch(IOException var){
         }
