@@ -3,9 +3,10 @@
  *
  */
 
-import java.net.*;
-import java.util.Properties;
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
 //import java.util.*; // no se necesita de momento
 
 public class ClientHandler extends Thread{
@@ -65,6 +66,12 @@ public class ClientHandler extends Thread{
 
 	            	serverOutput.print("Choose your password: ");
 	            	String newPassword = userInput.readLine();
+
+	            	/*
+	            	public char[] readPassword() {
+	                    return readPassword("");
+	                }
+	            	 */
 
             		int tries = 0;
             		while(tries < 4) {
@@ -151,5 +158,13 @@ public class ClientHandler extends Thread{
 
         }
     }
+
+	/**
+	 * 
+	 */
+	private void readPassword() {
+		// TODO Auto-generated method stub
+		
+	}
     
 }
