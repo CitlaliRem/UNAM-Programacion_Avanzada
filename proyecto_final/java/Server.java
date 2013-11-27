@@ -1,13 +1,6 @@
-/**
- *  TODO: Comentarios cabezales proyecto 
- *
- */
-
 import java.net.*;
 import java.util.*; 
 import java.io.*; // no se necesita de momento
-
-
 public class Server{
 
     //ArrayList clientes = new ArrayList();
@@ -17,7 +10,7 @@ public class Server{
     //static ClientHandler clientCount[] = new ClientHandler[10];                 que nos acepte guardar
 //                                                                               objetos en ella
     public static void main(String args[]){
-        // int i = 0; // ya no se usa
+        int i=0;
         //String shutdown = null ; // variable para entrada del usuario 
 
         try{
@@ -31,7 +24,7 @@ public class Server{
                 //clientCount[i] = clientObj;
                 listOfClients.add(clientObj);//agregamos el cliente objeto a la lista dentro de la clase
                 clientObj.start();//clientehandler
-                //i++;
+                i++;
 
 
             }
