@@ -131,7 +131,7 @@ public class ClientHandler extends Thread{
             }
 
             while(true) {
-            	serverOutput.print(">># :\t");
+            	serverOutput.print(">> : ");
                 inputString = userInput.readLine();
 
                 if(inputString.startsWith("/exit")) {
