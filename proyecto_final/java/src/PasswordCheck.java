@@ -69,7 +69,6 @@ public class PasswordCheck {
 
 			String userPass = properties.getProperty(nick);
 
-	        System.out.println("Userpass: " + userPass);
 	         if (! password.equals(userPass)) {
 	        	 System.out.println("LOG: User entered incorrect password");
 	        	 return false;
