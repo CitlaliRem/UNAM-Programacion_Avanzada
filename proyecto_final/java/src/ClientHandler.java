@@ -3,32 +3,61 @@
  *
  */
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Scanner;
 
 public class ClientHandler extends Thread{
+
 
     Socket clientSocket;
     static int numSockets;
     PrintStream serverOutput;
     DataInputStream userInput;
+    private SimpleDateFormat timeStamp;
     int id;
     String nickname;
     String passwd;
     String inputString;
-    ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler> ();
+    //ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();//generamos un arraylist de objetos,
+	 //es lo que hiso german pero con arreglos con esto ya nos funciona el outPut y el this
+    ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler>();
+	private ArrayList<String> chatLog;
 
-    public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient){
+	public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient, ArrayList<String> chatLog){
 
-        this.clientSocket = socket;
-        this.clientCount = tmpClient;
-        numSockets = numSockets + 1;
-        id = numSockets;
-        System.out.println(this);
+		this.chatLog = chatLog;
+		this.clientSocket = socket;
+		this.clientCount = tmpClient;
+		numSockets = numSockets + 1;
+		id = numSockets;
+		timeStamp = new SimpleDateFormat("HH:mm:ss");
+		System.out.println(this);
     }
+	
+	public void WriteToFile(ArrayList<String> chatLog) {
+/*
+        for (int j = 0; j < chatLog.size(); j++) {
+        	String temp = chatLog.get(j);
+        	System.out.println(temp);
+		}
+*/
+		PrintWriter logFile = null;
+		try {
+			logFile = new PrintWriter(new FileWriter("./chatlog.txt"));
+		} catch (IOException e) {
+			System.out.println("ERROR: Can't open logfile");
+		}
+		
+		for (int i = 0; i < chatLog.size(); i++) {
+			logFile.println(chatLog.get(i));
+		}
+		logFile.close();
+	}
 
     public String toString() {
         return "ID : " + id + " ,Socket: " + numSockets;
@@ -37,6 +66,8 @@ public class ClientHandler extends Thread{
 
     public void run() {
         int i;
+        String time = timeStamp.format(new Date());
+	
         try {
             userInput = new DataInputStream(clientSocket.getInputStream());
             serverOutput = new PrintStream(clientSocket.getOutputStream());
@@ -86,7 +117,7 @@ public class ClientHandler extends Thread{
 		    				numSockets -= 1;
 		            	}
 
-		            		System.out.println("LOG: User choose invalid password " + (tries+1) + " times");
+		            		System.out.println("LOG: " + time + " User choose invalid password " + (tries+1) + " times");
 		            		serverOutput.println("Password should be min 8 characters long and contain min 2 digits");
 			            	serverOutput.print("Choose your password: ");
 			            	newPassword = userInput.readLine();
@@ -123,16 +154,23 @@ public class ClientHandler extends Thread{
             while(true) {
             	serverOutput.print(">> : ");
                 inputString = userInput.readLine();
+                if (! inputString.startsWith("/exit") || inputString.startsWith("/showUsers")) {
+                	time = timeStamp.format(new Date());
+                	chatLog.add(time + " " + nickname + ": " + inputString);
+                }
 
                 if(inputString.startsWith("/exit")) {
                 	serverOutput.println("SERVER:\tGoodbye " + nickname);
                 	break;
                 }
+
                 for(i=0; i<clientCount.size(); i++) {
-                    if(clientCount.get(i)!=null && clientCount.get(i)!= this)
-                    	clientCount.get(i).serverOutput.print("\n" + nickname +": " + inputString + "\n>> : ");
+                    if(clientCount.get(i)!=null && clientCount.get(i)!= this) {
+                    	clientCount.get(i).serverOutput.print("\n" + time + " " + nickname +": " + inputString + "\n>> : ");
+                    }
                 }
             }
+
 
             for(i=0; i<clientCount.size();i++){
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
@@ -142,10 +180,13 @@ public class ClientHandler extends Thread{
 		            clientSocket.close();
             }
             
+            
             for(i=0; i<clientCount.size(); i++) {
                 if(clientCount.get(i) == this) clientCount.set(i,null);///tengo duda en esta linea de codigo, para 
 					 //que la estamos implementando
             }
+            
+            WriteToFile(chatLog);
 
         }catch(IOException var){
         }

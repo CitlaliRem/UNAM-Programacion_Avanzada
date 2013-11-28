@@ -8,25 +8,18 @@ public class PasswordCheck {
 	static boolean checkSignUp(String nick) {
 
 			try {
-				File file = new File("users.xml");
+				File file = new File("./users.xml");
 				FileInputStream fileInput = new FileInputStream(file);
 				Properties properties = new Properties();
 				properties.loadFromXML(fileInput);
 				fileInput.close();
 	
 				String userName = properties.getProperty(nick);
-	/*
-				Enumeration enuKeys = properties.keys();
-				while (enuKeys.hasMoreElements()) {
-					String key = (String) enuKeys.nextElement();
-					String value = properties.getProperty(key);
-					System.out.println(key + ": " + value);
-			}
-					*/
-			if(userName == null) {
-				System.out.println("LOG: Nickname does not exist");
-				return false;
-			}
+
+				if(userName == null) {
+					System.out.println("LOG: Nickname does not exist");
+					return false;
+				}
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -40,7 +33,7 @@ public class PasswordCheck {
 
 			try {
 				
-				File file = new File("users.xml");
+				File file = new File("./users.xml");
 				FileInputStream fileInput = new FileInputStream(file);
 				Properties properties = new Properties();
 				properties.loadFromXML(fileInput);
@@ -61,7 +54,7 @@ public class PasswordCheck {
     static boolean checkCredentials(String nick, String password) { 
 
     	try {
-			File file = new File("users.xml");
+			File file = new File("./users.xml");
 			FileInputStream fileInput = new FileInputStream(file);
 			Properties properties = new Properties();
 			properties.loadFromXML(fileInput);
@@ -69,7 +62,6 @@ public class PasswordCheck {
 
 			String userPass = properties.getProperty(nick);
 
-	        System.out.println("Userpass: " + userPass);
 	         if (! password.equals(userPass)) {
 	        	 System.out.println("LOG: User entered incorrect password");
 	        	 return false;
