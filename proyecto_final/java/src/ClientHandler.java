@@ -7,7 +7,6 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.*;
-//import java.util.*; // no se necesita de momento
 import java.util.ArrayList;
 
 public class ClientHandler extends Thread{
@@ -20,11 +19,7 @@ public class ClientHandler extends Thread{
     String nickname;
     String passwd;
     String inputString;
-    //ClientHandler clientCount[];
-    //ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();//generamos un arraylist de objetos,
-	 //es lo que hiso german pero con arreglos con esto ya nos funciona el outPut y el this
-   //ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();
-   ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler> ();
+    ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler> ();
 
     public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient){
 
@@ -71,11 +66,6 @@ public class ClientHandler extends Thread{
 	            	serverOutput.print("Choose your password: ");
 	            	String newPassword = userInput.readLine();
 
-	            	/*
-	            	public char[] readPassword() {
-	                    return readPassword("");
-	                }
-	            	 */
 
             		int tries = 0;
             		while(tries < 4) {
@@ -160,13 +150,5 @@ public class ClientHandler extends Thread{
         }catch(IOException var){
         }
     }    
-//}
-
-	/**
-	 * 
-	 */
-	private void readPassword() {
-		// TODO Auto-generated method stub
-	}	
 	
 }

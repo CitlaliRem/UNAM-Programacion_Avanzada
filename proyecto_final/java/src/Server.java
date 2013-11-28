@@ -5,33 +5,22 @@
 
 import java.net.*;
 import java.util.*; 
-import java.io.*; // no se necesita de momento
-
 
 public class Server{
 
-    //ArrayList clientes = new ArrayList();
     static Socket client;
-    //ClientHandler lista=new ClientHandler();
-	 static ArrayList<ClientHandler> listOfClients = new ArrayList<ClientHandler>();//generamos una lista
-    //static ClientHandler clientCount[] = new ClientHandler[10];                 que nos acepte guardar
-//                                                                               objetos en ella
+	 static ArrayList<ClientHandler> listOfClients = new ArrayList<ClientHandler>();
     public static void main(String args[]){
-        // int i = 0; // ya no se usa
-        //String shutdown = null ; // variable para entrada del usuario 
 
         try{
-        	//while
             ServerSocket chatServer = new ServerSocket(8888);
             System.out.println("Server up and running!!");
 
             while(true){
                 client = chatServer.accept();
                 ClientHandler clientObj = new ClientHandler(client,listOfClients);
-                //clientCount[i] = clientObj;
-                listOfClients.add(clientObj);//agregamos el cliente objeto a la lista dentro de la clase
-                clientObj.start();//clientehandler
-                //i++;
+                listOfClients.add(clientObj); //agregamos el cliente objeto a la lista dentro de la clase
+                clientObj.start(); //clientHandler
 
 
             }
