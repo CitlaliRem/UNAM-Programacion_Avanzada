@@ -15,18 +15,11 @@ public class PasswordCheck {
 				fileInput.close();
 	
 				String userName = properties.getProperty(nick);
-	/*
-				Enumeration enuKeys = properties.keys();
-				while (enuKeys.hasMoreElements()) {
-					String key = (String) enuKeys.nextElement();
-					String value = properties.getProperty(key);
-					System.out.println(key + ": " + value);
-			}
-					*/
-			if(userName == null) {
-				System.out.println("LOG: Nickname does not exist");
-				return false;
-			}
+
+				if(userName == null) {
+					System.out.println("LOG: Nickname does not exist");
+					return false;
+				}
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

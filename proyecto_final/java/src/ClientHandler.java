@@ -3,13 +3,6 @@
  *
  */
 
-/*
-import java.io.DataInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-*/
 import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;
@@ -53,7 +46,6 @@ public class ClientHandler extends Thread{
         	System.out.println(temp);
 		}
 */
-		Collections.reverse(chatLog);
 		PrintWriter logFile = null;
 		try {
 			logFile = new PrintWriter(new FileWriter("./chatlog.txt"));
@@ -62,27 +54,9 @@ public class ClientHandler extends Thread{
 		}
 		
 		for (int i = 0; i < chatLog.size(); i++) {
-			//System.out.println("Debugging: " + chatLog.get(i));
 			logFile.println(chatLog.get(i));
 		}
 		logFile.close();
-	}
-
-	public void recallHistory(ArrayList<String> chatLog) {
-		Scanner historyLog = null;
-		try {
-			historyLog = new Scanner(new File("./chatLog.txt"));
-			historyLog.useDelimiter("\n");
-		} catch (FileNotFoundException e) {
-			System.out.println("ERROR: Logfile not found");
-		}
-		
-		while (historyLog.hasNext()) {
-			String line = historyLog.next();
-			chatLog.add(line);
-		}
-		historyLog.close();
-		
 	}
 
     public String toString() {
@@ -186,7 +160,7 @@ public class ClientHandler extends Thread{
             	serverOutput.print(">> : ");
                 inputString = userInput.readLine();
                 if (! inputString.startsWith("/exit") || inputString.startsWith("/showUsers")) {
-                	//chatLog.add(time + " " + nickname + ": " + inputString + "\n");
+                	time = timeStamp.format(new Date());
                 	chatLog.add(time + " " + nickname + ": " + inputString);
                 }
 
@@ -217,8 +191,6 @@ public class ClientHandler extends Thread{
 					 //que la estamos implementando
             }
             
-            recallHistory(chatLog);
-            //Collections.reverse(chatLog);
             WriteToFile(chatLog);
 
         }catch(IOException var){

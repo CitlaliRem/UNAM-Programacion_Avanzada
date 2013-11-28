@@ -1,5 +1,5 @@
 /**
- * comments
+ *  Esta clase no se usa y creo que no se va a usar
  */
 
 import java.io.*;
