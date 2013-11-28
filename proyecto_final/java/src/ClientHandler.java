@@ -3,38 +3,87 @@
  *
  */
 
+/*
 import java.io.DataInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+*/
+import java.io.*;
 import java.net.*;
-//import java.util.*; // no se necesita de momento
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Scanner;
 
 public class ClientHandler extends Thread{
+
 
     Socket clientSocket;
     static int numSockets;
     PrintStream serverOutput;
     DataInputStream userInput;
+    private SimpleDateFormat timeStamp;
     int id;
     String nickname;
     String passwd;
     String inputString;
-    //ClientHandler clientCount[];
     //ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();//generamos un arraylist de objetos,
 	 //es lo que hiso german pero con arreglos con esto ya nos funciona el outPut y el this
-   //ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();
-   ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler>();
-   ArrayList<String> chatLog = new ArrayList<String>();
+    ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler>();
+	private ArrayList<String> chatLog;
 
-    public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient){
+	public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient, ArrayList<String> chatLog){
 
-        this.clientSocket = socket;
-        this.clientCount = tmpClient;
-        numSockets = numSockets + 1;
-        id = numSockets;
-        System.out.println(this);
+		this.chatLog = chatLog;
+		this.clientSocket = socket;
+		this.clientCount = tmpClient;
+		numSockets = numSockets + 1;
+		id = numSockets;
+		timeStamp = new SimpleDateFormat("HH:mm:ss");
+		System.out.println(this);
     }
+	
+	public void WriteToFile(ArrayList<String> chatLog) {
+/*
+        for (int j = 0; j < chatLog.size(); j++) {
+        	String temp = chatLog.get(j);
+        	System.out.println(temp);
+		}
+*/
+		Collections.reverse(chatLog);
+		PrintWriter logFile = null;
+		try {
+			logFile = new PrintWriter(new FileWriter("./chatlog.txt"));
+		} catch (IOException e) {
+			System.out.println("ERROR: Can't open logfile");
+		}
+		
+		for (int i = 0; i < chatLog.size(); i++) {
+			//System.out.println("Debugging: " + chatLog.get(i));
+			logFile.println(chatLog.get(i));
+		}
+		logFile.close();
+	}
+
+	public void recallHistory(ArrayList<String> chatLog) {
+		Scanner historyLog = null;
+		try {
+			historyLog = new Scanner(new File("./chatLog.txt"));
+			historyLog.useDelimiter("\n");
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR: Logfile not found");
+		}
+		
+		while (historyLog.hasNext()) {
+			String line = historyLog.next();
+			chatLog.add(line);
+		}
+		historyLog.close();
+		
+	}
 
     public String toString() {
         return "ID : " + id + " ,Socket: " + numSockets;
@@ -43,6 +92,8 @@ public class ClientHandler extends Thread{
 
     public void run() {
         int i;
+        String time = timeStamp.format(new Date());
+	
         try {
             userInput = new DataInputStream(clientSocket.getInputStream());
             serverOutput = new PrintStream(clientSocket.getOutputStream());
@@ -97,7 +148,7 @@ public class ClientHandler extends Thread{
 		    				numSockets -= 1;
 		            	}
 
-		            		System.out.println("LOG: User choose invalid password " + (tries+1) + " times");
+		            		System.out.println("LOG: " + time + " User choose invalid password " + (tries+1) + " times");
 		            		serverOutput.println("Password should be min 8 characters long and contain min 2 digits");
 			            	serverOutput.print("Choose your password: ");
 			            	newPassword = userInput.readLine();
@@ -134,25 +185,23 @@ public class ClientHandler extends Thread{
             while(true) {
             	serverOutput.print(">> : ");
                 inputString = userInput.readLine();
-                chatLog.add(nickname + ": " + inputString + "\n");
+                if (! inputString.startsWith("/exit") || inputString.startsWith("/showUsers")) {
+                	//chatLog.add(time + " " + nickname + ": " + inputString + "\n");
+                	chatLog.add(time + " " + nickname + ": " + inputString);
+                }
 
                 if(inputString.startsWith("/exit")) {
                 	serverOutput.println("SERVER:\tGoodbye " + nickname);
                 	break;
                 }
+
                 for(i=0; i<clientCount.size(); i++) {
-                    if(clientCount.get(i)!=null && clientCount.get(i)!= this)
-                    	clientCount.get(i).serverOutput.print("\n" + nickname +": " + inputString + "\n>> : ");
+                    if(clientCount.get(i)!=null && clientCount.get(i)!= this) {
+                    	clientCount.get(i).serverOutput.print("\n" + time + " " + nickname +": " + inputString + "\n>> : ");
+                    }
                 }
             }
 
-            /*
-            for(i=0; i<clientCount.size();i++){
-                if(clientCount.get(i)!=null && clientCount.get(i) == this)
-
-               	 chatLog.add(nickname + ": " + inputString + "\n");  
-            }
-            */
 
             for(i=0; i<clientCount.size();i++){
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
@@ -168,10 +217,9 @@ public class ClientHandler extends Thread{
 					 //que la estamos implementando
             }
             
-            for (int j = 0; j < chatLog.size(); j++) {
-            	String temp = chatLog.get(j);
-            	System.out.println("pos: " + j + ", " + temp);
-			}
+            recallHistory(chatLog);
+            //Collections.reverse(chatLog);
+            WriteToFile(chatLog);
 
         }catch(IOException var){
         }
