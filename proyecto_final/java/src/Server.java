@@ -10,7 +10,7 @@ import java.io.*; // no se necesita de momento
 
 public class Server{
 
-    //ArrayList clientes = new ArrayList();
+    static ArrayList clientes = new ArrayList();
     static Socket client;
     //ClientHandler lista=new ClientHandler();
 	 static ArrayList<ClientHandler> listOfClients = new ArrayList<ClientHandler>();//generamos una lista
@@ -27,7 +27,7 @@ public class Server{
 
             while(true){
                 client = chatServer.accept();
-                ClientHandler clientObj = new ClientHandler(client,listOfClients);
+                ClientHandler clientObj = new ClientHandler(client,listOfClients,ArrayList);
                 //clientCount[i] = clientObj;
                 listOfClients.add(clientObj);//agregamos el cliente objeto a la lista dentro de la clase
                 clientObj.start();//clientehandler

@@ -20,16 +20,18 @@ public class ClientHandler extends Thread{
     String nickname;
     String passwd;
     String inputString;
+    ArrayList  usersOnline = new ArrayList  ();
     //ClientHandler clientCount[];
     //ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();//generamos un arraylist de objetos,
 	 //es lo que hiso german pero con arreglos con esto ya nos funciona el outPut y el this
    //ArrayList <ClientHandler> clientCount = new <ClientHandler> ArrayList();
    ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler> ();
 
-    public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient){
+    public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient,ArrayList usersTmp){
 
         this.clientSocket = socket;
         this.clientCount = tmpClient;
+        this.usersOnline = usersTmp;
         numSockets = numSockets + 1;
         id = numSockets;
         System.out.println(this);
@@ -123,6 +125,13 @@ public class ClientHandler extends Thread{
 				numSockets -= 1;
 			}
             nickname = Tools.capitalizeFirstLetter(nickname);
+            if(usersOnline.contains(nickname)){
+                serverOutput.println("SERVER: Sorry, you have no access to this chat because "+nickname+"  has be online");//mi ingles no es muy bueno no se si se escriba asi
+                userInput.close();
+                serverOutput.close();
+                clientSocket.close();
+               
+            }else{
             serverOutput.println("\nSERVER:\tHi " + nickname + "\n>> : ");
 
             for(i=0; i<clientCount.size(); i++) {
@@ -156,7 +165,7 @@ public class ClientHandler extends Thread{
                 if(clientCount.get(i) == this) clientCount.set(i,null);///tengo duda en esta linea de codigo, para 
 					 //que la estamos implementando
             }
-
+            }
         }catch(IOException var){
         }
     }    
