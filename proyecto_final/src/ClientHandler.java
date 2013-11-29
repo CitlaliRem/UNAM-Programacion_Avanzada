@@ -22,6 +22,7 @@ public class ClientHandler extends Thread{
     int id;
     String nickname;
     String passwd;
+    String tmpInputString;
     String inputString;
     ArrayList<String>  usersOnline = new ArrayList<String>();
     ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler>();
@@ -181,12 +182,25 @@ public class ClientHandler extends Thread{
                 }
 
                 if (UserCommands.ExitChat(serverOutput, inputString, nickname)) break;
-
+/////////////////////////////////aqui modifico un poco
+		if(inputString.startsWith("/private")){
+                    tmpInputString=inputString.substring(inputString.indexOf(' ')+1);
+                    tmpInputString = Tools.capitalizeFirstLetter(tmpInputString);
+                    if(usersOnline.indexOf(tmpInputString.substring(0,tmpInputString.indexOf(' ')))==-1){
+                        serverOutput.println("user not found");
+                    }
+                    else{
+                        clientCount.get(usersOnline.indexOf(tmpInputString.substring(0,tmpInputString.indexOf(' ')))).serverOutput.println(nickname+">> "+tmpInputString.substring(tmpInputString.indexOf(' ')));
+                    }
+					
+                }
+//////////////////////////////////////////////////////terminan cambios sinificativos la siguiente linea tambien esta mdificada  
+                if(!inputString.startsWith("/private")){
                 for(i=0; i<clientCount.size(); i++) {
                     if(clientCount.get(i)!=null && clientCount.get(i)!= this) {
                     	clientCount.get(i).serverOutput.print("\n" + time + " " + nickname +": " + inputString + "\n>> : ");
                     }
-                }
+                }}
             }
 
 
