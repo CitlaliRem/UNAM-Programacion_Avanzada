@@ -1,7 +1,7 @@
  /* 	Proyecto Final - Programación Avanzada y Métodos Numéricos
  *  Semestre 14-1
  *  
- * 	Chat Server con los siguientes funcionalidades:	 
+ * 	Chat Server con las siguientes funcionalidades:	 
  *  1. login y password
  *	2. bitacora de pláticas (chatlog)
  *	3. lista de usuarios conectados (/showUsers)
@@ -18,7 +18,8 @@ import java.util.*;
 
 public class Server{
 
-public static final int PORT = 8888;
+
+private static final int PORT = 8888;
 
 	static Socket client;
     static ArrayList<ClientHandler> listOfClients = new ArrayList<ClientHandler>();

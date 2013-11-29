@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class ClientHandler extends Thread{
 
 
+	private static final String USER_DATABASE = "users.xml";
     Socket clientSocket;
     static int numSockets;
     PrintStream serverOutput;
@@ -50,7 +51,7 @@ public class ClientHandler extends Thread{
 			int tries = 0;
 			while(tries < 4) {
 	        	if (PasswordCheck.isValid(newPassword) == true) {
-	            	PasswordCheck.propSetter(newNickname, newPassword);
+	            	Tools.propSetter(newNickname, newPassword, USER_DATABASE);
 	            	nickname = newNickname;
 	            	serverOutput.println("You can now log into your new account");
 	            	break;

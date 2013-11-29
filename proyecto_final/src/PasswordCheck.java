@@ -29,27 +29,6 @@ public class PasswordCheck {
 		return true;
 	}
 
-	static void propSetter(String nick, String password) {
-
-			try {
-				
-				File file = new File("./users.xml");
-				FileInputStream fileInput = new FileInputStream(file);
-				Properties properties = new Properties();
-				properties.loadFromXML(fileInput);
-				fileInput.close();
-
-				properties.setProperty(nick, password);
-
-				FileOutputStream fileOut = new FileOutputStream(file);
-				properties.storeToXML(fileOut, "User Access");
-				fileOut.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		  }
 
     static boolean checkCredentials(String nick, String password) { 
 
