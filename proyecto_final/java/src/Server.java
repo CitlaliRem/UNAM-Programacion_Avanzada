@@ -27,7 +27,7 @@ public class Server{
 
             while(true){
                 client = chatServer.accept();
-                ClientHandler clientObj = new ClientHandler(client,listOfClients,ArrayList);
+                ClientHandler clientObj = new ClientHandler(client,listOfClients,clientes);
                 //clientCount[i] = clientObj;
                 listOfClients.add(clientObj);//agregamos el cliente objeto a la lista dentro de la clase
                 clientObj.start();//clientehandler
