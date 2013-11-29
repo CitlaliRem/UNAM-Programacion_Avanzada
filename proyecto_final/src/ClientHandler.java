@@ -81,12 +81,6 @@ public class ClientHandler extends Thread{
     }
 
 	public void WriteToFile(ArrayList<String> chatLog) {
-/*
-        for (int j = 0; j < chatLog.size(); j++) {
-        	String temp = chatLog.get(j);
-        	System.out.println(temp);
-		}
-*/
 		PrintWriter logFile = null;
 		try {
 			logFile = new PrintWriter(new FileWriter("./chatlog.txt"));

@@ -2,7 +2,7 @@
 02:12:07 Oscar: hay alguien?
 02:12:15 Mag: que onda
 02:12:24 Oscar: ya funciona nuestro chat
-02:12:37 Mag: asi es
+02:12:37 Mag: claro :) 
 02:12:50 Mag: estamos checando si el chat log funciona
 02:13:05 Oscar: veo que ya tenemos el timestamp
 02:13:09 Mag: asi es
@@ -24,13 +24,10 @@ Thu Nov 28 2013  15:43:18 Mag: hi server
 Thu Nov 28 2013  15:44:08   Mag: formato definitivo
 Thu Nov 28 2013  15:48:55   Mag: test
 Thu Nov 28 2013  16:11:57   Mag: hi
-Thu Nov 28 2013  16:12:49   Mag: hi
 Thu Nov 28 2013  16:12:50   Mag: exit
 Thu Nov 28 2013  16:46:27   Mag: hey server again
 Thu Nov 28 2013  16:46:34   Mag: que pasC3?
-Thu Nov 28 2013  16:46:46   Mag: no0 acepta acentos la pinche consola de eclipse
+Thu Nov 28 2013  16:46:46   Mag: no0 acepta acentos la p****e consola de eclipse
 Thu Nov 28 2013  16:48:48   Mag: lalala
-Thu Nov 28 2013  16:56:31   Mag: 
-Thu Nov 28 2013  16:56:31   Mag: 
 Thu Nov 28 2013  16:58:27   Mag: hey
 Fri Nov 29 2013  00:47:46   Mag: hallo
