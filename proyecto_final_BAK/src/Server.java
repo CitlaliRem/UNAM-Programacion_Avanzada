@@ -1,4 +1,6 @@
- /* 	Proyecto Final - Programación Avanzada y Métodos Numéricos
+/**
+ * 
+ * 	Proyecto Final - Programación Avanzada y Métodos Numéricos
  *  Semestre 14-1
  *  
  * 	Chat Server con los siguientes funcionalidades:	 
