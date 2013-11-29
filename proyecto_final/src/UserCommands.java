@@ -4,33 +4,38 @@
  */
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UserCommands {
 	
 	public static void CommandSwitch(PrintStream serverOutput, String inputString, String nickname) {
-		System.out.println("Debugging: inputString" + inputString);
 		if (inputString.equals("/users")) {
-			System.out.println("Debugging: inside CommandSwitch");
 			UserCommands.ShowUsers(serverOutput, inputString, nickname);
 		}
 		else if(inputString.equals("/hist")) {
-			UserCommands.ShowHistory(serverOutput, inputString, nickname);
+			UserCommands.ShowHistory(serverOutput, Server.chatLog);
 		}
 	}
 
 	public static void ShowUsers(PrintStream serverOutput, String inputString, String nickname) {
-        //if(inputString.startsWith("/showUsers")) {
         	System.out.println("Connected users right now:");
         	serverOutput.println("Connected users right now");
         	//TODO:
-        //}
 	}
 
-	public static void ShowHistory(PrintStream serverOutput, String inputString, String nickname) {
-        //if(inputString.startsWith("/showHistory")) {
-        	System.out.println("Showing historial");
-        	//TODO:
-        //}
+	public static void ShowHistory(PrintStream serverOutput, ArrayList<String> chatLog) {
+        	serverOutput.println("Showing chat history");
+        	serverOutput.println("++++++++++++++++++++");
+        	if(chatLog.isEmpty()) {
+        		Server.recallHistory(chatLog);
+        	}
+
+        	for (int j = 0; j < chatLog.size(); j++) {
+            	String temp = chatLog.get(j);
+            	serverOutput.println(temp);
+    		}
+    		
 	}
 
 	public static boolean ExitChat(PrintStream serverOutput, String inputString, String nickname) {
