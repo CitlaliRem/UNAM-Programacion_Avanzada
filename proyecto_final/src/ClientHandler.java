@@ -23,6 +23,7 @@ public class ClientHandler extends Thread{
     String nickname;
     String passwd;
     String inputString;
+    ArrayList<String>  usersOnline = new ArrayList<String>();
     ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler>();
 	private ArrayList<String> chatLog;
 
@@ -149,6 +150,17 @@ public class ClientHandler extends Thread{
 				numSockets -= 1;
 			}
             nickname = Tools.capitalizeFirstLetter(nickname);
+            
+            if (usersOnline.contains(nickname)) {
+                serverOutput.println("SERVER: Sorry, you have no access to this chat because "+nickname+"  has be online");//mi ingles no es muy bueno no se si se escriba asi
+                userInput.close();
+                serverOutput.close();
+                clientSocket.close();
+               
+            } else {
+            	serverOutput.println("\nSERVER:\tHi " + nickname + "\n>> : ");
+            }
+
             serverOutput.println("\nSERVER:\tHi " + nickname + "\n>> : ");
 
             for(i=0; i<clientCount.size(); i++) {

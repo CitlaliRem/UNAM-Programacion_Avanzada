@@ -33,3 +33,4 @@ Thu Nov 28 2013  16:48:48   Mag: lalala
 Thu Nov 28 2013  16:56:31   Mag: 
 Thu Nov 28 2013  16:56:31   Mag: 
 Thu Nov 28 2013  16:58:27   Mag: hey
+Fri Nov 29 2013  00:47:46   Mag: hallo
