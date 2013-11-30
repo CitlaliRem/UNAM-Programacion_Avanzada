@@ -57,6 +57,9 @@ public static final int PORT = 8888;
             System.out.println("Server up and running!!");
             System.out.println("Waiting for connections on port " + PORT);
             
+            AdminControl admin = new AdminControl(usersBanned);
+            admin.start();
+            
             while(true){
                    
                 client = chatServer.accept();
