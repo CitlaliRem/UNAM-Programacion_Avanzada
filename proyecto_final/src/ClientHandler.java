@@ -36,7 +36,7 @@ public class ClientHandler extends Thread{
 		id = numSockets;
 		//timeStamp = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
 		timeStamp = new SimpleDateFormat("E MMM dd yyyy  HH:mm:ss  ");
-		System.out.println(this);
+		//System.out.println(this);
 	}
 
 	public void SignUp () {
@@ -51,7 +51,7 @@ public class ClientHandler extends Thread{
 			int tries = 0;
 			while(tries < 4) {
 	        	if (PasswordCheck.isValid(newPassword) == true) {
-	            	Tools.propSetter(newNickname, newPassword, USER_DATABASE);
+	            	Tools.propSetter(newNickname, newPassword, USER_DATABASE, "User Access");
 	            	nickname = newNickname;
 	            	serverOutput.println("You can now log into your new account");
 	            	break;
@@ -163,22 +163,21 @@ public class ClientHandler extends Thread{
                 if (! inputString.startsWith("/")) {
                 	time = timeStamp.format(new Date());
                 	chatLog.add(time + " " + nickname + ": " + inputString);
+	                for(i=0; i<clientCount.size(); i++) {
+	                    if(clientCount.get(i)!=null && clientCount.get(i)!= this) {
+	                    	clientCount.get(i).serverOutput.print("\n" + time + " " + nickname +": " + inputString + "\n>> : ");
+	                    }
+	                }
                 } else {
-                	System.out.println("String starting with /");
-                	System.out.println("String: " + inputString);
+                	if (UserCommands.ExitChat(serverOutput, inputString, nickname)) break;
+
                 	UserCommands.CommandSwitch(serverOutput, inputString, nickname);
-                }
 
-                if (UserCommands.ExitChat(serverOutput, inputString, nickname)) break;
 
-                for(i=0; i<clientCount.size(); i++) {
-                    if(clientCount.get(i)!=null && clientCount.get(i)!= this) {
-                    	clientCount.get(i).serverOutput.print("\n" + time + " " + nickname +": " + inputString + "\n>> : ");
-                    }
                 }
             }
 
-
+            /* Terminando la conxión del cliente después de /exit */
             for(i=0; i<clientCount.size();i++){
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
                 	clientCount.get(i).serverOutput.print("\n++ " + nickname + " left ++\n>> : ");
@@ -188,13 +187,15 @@ public class ClientHandler extends Thread{
             }
             
             
+            /*
             for(i=0; i<clientCount.size(); i++) {
                 if(clientCount.get(i) == this) clientCount.set(i,null);///tengo duda en esta linea de codigo, para 
 					 //que la estamos implementando
             }
+            */
             
             WriteToFile(chatLog);
-
+            
         } catch(IOException var){
         }
     }    

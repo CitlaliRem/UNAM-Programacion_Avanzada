@@ -9,13 +9,13 @@
  */
 import java.util.*;
 
-public class Data implements Comparable<Data>{
+public class data implements Comparable<Data>{
         private int id;
         private int zipCode;
         private int township;
         private String state;
 
-        public Data(int cp, String edo, int delMun, int id){
+        public data(int cp, String edo, int delMun, int id){
                 this.zipCode = cp;
                 this.state = edo;
                 this.township = delMun;

@@ -56,10 +56,7 @@ public class PasswordCheck {
     }
 
     static boolean isValid(String password) { 
-        //return true if and only if password:
-        //1. have at least eight characters.
-        //2. consists of only letters and digits.
-        //3. must contain at least two digits.
+      
         if (password.length() < 8) {   
             return false;  
         } else {      
