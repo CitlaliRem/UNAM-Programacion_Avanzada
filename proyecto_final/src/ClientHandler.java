@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class ClientHandler extends Thread{
 
 
+	private static final String USER_DATABASE = "users.xml";
     Socket clientSocket;
     static int numSockets;
     PrintStream serverOutput;
@@ -21,81 +22,76 @@ public class ClientHandler extends Thread{
     String inputString;
     ArrayList<String>  usersOnline = new ArrayList<String>();
     ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler>();
-        private ArrayList<String> chatLog;
 
-        public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient, ArrayList<String> chatLog,ArrayList tmpUsersOnline){
+	private ArrayList<String> chatLog;
 
-                this.chatLog = chatLog;
-                this.clientSocket = socket;
-                this.clientCount = tmpClient;
-					 this.usersOnline = tmpUsersOnline;
-                numSockets = numSockets + 1;
-                id = numSockets;
-                //timeStamp = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
-                timeStamp = new SimpleDateFormat("E MMM dd yyyy  HH:mm:ss  ");
-                System.out.println(this);
-        }
+		public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient, ArrayList<String> chatLog,ArrayList tmpUsersOnline){
 
-        public void SignUp () {
-                try {
-                        serverOutput.print("Choose your nickname: ");
-                        String newNickname = userInput.readLine();
-                    serverOutput.print("Choose your password: ");
-                    String newPassword = userInput.readLine();
+		this.chatLog = chatLog;
+		this.clientSocket = socket;
+		this.clientCount = tmpClient;
+		this.usersOnline = tmpUsersOnline;
+		numSockets = numSockets + 1;
+		id = numSockets;
+		//timeStamp = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
+		timeStamp = new SimpleDateFormat("E MMM dd yyyy  HH:mm:ss  ");
+		//System.out.println(this);
+	}
+
+	public void SignUp () {
+		try {
+			serverOutput.print("Choose your nickname: ");
+			String newNickname = userInput.readLine();
+		    serverOutput.print("Choose your password: ");
+		    String newPassword = userInput.readLine();
 
 
 
-                        int tries = 0;
-                        while(tries < 4) {
-                        if (PasswordCheck.isValid(newPassword) == true) {
-                            PasswordCheck.propSetter(newNickname, newPassword);
-                            nickname = newNickname;
-                            serverOutput.println("You can now log into your new account");
-                            break;
-        
-                        } else {
-        
-                                if (tries == 3) {
-                                    serverOutput.println("Too many tries... Exiting");
-                                        userInput.close();
-                                                serverOutput.close();
-                                                clientSocket.close();
-                                                numSockets -= 1;
-                                }
-                                //System.out.println("LOG: " + time + " User choose invalid password " + (tries+1) + " times");
-                                serverOutput.println("Password should be min 8 characters long and contain min 2 digits");
-                            serverOutput.print("Choose your password: ");
-                            newPassword = userInput.readLine();
-        
-                                tries += 1;
-        
-                            }
-                        } 
-                }catch (IOException e) {
-                        e.printStackTrace();
-                }          
+			int tries = 0;
+			while(tries < 4) {
+	        	if (PasswordCheck.isValid(newPassword) == true) {
+	            	Tools.propSetter(newNickname, newPassword, USER_DATABASE, "User Access");
+	            	nickname = newNickname;
+	            	serverOutput.println("You can now log into your new account");
+	            	break;
+	
+	        	} else {
+	
+		        	if (tries == 3) {
+		            	serverOutput.println("Too many tries... Exiting");
+		        		userInput.close();
+						serverOutput.close();
+						clientSocket.close();
+						numSockets -= 1;
+		        	}
+	        		//System.out.println("LOG: " + time + " User choose invalid password " + (tries+1) + " times");
+	        		serverOutput.println("Password should be min 8 characters long and contain min 2 digits");
+	            	serverOutput.print("Choose your password: ");
+	            	newPassword = userInput.readLine();
+	
+	        		tries += 1;
+	
+	    		}
+			} 
+		}catch (IOException e) {
+			e.printStackTrace();
+		}  	
 
     }
 
-        public void WriteToFile(ArrayList<String> chatLog) {
-/*
-        for (int j = 0; j < chatLog.size(); j++) {
-                String temp = chatLog.get(j);
-                System.out.println(temp);
-                }
-*/
-                PrintWriter logFile = null;
-                try {
-                        logFile = new PrintWriter(new FileWriter("./chatlog.txt"));
-                } catch (IOException e) {
-                        System.out.println("ERROR: Can't open logfile");
-                }
-                
-                for (int i = 0; i < chatLog.size(); i++) {
-                        logFile.println(chatLog.get(i));
-                }
-                logFile.close();
-        }
+	public void WriteToFile(ArrayList<String> chatLog) {
+		PrintWriter logFile = null;
+		try {
+			logFile = new PrintWriter(new FileWriter("./chatlog.txt"));
+		} catch (IOException e) {
+			System.out.println("ERROR: Can't open logfile");
+		}
+		
+		for (int i = 0; i < chatLog.size(); i++) {
+			logFile.println(chatLog.get(i));
+		}
+		logFile.close();
+	}
 
     public String toString() {
         return "ID : " + id + " ,Socket: " + numSockets;
@@ -171,24 +167,23 @@ public class ClientHandler extends Thread{
                     serverOutput.print(">> : ");
                 inputString = userInput.readLine();
                 if (! inputString.startsWith("/")) {
-                        time = timeStamp.format(new Date());
-                        chatLog.add(time + " " + nickname + ": " + inputString);
+                	time = timeStamp.format(new Date());
+                	chatLog.add(time + " " + nickname + ": " + inputString);
+	                for(i=0; i<clientCount.size(); i++) {
+	                    if(clientCount.get(i)!=null && clientCount.get(i)!= this) {
+	                    	clientCount.get(i).serverOutput.print("\n" + time + " " + nickname +": " + inputString + "\n>> : ");
+	                    }
+	                }
                 } else {
-                        System.out.println("String starting with /");
-                        System.out.println("String: " + inputString);
-                        UserCommands.CommandSwitch(serverOutput, inputString, nickname,clientCount,usersOnline);
-                }
+                	if (UserCommands.ExitChat(serverOutput, inputString, nickname)) break;
 
-                if (UserCommands.ExitChat(serverOutput, inputString, nickname)) break;
-//////////////////////////////////////////////////////terminan cambios sinificativos la siguiente linea tambien esta mdificada  
-                for(i=0; i<clientCount.size(); i++) {
-                    if(clientCount.get(i)!=null && clientCount.get(i)!= this) {
-                            clientCount.get(i).serverOutput.print("\n" + time + " " + nickname +": " + inputString + "\n>> : ");
-                    }
+                	UserCommands.CommandSwitch(serverOutput, inputString, chatLog, nickname, clientCount, chatLog);
+
+
                 }
             }
 
-
+            /* Terminando la conxión del cliente después de /exit */
             for(i=0; i<clientCount.size();i++){
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
                         clientCount.get(i).serverOutput.print("\n++ " + nickname + " left ++\n>> : ");
@@ -198,13 +193,15 @@ public class ClientHandler extends Thread{
             }
             
             
+            /*
             for(i=0; i<clientCount.size(); i++) {
                 if(clientCount.get(i) == this) clientCount.set(i,null);///tengo duda en esta linea de codigo, para 
                                          //que la estamos implementando
             }
+            */
             
             WriteToFile(chatLog);
-
+            
         } catch(IOException var){
         }
     }    

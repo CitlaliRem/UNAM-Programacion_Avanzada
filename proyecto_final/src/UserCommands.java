@@ -3,14 +3,14 @@ import java.util.*;
 
 public class UserCommands {
         
-        public static void CommandSwitch(PrintStream serverOutput, String inputString, String nickname,ArrayList <ClientHandler> clientCount, ArrayList <String> usersOnline) {
+        public static void CommandSwitch(PrintStream serverOutput, String inputString, ArrayList<String> chatLog, String nickname,ArrayList <ClientHandler> clientCount, ArrayList <String> usersOnline) {
                 System.out.println("Debugging: inputString " + inputString);
                 if (inputString.equals("/users")) {
                         System.out.println("si entro");
 					 			UserCommands.ShowUsers(serverOutput,usersOnline);
                 }
                 else if(inputString.equals("/hist")) {
-                        UserCommands.ShowHistory(serverOutput, inputString, nickname);
+                        UserCommands.ShowHistory(serverOutput, chatLog);
                 }
                 else if(inputString.equals("/help")) {
                         UserCommands.ShowHelp(serverOutput);
@@ -27,17 +27,21 @@ public class UserCommands {
 					 System.out.println(usersOnline);
                 serverOutput.println("Connected users right now");
 					 serverOutput.println(usersOnline);
-                //TODO:
         //}
         }
 
-        public static void ShowHistory(PrintStream serverOutput, String inputString, String nickname) {
-        //if(inputString.startsWith("/showHistory")) {
-                System.out.println("Showing chat history:");
-                serverOutput.println("Showing chat history");
-                //TODO:
-        //}
-        }
+	public static void ShowHistory(PrintStream serverOutput, ArrayList<String> chatLog) {
+        	serverOutput.println("Showing chat history");
+        	serverOutput.println("++++++++++++++++++++");
+        	if(chatLog.isEmpty()) {
+        		Server.recallHistory(chatLog);
+        	}
+
+        	for (int j = 0; j < chatLog.size(); j++) {
+            	String temp = chatLog.get(j);
+            	serverOutput.println(temp);
+    		}
+	}
         
         public static void ShowHelp(PrintStream serverOutput) {
                 serverOutput.println("*********************************");
