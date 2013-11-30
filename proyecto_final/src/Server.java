@@ -58,7 +58,9 @@ public class Server extends Thread{
 				                clientObj.start(); //clientHandler
 			                   	}
 
-	                    } catch(IOException e) {e.printStackTrace();}
+	                    } catch(IOException e) {
+	                    	e.printStackTrace();
+	                    }
 	                }
 	            }).start();
 
@@ -76,17 +78,22 @@ public class Server extends Thread{
 
 		finally {
 			//chatServer.close(); //TODO: no me funciona esto de momento, habría que ver por qué..
-			for(int i = 0; i < listOfClients.size(); ++i) {
-				ClientHandler closeThread = listOfClients.get(i);
-				try {
-					closeThread.serverOutput.close();
-					closeThread.userInput.close();
-					closeThread.clientSocket.close(); 
-					System.exit(0);
-				} catch(Exception e) {
-					//TODO
+			System.out.println("Shutting down the server..");
+			if (! listOfClients.isEmpty()) {
+				System.out.println("Shutting down users connections");
+				for(int i = 0; i < listOfClients.size(); ++i) {
+					try {
+					ClientHandler closeThread = listOfClients.get(i);
+						closeThread.serverOutput.println("Server shutting down");
+						closeThread.serverOutput.close();
+						closeThread.userInput.close();
+						closeThread.clientSocket.close(); 
+					} catch(Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
+			System.exit(0);
 		}
 	}
 		
