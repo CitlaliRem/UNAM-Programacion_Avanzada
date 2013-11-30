@@ -11,7 +11,7 @@ public class PasswordCheck {
 	static boolean checkSignUp(String nick) {
 
 			try {
-				File file = new File("./users.xml");
+				File file = new File(USER_DATABASE);
 				FileInputStream fileInput = new FileInputStream(file);
 				Properties properties = new Properties();
 				properties.loadFromXML(fileInput);
@@ -32,15 +32,16 @@ public class PasswordCheck {
 		return true;
 	}
 
-	public static void SignUp (PrintStream serverOutput, Scanner userInput, Socket clientSocket, String nickname, int numSockets) {
+	public static void SignUp (PrintStream serverOutput, DataInputStream userInput, Socket clientSocket, String nickname, int numSockets) throws IOException {
 		String newNickname = null;
 		String newPassword = null;
 
 		serverOutput.print("Choose your nickname: ");
-		newNickname = ClientHandler.RecordUserInput(userInput);
+		//newNickname = ClientHandler.RecordUserInput(userInput);
+		newNickname = userInput.readLine();
 	    serverOutput.print("Choose your password: ");
-		newPassword = ClientHandler.RecordUserInput(userInput);
-
+		//newPassword = ClientHandler.RecordUserInput(userInput);
+		newPassword = userInput.readLine();
 
 
 			int tries = 0;
@@ -64,7 +65,8 @@ public class PasswordCheck {
 	        		//System.out.println("LOG: " + time + " User choose invalid password " + (tries+1) + " times");
 	        		serverOutput.println("Password should be min 8 characters long and contain min 2 digits");
 	            	serverOutput.print("Choose your password: ");
-	            	newPassword = ClientHandler.RecordUserInput(userInput);
+	            	//newPassword = ClientHandler.RecordUserInput(userInput);
+	            	newPassword = userInput.readLine();
 	
 	        		tries += 1;
 	

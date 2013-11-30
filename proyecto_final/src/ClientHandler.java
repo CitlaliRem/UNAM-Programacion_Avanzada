@@ -8,18 +8,17 @@ import java.net.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class ClientHandler extends Thread{
 
 
-	//private static final String USER_DATABASE = "users.xml";
 	private static final String HISTORYLOG = "chatlog.txt";
-    Socket clientSocket;
+    static Socket clientSocket;
     static int numSockets;
     PrintStream serverOutput = null;
-    //DataInputStream userInput;
-    Scanner userInput = null;
+    DataInputStream userInput = null;
+    //Scanner userInput = null;
     private SimpleDateFormat timeStamp;
     int id;
     String nickname;
@@ -31,7 +30,7 @@ public class ClientHandler extends Thread{
 	public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient, ArrayList<String> chatLog){
 
 		this.chatLog = chatLog;
-		this.clientSocket = socket;
+		ClientHandler.clientSocket = socket;
 		this.clientCount = tmpClient;
 		numSockets = numSockets + 1;
 		id = numSockets;
@@ -39,11 +38,14 @@ public class ClientHandler extends Thread{
 		//System.out.println(this);
 	}
 
-    public String toString() {
+    @Override
+	public String toString() {
         return "ID : " + id + " ,Socket: " + numSockets;
-
     }
+    
+/*
     public static String RecordUserInput(Scanner userInput) {
+
     	String outputString = null;
     	try {
     	if (userInput.hasNextLine()) {
@@ -56,9 +58,10 @@ public class ClientHandler extends Thread{
 		}
     	return outputString;
     }
+*/
 
-    public static void closeConnections(Scanner userInput, PrintStream serverOutput, Socket clientSocket) {
-    	System.out.println("Debugging: inside closeConnections");
+    public static void closeConnections(DataInputStream userInput, PrintStream serverOutput, Socket clientSocket) {
+    	//System.out.println("Debugging: inside closeConnections");
     	try {
 			serverOutput.println("User connection closed");
 			userInput.close();
@@ -70,16 +73,18 @@ public class ClientHandler extends Thread{
     }
     
     
-    public void run() {
+    @Override
+	public void run() {
         int i;
         String time = null;
 	
         try {
-        	userInput = new Scanner(clientSocket.getInputStream());
-
-            System.out.println("Debugging: after scanner " + userInput);
-        	//userInput.useDelimiter("\n"); 
+        	//clientSocket = new Socket("localhost", 8888);
             serverOutput = new PrintStream(clientSocket.getOutputStream());
+            userInput = new DataInputStream(clientSocket.getInputStream());
+
+            //userInput = new Scanner(clientSocket.getInputStream());
+        	//userInput.useDelimiter("\n"); 
 
             serverOutput.println("**********************************");
             serverOutput.println("*** Welcome to the Chat Server ***");
@@ -87,21 +92,24 @@ public class ClientHandler extends Thread{
 
             serverOutput.print("Nick: ");
 
-            		System.out.println("Debugging: before recorduserinput" + userInput);
-            nickname = RecordUserInput(userInput);
-            
+       		//System.out.println("Debugging: before recorduserinput" + userInput);
+            //nickname = RecordUserInput(userInput);
+
+            nickname = userInput.readLine();
+            		
             Boolean signedUp = PasswordCheck.checkSignUp(nickname);
 
             if (signedUp == false) {
             	serverOutput.println(nickname + " not found in database");
             	serverOutput.println("Do you want to register? (y/n)");
 
-            	String option = RecordUserInput(userInput);
-            	System.out.println("Debugging1: " + option);
+            	//String option = RecordUserInput(userInput);
+            	String option = userInput.readLine();
+            	//System.out.println("Debugging1: " + option);
 
             	if(! option.equals("y")) {
             		numSockets -= 1;
-            		System.out.println("Debugging: before closeConnections" + userInput);
+            		//System.out.println("Debugging: before closeConnections" + userInput);
             		closeConnections(userInput, serverOutput, clientSocket);
             		
             	} else {
@@ -113,7 +121,8 @@ public class ClientHandler extends Thread{
 
             serverOutput.print("Password: ");
 
-            passwd = RecordUserInput(userInput);
+            //passwd = RecordUserInput(userInput);
+            passwd = userInput.readLine();
 
 			Boolean validPass = PasswordCheck.checkCredentials(nickname, passwd);
 			
@@ -132,8 +141,9 @@ public class ClientHandler extends Thread{
 
             while(true) {
             	serverOutput.print(">> : ");
-            	inputString = RecordUserInput(userInput);
-            	System.out.println("Debugging inside while: " + inputString);
+            	//inputString = RecordUserInput(userInput);
+            	inputString = userInput.readLine();
+            	//System.out.println("Debugging inside while: " + inputString);
             	
                 if (! inputString.startsWith("/")) {
                 	time = timeStamp.format(new Date());
@@ -163,6 +173,10 @@ public class ClientHandler extends Thread{
         } catch(IOException var){
         }
     }    
-
+   /* 
+    public static void main(String args[]) throws UnknownHostException, IOException {
+        	clientSocket = new Socket("localhost", 8888);
+    }
+    */
 
 }

@@ -40,6 +40,7 @@ public class Server extends Thread{
 	}
 
 	
+	@Override
 	public void start() {
 		boolean runServer = true;
 
@@ -52,7 +53,8 @@ public class Server extends Thread{
 				System.out.println("Server waiting for Clients on port " + PORT + ".");
 					
 				new Thread(new Runnable() {
-	                public void run() {
+	                @Override
+					public void run() {
 	                    try {
 	                    	while (true) {
 								client = chatServer.accept();
@@ -95,7 +97,7 @@ public class Server extends Thread{
 						try {
 							closeThread.serverOutput.close();
 							closeThread.userInput.close();
-							closeThread.clientSocket.close(); 
+							ClientHandler.clientSocket.close(); 
 						} catch(Exception e) {
 							e.printStackTrace();
 						}
