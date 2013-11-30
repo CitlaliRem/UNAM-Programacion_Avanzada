@@ -1,4 +1,4 @@
-/**
+**
  * 
  *
  */
@@ -14,17 +14,18 @@ public class ClientHandler extends Thread{
 
 
 	private static final String HISTORYLOG = "chatlog.txt";
-    static Socket clientSocket;
+    //static Socket clientSocket;
+    static ClientHandler clientSocket;
     static int numSockets;
     PrintStream serverOutput = null;
     DataInputStream userInput = null;
     //Scanner userInput = null;
     private SimpleDateFormat timeStamp;
-    int id;
-    String nickname;
-    String passwd;
-    String inputString;
-    ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler>();
+    private int id;
+    private String nickname;
+    private String passwd;
+    private String inputString;
+    private ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler>();
 	private ArrayList<String> chatLog;
 
 	public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient, ArrayList<String> chatLog){
@@ -38,7 +39,18 @@ public class ClientHandler extends Thread{
 		//System.out.println(this);
 	}
 
-    @Override
+    /**
+	 * @param string
+	 * @param i
+	public ClientHandler(String hostname, int port) {
+		this.hostname = "localhost";
+		this.port = 8888;
+		// TODO Auto-generated constructor stub
+
+	}
+	 */
+
+	@Override
 	public String toString() {
         return "ID : " + id + " ,Socket: " + numSockets;
     }
@@ -173,10 +185,11 @@ public class ClientHandler extends Thread{
         } catch(IOException var){
         }
     }    
-   /* 
+   
     public static void main(String args[]) throws UnknownHostException, IOException {
-        	clientSocket = new Socket("localhost", 8888);
+        	clientSocket = new ClientHandler("localhost", 8888);
+        	clientSocket.start();
     }
-    */
+    
 
 }
