@@ -1,4 +1,4 @@
-**
+/**
  * 
  *
  */
@@ -14,8 +14,8 @@ public class ClientHandler extends Thread{
 
 
 	private static final String HISTORYLOG = "chatlog.txt";
-    //static Socket clientSocket;
-    static ClientHandler clientSocket;
+    static Socket clientSocket;
+    //static ClientHandler clientSocket;
     static int numSockets;
     PrintStream serverOutput = null;
     DataInputStream userInput = null;
@@ -27,6 +27,8 @@ public class ClientHandler extends Thread{
     private String inputString;
     private ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler>();
 	private ArrayList<String> chatLog;
+	private String hostname;
+	private int port;
 
 	public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient, ArrayList<String> chatLog){
 
@@ -39,16 +41,14 @@ public class ClientHandler extends Thread{
 		//System.out.println(this);
 	}
 
-    /**
-	 * @param string
+	/* @param string
 	 * @param i
+	 */
 	public ClientHandler(String hostname, int port) {
-		this.hostname = "localhost";
-		this.port = 8888;
-		// TODO Auto-generated constructor stub
+		this.hostname = hostname;
+		this.port = port;
 
 	}
-	 */
 
 	@Override
 	public String toString() {
@@ -187,8 +187,8 @@ public class ClientHandler extends Thread{
     }    
    
     public static void main(String args[]) throws UnknownHostException, IOException {
-        	clientSocket = new ClientHandler("localhost", 8888);
-        	clientSocket.start();
+        	clientSocket = new Socket("localhost", 8888);
+        	//clientSocket.start();
     }
     
 
