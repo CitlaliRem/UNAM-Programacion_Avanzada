@@ -21,14 +21,16 @@ public class ClientHandler extends Thread{
     String inputString;
     ArrayList<String>  usersOnline = new ArrayList<String>();
     ArrayList <ClientHandler> clientCount = new  ArrayList <ClientHandler>();
+    ArrayList usersBanned = new ArrayList();
         private ArrayList<String> chatLog;
 
-        public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient, ArrayList<String> chatLog,ArrayList tmpUsersOnline){
+        public ClientHandler(Socket socket,ArrayList <ClientHandler> tmpClient, ArrayList<String> chatLog,ArrayList tmpUsersOnline,ArrayList tmpUsersBlock){
 
                 this.chatLog = chatLog;
                 this.clientSocket = socket;
                 this.clientCount = tmpClient;
-					 this.usersOnline = tmpUsersOnline;
+				this.usersOnline = tmpUsersOnline;
+                this.usersBanned = tmpUsersBlock;
                 numSockets = numSockets + 1;
                 id = numSockets;
                 //timeStamp = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
@@ -63,7 +65,7 @@ public class ClientHandler extends Thread{
                                                 numSockets -= 1;
                                 }
                                 //System.out.println("LOG: " + time + " User choose invalid password " + (tries+1) + " times");
-                                serverOutput.println("Password should be min 8 characters long and contain min 2 digits");
+                      //          serverOutput.println("Password should be min 8 characters long and contain min 2 digits");
                             serverOutput.print("Choose your password: ");
                             newPassword = userInput.readLine();
         
@@ -77,7 +79,7 @@ public class ClientHandler extends Thread{
 
     }
 
-        public void WriteToFile(ArrayList<String> chatLog) {
+        public void WriteToFile(ArrayList<String> chatLog,String toFileWrite) {
 /*
         for (int j = 0; j < chatLog.size(); j++) {
                 String temp = chatLog.get(j);
@@ -86,13 +88,34 @@ public class ClientHandler extends Thread{
 */
                 PrintWriter logFile = null;
                 try {
-                        logFile = new PrintWriter(new FileWriter("./chatlog.txt"));
+                        logFile = new PrintWriter(new FileWriter(toFileWrite));
                 } catch (IOException e) {
                         System.out.println("ERROR: Can't open logfile");
                 }
                 
                 for (int i = 0; i < chatLog.size(); i++) {
                         logFile.println(chatLog.get(i));
+                }
+                logFile.close();
+        }
+        public void WriteToFile(String toFileWrite,ArrayList<String> chatLog) {
+/*
+        for (int j = 0; j < chatLog.size(); j++) {
+                String temp = chatLog.get(j);
+                System.out.println(temp);
+                }
+*/
+                PrintWriter logFile = null;
+                try {
+                        logFile = new PrintWriter(new FileWriter(toFileWrite));
+                } catch (IOException e) {
+                        System.out.println("ERROR: Can't open logfile");
+                }
+                
+                for (int i = 0; i < chatLog.size(); i++) {
+                        logFile.print("*");
+                        logFile.print(chatLog.get(i));
+                        logFile.println("#");
                 }
                 logFile.close();
         }
@@ -154,8 +177,16 @@ public class ClientHandler extends Thread{
                 serverOutput.close();
                 clientSocket.close();
                
-            } else {
-                    serverOutput.println("\nSERVER:\tHi " + nickname + "\n>> : ");
+            } 
+            else if(usersBanned.contains(nickname)){
+                serverOutput.println("SERVER: Sorry, you have no access to this chat because "+nickname+"  has be Banned");
+                userInput.close();
+                serverOutput.close();
+                clientSocket.close();
+            }
+
+            else {
+                    //serverOutput.println("\nSERVER:\tHi " + nickname + "\n>> : ");
 						  usersOnline.add(nickname);
 						  //System.out.println(usersOnline);
             }
@@ -176,10 +207,12 @@ public class ClientHandler extends Thread{
                 } else {
                         System.out.println("String starting with /");
                         System.out.println("String: " + inputString);
-                        UserCommands.CommandSwitch(serverOutput, inputString, nickname,clientCount,usersOnline);
+                        UserCommands.CommandSwitch(serverOutput, inputString, nickname,clientCount,usersOnline,usersBanned);
                 }
 
-                if (UserCommands.ExitChat(serverOutput, inputString, nickname)) break;
+                if (UserCommands.ExitChat(serverOutput, inputString, nickname)){ 
+                    usersOnline.remove(nickname);
+                    break;}
 //////////////////////////////////////////////////////terminan cambios sinificativos la siguiente linea tambien esta mdificada  
                 for(i=0; i<clientCount.size(); i++) {
                     if(clientCount.get(i)!=null && clientCount.get(i)!= this) {
@@ -187,7 +220,7 @@ public class ClientHandler extends Thread{
                     }
                 }
             }
-
+            WriteToFile("./banned.txt",usersBanned);
 
             for(i=0; i<clientCount.size();i++){
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
@@ -203,7 +236,8 @@ public class ClientHandler extends Thread{
                                          //que la estamos implementando
             }
             
-            WriteToFile(chatLog);
+            WriteToFile(chatLog,"./chatlog.txt");
+            //WriteToFile("./banned.txt",usersBanned);
 
         } catch(IOException var){
         }
