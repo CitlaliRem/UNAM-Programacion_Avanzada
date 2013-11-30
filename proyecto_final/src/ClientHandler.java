@@ -98,27 +98,6 @@ public class ClientHandler extends Thread{
                 }
                 logFile.close();
         }
-        public void WriteToFile(String toFileWrite,ArrayList<String> chatLog) {
-/*
-        for (int j = 0; j < chatLog.size(); j++) {
-                String temp = chatLog.get(j);
-                System.out.println(temp);
-                }
-*/
-                PrintWriter logFile = null;
-                try {
-                        logFile = new PrintWriter(new FileWriter(toFileWrite));
-                } catch (IOException e) {
-                        System.out.println("ERROR: Can't open logfile");
-                }
-                
-                for (int i = 0; i < chatLog.size(); i++) {
-                        logFile.print("*");
-                        logFile.print(chatLog.get(i));
-                        logFile.println("#");
-                }
-                logFile.close();
-        }
 
     public String toString() {
         return "ID : " + id + " ,Socket: " + numSockets;
@@ -207,20 +186,20 @@ public class ClientHandler extends Thread{
                 } else {
                         System.out.println("String starting with /");
                         System.out.println("String: " + inputString);
-                        UserCommands.CommandSwitch(serverOutput, inputString, nickname,clientCount,usersOnline,usersBanned);
+                        UserCommands.CommandSwitch(serverOutput, inputString, nickname,clientCount,usersOnline);
                 }
 
                 if (UserCommands.ExitChat(serverOutput, inputString, nickname)){ 
                     usersOnline.remove(nickname);
                     break;}
 //////////////////////////////////////////////////////terminan cambios sinificativos la siguiente linea tambien esta mdificada  
+                if(! inputString.startsWith("/private")){
                 for(i=0; i<clientCount.size(); i++) {
                     if(clientCount.get(i)!=null && clientCount.get(i)!= this) {
                             clientCount.get(i).serverOutput.print("\n" + time + " " + nickname +": " + inputString + "\n>> : ");
                     }
-                }
+                }}
             }
-            WriteToFile("./banned.txt",usersBanned);
 
             for(i=0; i<clientCount.size();i++){
                 if(clientCount.get(i)!=null && clientCount.get(i)!= this)
