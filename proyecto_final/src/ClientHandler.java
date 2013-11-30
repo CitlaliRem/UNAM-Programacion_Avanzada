@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class ClientHandler extends Thread{
 
 
-	private static final String USER_DATABASE = "users.xml";
+	//private static final String USER_DATABASE = "users.xml";
     Socket clientSocket;
     static int numSockets;
     PrintStream serverOutput;
@@ -39,7 +39,7 @@ public class ClientHandler extends Thread{
 		//System.out.println(this);
 	}
 
-	public void SignUp () {
+	/*public void SignUp () {
 		try {
 			serverOutput.print("Choose your nickname: ");
 			String newNickname = userInput.readLine();
@@ -78,7 +78,7 @@ public class ClientHandler extends Thread{
 			e.printStackTrace();
 		}  	
 
-    }
+    }*/
 
 	public void WriteToFile(ArrayList<String> chatLog) {
 /*
@@ -133,7 +133,7 @@ public class ClientHandler extends Thread{
     				numSockets -= 1;
             	} else {
 	            	System.out.println("LOG: User choose option: " + option);
-	            	SignUp();
+	            	PasswordCheck.SignUp(serverOutput, userInput, clientSocket, nickname, numSockets);
             	}
             }
 
