@@ -1,6 +1,6 @@
-/**
- * 
- */
+import java.io.*;
+import java.util.Properties;
+
 
 public class Tools {
 
@@ -10,4 +10,42 @@ public class Tools {
 	    return original.substring(0, 1).toUpperCase() + original.substring(1);
 	}
 	
+	static boolean checkFileEntry(String nick, String password, String datafile) { 
+    	try {
+			File file = new File(datafile);
+			FileInputStream fileInput = new FileInputStream(file);
+			Properties properties = new Properties();
+			properties.loadFromXML(fileInput);
+			fileInput.close();
+
+			if (properties.getProperty(nick) == null) return false;
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+        return true;  
+	}
+
+	public static void propSetter(String nick, String password, String datafile, String comment) {
+		try {
+			File file = new File(datafile);
+			FileInputStream fileInput = new FileInputStream(file);
+			Properties properties = new Properties();
+			properties.loadFromXML(fileInput);
+			fileInput.close();
+
+			properties.setProperty(nick, password);
+
+			FileOutputStream fileOut = new FileOutputStream(file);
+			properties.storeToXML(fileOut, comment);
+			fileOut.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	  }
 }

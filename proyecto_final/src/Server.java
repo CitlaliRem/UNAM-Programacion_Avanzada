@@ -1,7 +1,7 @@
  /* 	Proyecto Final - Programación Avanzada y Métodos Numéricos
  *  Semestre 14-1
  *  
- * 	Chat Server con los siguientes funcionalidades:	 
+ * 	Chat Server con las siguientes funcionalidades:	 
  *  1. login y password
  *	2. bitacora de pláticas (chatlog)
  *	3. lista de usuarios conectados (/showUsers)
@@ -16,14 +16,12 @@ import java.io.*;
 import java.net.*;
 import java.util.*; 
 
-public class Server{
+public class Server extends Thread{
 
-public static final int PORT = 8888;
-
+	private static final int PORT = 8888;
 	static Socket client;
     static ArrayList<ClientHandler> listOfClients = new ArrayList<ClientHandler>();
     static ArrayList<String> chatLog = new ArrayList<String>(); 
-    
     
 	public static void recallHistory(ArrayList<String> arrayList) {
 		Scanner historyLog = null;
@@ -42,42 +40,74 @@ public static final int PORT = 8888;
 	}
 
 	
-	
+	public void start() {
+		boolean runServer = true;
+		try {
+			final ServerSocket chatServer = new ServerSocket(PORT);
+
+			while(runServer == true) {
+				System.out.println("Server waiting for Clients on port " + PORT + ".");
+					
+				new Thread(new Runnable() {
+	                public void run() {
+	                    try {
+	                    	while (true) {
+								client = chatServer.accept();
+				                ClientHandler clientObj = new ClientHandler(client,listOfClients, chatLog);
+				                listOfClients.add(clientObj); //agregamos el cliente objeto a la lista dentro de la clase
+				                clientObj.start(); //clientHandler
+			                   	}
+
+	                    } catch(IOException e) {
+	                    	e.printStackTrace();
+	                    }
+	                }
+	            }).start();
+
+				System.out.println("Press 'q' for quitting the server");
+				Scanner scanner = new Scanner(System.in);
+				String adminAction1 = scanner.nextLine();
+				if (adminAction1.equals("q")) {
+					System.out.println("Quitting server...");
+					runServer = false;
+				}
+			} 
+		}catch(Exception e) {
+			//TODO
+		}
+
+		finally {
+			//chatServer.close(); //TODO: no me funciona esto de momento, habría que ver por qué..
+			System.out.println("Shutting down the server..");
+			if (! listOfClients.isEmpty()) {
+				System.out.println("Shutting down users connections");
+				for(int i = 0; i < listOfClients.size(); ++i) {
+					try {
+					ClientHandler closeThread = listOfClients.get(i);
+						closeThread.serverOutput.println("Server shutting down");
+						closeThread.serverOutput.close();
+						closeThread.userInput.close();
+						closeThread.clientSocket.close(); 
+					} catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			System.exit(0);
+		}
+	}
+		
+		
     public static void main(String args[]){
 
         try{
-            ServerSocket chatServer = new ServerSocket(PORT);
-            recallHistory(chatLog);
-            System.out.println("Server up and running!!");
-            System.out.println("Waiting for connections on port " + PORT);
-            
-            while(true){
-                   
-                client = chatServer.accept();
-                ClientHandler clientObj = new ClientHandler(client,listOfClients, chatLog);
-                listOfClients.add(clientObj); //agregamos el cliente objeto a la lista dentro de la clase
-                clientObj.start(); //clientHandler
-                
-            }
-            
-            /* TODO: este cÃ³digo espera una entrada del usuario para salir
-             * Para que funcione necesitamos que chatServer.accept() trabaje el en background 
-             * porque de otra forma esta esperando a dos eventos a la vez: la
-             * entrada del usuario y un nuevo cliente que se conecte
-             * 
-	            System.out.println("Type 'q' for quitting the server");
-	            Scanner userInterrupt = new Scanner(System.in);
-	            shutdown = userInterrupt.next();
-	            System.out.println(shutdown);
+    	Server server = new Server();
+		server.start();
 
-            	if(shutdown == "q") {
-            		System.out.println("Exiting the server");
-            		System.exit(0);
-            	}
-            	*/
-        }catch(Exception var){
+            
+        }catch(Exception e){
             System.out.println("An exception ocurred");
-            System.out.println(var);
+            System.out.println(e);
         }
 
     }
