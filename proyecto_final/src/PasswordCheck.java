@@ -32,12 +32,14 @@ public class PasswordCheck {
 		return true;
 	}
 
-	public static void SignUp (PrintStream serverOutput, DataInputStream userInput, Socket clientSocket, String nickname, int numSockets) {
-		try {
-			serverOutput.print("Choose your nickname: ");
-			String newNickname = userInput.readLine();
-		    serverOutput.print("Choose your password: ");
-		    String newPassword = userInput.readLine();
+	public static void SignUp (PrintStream serverOutput, Scanner userInput, Socket clientSocket, String nickname, int numSockets) {
+		String newNickname = null;
+		String newPassword = null;
+
+		serverOutput.print("Choose your nickname: ");
+		newNickname = ClientHandler.RecordUserInput(userInput);
+	    serverOutput.print("Choose your password: ");
+		newPassword = ClientHandler.RecordUserInput(userInput);
 
 
 
@@ -53,27 +55,26 @@ public class PasswordCheck {
 	
 		        	if (tries == 3) {
 		            	serverOutput.println("Too many tries... Exiting");
-		        		userInput.close();
+		            	ClientHandler.closeConnections(userInput, serverOutput, clientSocket);
+/*		        		userInput.close();
 						serverOutput.close();
-						clientSocket.close();
+						clientSocket.close();*/
 						numSockets -= 1;
 		        	}
 	        		//System.out.println("LOG: " + time + " User choose invalid password " + (tries+1) + " times");
 	        		serverOutput.println("Password should be min 8 characters long and contain min 2 digits");
 	            	serverOutput.print("Choose your password: ");
-	            	newPassword = userInput.readLine();
+	            	newPassword = ClientHandler.RecordUserInput(userInput);
 	
 	        		tries += 1;
 	
 	    		}
 			} 
-		}catch (IOException e) {
-			e.printStackTrace();
-		}  	
-
     }
-
+	
     static boolean checkCredentials(String nick, String password) { 
+
+    	if (password == null) return false;
 
     	try {
 			File file = new File("./users.xml");

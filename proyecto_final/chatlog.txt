@@ -1,9 +1,15 @@
-Fri Nov 29 2013  18:38:07   Mag: haciendo chathistory
-Fri Nov 29 2013  18:38:13   Mag: blblabla
-Fri Nov 29 2013  18:38:16   Mag: lalala
-Fri Nov 29 2013  18:39:00   Oscar: conectado
-Fri Nov 29 2013  18:39:09   Oscar: palabras
-Fri Nov 29 2013  18:43:28   Mag: hallo
-Fri Nov 29 2013  18:43:36   Oscar: qu onda
-Fri Nov 29 2013  18:44:05   Mag: bla bla
-Fri Nov 29 2013  18:44:18   Mag: nuevo
+Fri Nov 29 2013  21:24:35   Mag: hola log
+Fri Nov 29 2013  21:24:40   Mag: a ver si funcionas
+Fri Nov 29 2013  21:29:06   Mag: mas historia
+Fri Nov 29 2013  21:29:11   Mag: log log log
+Fri Nov 29 2013  21:29:30   Mag: av 
+Fri Nov 29 2013  21:29:42   Mag: a ver si retiene la historia
+Fri Nov 29 2013  21:29:48   Mag: el histoiral
+Fri Nov 29 2013  21:29:49   Mag: jaja
+Fri Nov 29 2013  21:29:55   Mag: no..
+Fri Nov 29 2013  22:07:44   Mag: una entrada mas
+Fri Nov 29 2013  22:49:12   Bunny: hi server
+Fri Nov 29 2013  23:01:24   Mag: e
+Sat Nov 30 2013  00:09:55   Mag: hey
+Sat Nov 30 2013  00:10:19   Mag: 
+Sat Nov 30 2013  03:09:31   Magnus: hi server!

@@ -42,6 +42,9 @@ public class Server extends Thread{
 	
 	public void start() {
 		boolean runServer = true;
+
+		recallHistory(chatLog);
+
 		try {
 			final ServerSocket chatServer = new ServerSocket(PORT);
 
@@ -68,7 +71,6 @@ public class Server extends Thread{
 				Scanner scanner = new Scanner(System.in);
 				String adminAction1 = scanner.nextLine();
 				if (adminAction1.equals("q")) {
-					System.out.println("Quitting server...");
 					runServer = false;
 				}
 			} 
@@ -78,19 +80,28 @@ public class Server extends Thread{
 
 		finally {
 			//chatServer.close(); //TODO: no me funciona esto de momento, habría que ver por qué..
-			System.out.println("Shutting down the server..");
+			System.out.println("Shutting down the server");
 			if (! listOfClients.isEmpty()) {
-				System.out.println("Shutting down users connections");
-				for(int i = 0; i < listOfClients.size(); ++i) {
-					try {
-					ClientHandler closeThread = listOfClients.get(i);
-						closeThread.serverOutput.println("Server shutting down");
-						closeThread.serverOutput.close();
-						closeThread.userInput.close();
-						closeThread.clientSocket.close(); 
-					} catch(Exception e) {
-						e.printStackTrace();
+				System.out.println("Shutting down user connections");
+				try {
+					for(int i = 0; i < listOfClients.size(); ++i) {
+						ClientHandler closeThread = listOfClients.get(i);
+						closeThread.serverOutput.println("Server shutting down in 4 seconds");
 					}
+						Thread.sleep(4000);
+					for(int i = 0; i < listOfClients.size(); ++i) {
+						ClientHandler closeThread = listOfClients.get(i);
+						closeThread.serverOutput.println("Server shutting down in 4 seconds");
+						try {
+							closeThread.serverOutput.close();
+							closeThread.userInput.close();
+							closeThread.clientSocket.close(); 
+						} catch(Exception e) {
+							e.printStackTrace();
+						}
+					}
+				} catch(InterruptedException e) {
+				    Thread.currentThread().interrupt();
 				}
 			}
 			System.exit(0);

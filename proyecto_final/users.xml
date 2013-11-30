@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<comment>blocked user</comment>
-<entry key="jos">23qwertyu</entry>
+<comment>User Access</comment>
+<entry key="nick">12345678</entry>
 <entry key="oscar">eeee33eeee</entry>
-<entry key="berto">12qazaq1</entry>
+<entry key="magnus">12qwerasdf</entry>
+<entry key="bunny">12qweasd</entry>
 <entry key="marty">1234</entry>
+<entry key="jos">23qwertyu</entry>
 <entry key="mag">1</entry>
+<entry key="hlf">12qweasdzxc</entry>
 <entry key="bobo">34qazxsw</entry>
-<entry key="tim">1qazxsw2</entry>
+<entry key="bert">12qweasd</entry>
+<entry key="berto">12qazaq1</entry>
+<entry key="bart">12qwerasdf</entry>
+<entry key="henk">12qwertyuop</entry>
+<entry key="tim">23qwerasdf</entry>
 </properties>

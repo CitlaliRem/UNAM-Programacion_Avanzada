@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 
@@ -48,4 +49,18 @@ public class Tools {
 			e.printStackTrace();
 		}
 	  }
+
+	public static void WriteToFile(ArrayList<String> chatLog, String historyLog) {
+		PrintWriter logFile = null;
+		try {
+			logFile = new PrintWriter(new FileWriter(historyLog));
+		} catch (IOException e) {
+			System.out.println("ERROR: Can't open logfile");
+		}
+		
+		for (int i = 0; i < chatLog.size(); i++) {
+			logFile.println(chatLog.get(i));
+		}
+		logFile.close();
+	}
 }
