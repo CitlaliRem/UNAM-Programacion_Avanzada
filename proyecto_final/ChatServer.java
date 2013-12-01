@@ -14,7 +14,7 @@ import java.util.*;
 
 public class ChatServer{
 
-   private final static int PORT_NO = 8010;
+   private final static int PORT_NO = 8888;
    private ServerSocket listener;
    public List <Connection> clients;
 
@@ -52,6 +52,7 @@ public class ChatServer{
       private volatile BufferedReader br;
       private volatile PrintWriter pw;
       private String clientName;
+      private String password;
 
       public Connection(Socket s) throws IOException{
 
@@ -66,35 +67,46 @@ public class ChatServer{
          try {
             pw.println("Nick:");
             clientName = br.readLine();
-            sendClientsList();
+            pw.println("Password:");
+            password = br.readLine();
+            pw.println("Server: Hi " + clientName);
             while ( (line = br.readLine()) != null ){
-               if (line.equals("/QUIT") == true) {
+               if (line.equals("/LOGOUT") == true) {
+                  pw.println("Server: Goodbye " + clientName + "!");
                   break;
                }
-               broadcast(clientName + ": " + line);
+               if (line.equals("/USERS") == true) {
+                  sendClientsList();
+               }
+               if (!line.equals("") == true) {
+                  broadcast(clientName + ": " + line);
+               }
             }
          }catch (IOException ioe){
             System.err.println("I/O error: " + ioe.getMessage());
          }catch(NullPointerException npe){
             System.err.println("NullPointer error" + npe.getMessage());
          }finally{
-            System.out.println(clientName + ": " + "finished");
+            System.out.println(clientName + ": logout");
             synchronized(clients){
+               String tempName = clientName;
                clients.remove(this);
+               broadcast(tempName + " logout");
                if (clients.size() == 0) {
                   broadcast("Now nobody is online");
                }else{
-                  broadcast("Now " + clients.size() + " users");
+                  broadcast("Now " + clients.size() + " users online");
+                  sendClientsList();
                }
-               sendClientsList();
+
             }
          }
       }
 
       /**
-      *  broadcast lets to shows online users.
+      *  broadcast lets to send messages to all users.
       *  @return: void
-      *  @param: nothing
+      *  @param: string
       */
       private void broadcast(String message){
 
@@ -124,10 +136,10 @@ public class ChatServer{
          StringBuilder sb = new StringBuilder();
          synchronized(clients){
             for (Connection con: clients){
+               sb.append("\n\t\t->");
                sb.append(con.clientName);
-               sb.append(" ");
             }
-            broadcast(">Users online: " + sb.toString());
+            broadcast(">>>Users online: " + sb.toString());
          }
       }
    }
