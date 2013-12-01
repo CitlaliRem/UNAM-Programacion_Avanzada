@@ -6,17 +6,17 @@
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-public class UserCommands {
+public class UserActions {
 	
 	public static void CommandSwitch(PrintStream serverOutput, String inputString, String nickname) {
 		if (inputString.equals("/users")) {
-			UserCommands.ShowUsers(serverOutput, inputString, nickname);
+			UserActions.ShowUsers(serverOutput, inputString, nickname);
 		}
 		else if(inputString.equals("/hist")) {
-			UserCommands.ShowHistory(serverOutput, Server.chatLog);
+			UserActions.ShowHistory(serverOutput, Server.chatLog);
 		}
 		else if(inputString.equals("/help")) {
-			UserCommands.ShowHelp(serverOutput);
+			UserActions.ShowHelp(serverOutput);
 		}
 	}
 

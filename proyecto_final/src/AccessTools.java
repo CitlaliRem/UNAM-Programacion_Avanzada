@@ -4,7 +4,7 @@ import java.lang.String;
 import java.lang.Character;  
 import java.net.Socket;
 
-public class PasswordCheck { 
+public class AccessTools { 
 
 	private static final String USER_DATABASE = "users.xml";
 
@@ -46,7 +46,7 @@ public class PasswordCheck {
 
 			int tries = 0;
 			while(tries < 4) {
-	        	if (PasswordCheck.isValid(newPassword) == true) {
+	        	if (AccessTools.isValid(newPassword) == true) {
 	            	Tools.propSetter(newNickname, newPassword, USER_DATABASE, "User Access");
 	            	nickname = newNickname;
 	            	serverOutput.println("You can now log into your new account");
@@ -56,7 +56,7 @@ public class PasswordCheck {
 	
 		        	if (tries == 3) {
 		            	serverOutput.println("Too many tries... Exiting");
-		            	ClientHandler.closeConnections(userInput, serverOutput, clientSocket);
+		            	ClientThread.closeConnections(userInput, serverOutput, clientSocket);
 /*		        		userInput.close();
 						serverOutput.close();
 						clientSocket.close();*/
