@@ -182,7 +182,9 @@ public class Server extends Thread{
 	            	serverMsg(nickname + " not found in database");
 	            	serverMsg("Do you want to register? (y/n)");
 
+				System.out.println("socket closed before option input? " + socket.isClosed());
 	            	String option = userInput.readLine();
+				System.out.println("socket closed after option input? " + socket.isClosed());
 
 	            	if(! option.equals("y")) {
 	            		numSockets -= 1;
@@ -195,64 +197,67 @@ public class Server extends Thread{
 		            	AccessTools.SignUp(serverOutput, userInput, socket, nickname, numSockets);
 	            	}
 	            }
-
-	            serverOutput.print("Password: ");
-
-				System.out.println("socket closed before password input? " + socket.isClosed());
-	            passwd = userInput.readLine();
-				System.out.println("socket closed after password input? " + socket.isClosed());
-
-	            System.out.println("User entered password " + passwd);
-				Boolean validPass = AccessTools.checkCredentials(nickname, passwd);
-				
-				if (validPass == false) {
-					//System.out.println("socket alive? " + socket.isClosed());
-					serverOutput.println("Sorry, you have no access to this chat");
-					closeConnections(userInput, serverOutput, socket);
-					numSockets -= 1;
-				}
-	            nickname = Tools.capitalizeFirstLetter(nickname);
-
-	            serverOutput.println("\nSERVER:\tHi " + nickname + "\n>> : ");
-
-	            for(int i=0; i < Server.clientList.size(); i++) {
-	                if(Server.clientList.get(i) != null && Server.clientList.get(i) != this) {
-	                	Server.clientList.get(i).serverOutput.print("\n++ " + nickname  + " entered the room ++\n>> :");
-	                }
-	            }
-
-	            for(int i=0; i< Server.clientList.size(); i++) {
-	                if(Server.clientList.get(i)!=null && Server.clientList.get(i)!= this)
-	                	Server.clientList.get(i).serverOutput.print("\n++ " + nickname  + " entered the room ++\n>> :");
-	            }
-
-	            while(true) {
-	            	serverOutput.print(">> : ");
-	            	inputString = userInput.readLine();
-	            	
-	                if (! inputString.startsWith("/")) {
-	                	time = timeStamp.format(new Date());
-	                	Server.chatLog.add(time + " " + nickname + ": " + inputString);
-		                for(int i=0; i<Server.clientList.size(); i++) {
-		                    if(Server.clientList.get(i)!=null && Server.clientList.get(i)!= this) {
-		                    	Server.clientList.get(i).serverOutput.print("\n" + time + " " + nickname +": " + inputString + "\n>> : ");
-		                    }
-		                }
-	                } else {
-	                	if (UserActions.ExitChat(serverOutput, inputString, nickname)) break;
-
-	                		UserActions.CommandSwitch(serverOutput, inputString, nickname);
-	                }
-	            }
-
-	            // Terminando la conxión del cliente después de /exit
-	            for(int i = 0; i < Server.clientList.size(); i++){
-	                if(Server.clientList.get(i) != null && Server.clientList.get(i) != this) {
-	                	Server.clientList.get(i).serverOutput.print("\n++ " + nickname + " left ++\n>> : ");
-	                	closeConnections(userInput, serverOutput, socket);
-	                }
-	            }
 	            
+	            if(! socket.isClosed()) {
+		            serverOutput.print("Password: ");
+	
+					System.out.println("socket closed before password input? " + socket.isClosed());
+		            passwd = userInput.readLine();
+					System.out.println("socket closed after password input? " + socket.isClosed());
+	
+		            System.out.println("User entered password " + passwd);
+					Boolean validPass = AccessTools.checkCredentials(nickname, passwd);
+					
+					System.out.println("socket closed last? " + socket.isClosed());
+					if (validPass == false) {
+						//System.out.println("socket alive? " + socket.isClosed());
+						serverOutput.println("Sorry, you have no access to this chat");
+						closeConnections(userInput, serverOutput, socket);
+						numSockets -= 1;
+					}
+		            nickname = Tools.capitalizeFirstLetter(nickname);
+	
+		            serverMsg("\nSERVER:\tHi " + nickname + "\n>> : ");
+	
+		            for(int i=0; i < Server.clientList.size(); i++) {
+		                if(Server.clientList.get(i) != null && Server.clientList.get(i) != this) {
+		                	Server.clientList.get(i).serverOutput.print("\n++ " + nickname  + " entered the room ++\n>> :");
+		                }
+		            }
+	
+		            for(int i=0; i< Server.clientList.size(); i++) {
+		                if(Server.clientList.get(i)!=null && Server.clientList.get(i)!= this)
+		                	Server.clientList.get(i).serverOutput.print("\n++ " + nickname  + " entered the room ++\n>> :");
+		            }
+	
+		            while(true) {
+		            	serverOutput.print(">> : ");
+		            	inputString = userInput.readLine();
+		            	
+		                if (! inputString.startsWith("/")) {
+		                	time = timeStamp.format(new Date());
+		                	Server.chatLog.add(time + " " + nickname + ": " + inputString);
+			                for(int i=0; i<Server.clientList.size(); i++) {
+			                    if(Server.clientList.get(i)!=null && Server.clientList.get(i)!= this) {
+			                    	Server.clientList.get(i).serverOutput.print("\n" + time + " " + nickname +": " + inputString + "\n>> : ");
+			                    }
+			                }
+		                } else {
+		                	if (UserActions.ExitChat(serverOutput, inputString, nickname)) break;
+	
+		                		UserActions.CommandSwitch(serverOutput, inputString, nickname);
+		                }
+		            }
+	
+		            // Terminando la conxión del cliente después de /exit
+		            for(int i = 0; i < Server.clientList.size(); i++){
+		                if(Server.clientList.get(i) != null && Server.clientList.get(i) != this) {
+		                	Server.clientList.get(i).serverOutput.print("\n++ " + nickname + " left ++\n>> : ");
+		                	closeConnections(userInput, serverOutput, socket);
+		                }
+		            }
+	            }
+
 	            Tools.WriteToFile(Server.chatLog, HISTORYLOG);
             
 				} catch (IOException e) {
