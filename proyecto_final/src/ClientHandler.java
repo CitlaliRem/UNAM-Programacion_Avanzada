@@ -91,7 +91,6 @@ public class ClientHandler extends Thread{
         String time = null;
 	
         try {
-        	//clientSocket = new Socket("localhost", 8888);
             serverOutput = new PrintStream(clientSocket.getOutputStream());
             userInput = new DataInputStream(clientSocket.getInputStream());
 
@@ -187,9 +186,8 @@ public class ClientHandler extends Thread{
     }    
    
     public static void main(String args[]) throws UnknownHostException, IOException {
-        	clientSocket = new Socket("localhost", 8888);
-        	//clientSocket.start();
-    }
+    		clientSocket = new Socket("localhost", 8888);
+    	}
     
 
 }

@@ -1,4 +1,4 @@
- /* 	Proyecto Final - Programación Avanzada y Métodos Numéricos
+/* 	Proyecto Final - Programación Avanzada y Métodos Numéricos
  *  Semestre 14-1
  *  
  * 	Chat Server con las siguientes funcionalidades:	 
@@ -58,6 +58,7 @@ public class Server extends Thread{
 	                    try {
 	                    	while (true) {
 								client = chatServer.accept();
+								System.out.println("Client accepted");
 				                ClientHandler clientObj = new ClientHandler(client,listOfClients, chatLog);
 				                listOfClients.add(clientObj); //agregamos el cliente objeto a la lista dentro de la clase
 				                clientObj.start(); //clientHandler
@@ -122,6 +123,5 @@ public class Server extends Thread{
             System.out.println("An exception ocurred");
             System.out.println(e);
         }
-
     }
 }
