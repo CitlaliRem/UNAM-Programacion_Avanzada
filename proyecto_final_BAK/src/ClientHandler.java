@@ -132,7 +132,46 @@ public class ClientHandler extends Thread{
     				numSockets -= 1;
             	} else {
 	            	System.out.println("LOG: User choose option: " + option);
+<<<<<<< HEAD:proyecto_final/java/src/ClientHandler.java
+	            	serverOutput.print("Choose your nickname: ");
+	            	String newNickname = userInput.readLine();
+
+	            	serverOutput.print("Choose your password: ");
+	            	String newPassword = userInput.readLine();
+
+
+            		int tries = 0;
+            		while(tries < 4) {
+
+		            	if (PasswordCheck.isValid(newPassword) == true) {
+			            	PasswordCheck.propSetter(newNickname, newPassword);
+			            	nickname = newNickname;
+			            	serverOutput.println("You can now log into your new account");
+			            	break;
+
+		            	} else {
+
+		            	if (tries == 3) {
+			            	serverOutput.println("Too many tries... Exiting");
+		            		userInput.close();
+		    				serverOutput.close();
+		    				clientSocket.close();
+		    				numSockets -= 1;
+		            	}
+
+		            		System.out.println("LOG: " + time + " User choose invalid password " + (tries+1) + " times");
+		            		serverOutput.println("Password should be min 8 characters long and contain min 2 digits");
+			            	serverOutput.print("Choose your password: ");
+			            	newPassword = userInput.readLine();
+
+		            		tries += 1;
+
+	            		}
+	            	}
+
+=======
 	            	SignUp();
+>>>>>>> PF_magnus:proyecto_final_BAK/src/ClientHandler.java
             	}
             }
 
@@ -197,6 +236,10 @@ public class ClientHandler extends Thread{
         } catch(IOException var){
         }
     }    
+<<<<<<< HEAD:proyecto_final/java/src/ClientHandler.java
+	
+=======
 
 
+>>>>>>> PF_magnus:proyecto_final_BAK/src/ClientHandler.java
 }

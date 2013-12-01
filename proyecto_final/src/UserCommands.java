@@ -15,6 +15,9 @@ public class UserCommands {
 		else if(inputString.equals("/hist")) {
 			UserCommands.ShowHistory(serverOutput, Server.chatLog);
 		}
+		else if(inputString.equals("/help")) {
+			UserCommands.ShowHelp(serverOutput);
+		}
 	}
 
 	public static void ShowUsers(PrintStream serverOutput, String inputString, String nickname) {
@@ -35,6 +38,16 @@ public class UserCommands {
             	serverOutput.println(temp);
     		}
     		
+	}
+	
+	public static void ShowHelp(PrintStream serverOutput) {
+		serverOutput.println("*********************************");
+		serverOutput.println("Options:");
+		serverOutput.println("/hist\tshow chat history");
+		serverOutput.println("/users\tshow online users");
+		serverOutput.println("/help\tshow this help menu");
+		serverOutput.println("/exit\tdisconnect");
+		serverOutput.println("*********************************");
 	}
 
 	public static boolean ExitChat(PrintStream serverOutput, String inputString, String nickname) {
