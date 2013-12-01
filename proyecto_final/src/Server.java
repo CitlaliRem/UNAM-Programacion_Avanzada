@@ -162,6 +162,9 @@ public class Server extends Thread{
 		@Override
 		public void run() {
             try {
+            	System.out.println("Socket closed? " + socket.isClosed());
+            	System.out.println("Socket connected? " + socket.isConnected());
+            	
 				serverOutput = new PrintStream(socket.getOutputStream());
 				userInput = new DataInputStream(socket.getInputStream());
 
@@ -195,11 +198,15 @@ public class Server extends Thread{
 
 	            serverOutput.print("Password: ");
 
+				System.out.println("socket closed before password input? " + socket.isClosed());
 	            passwd = userInput.readLine();
+				System.out.println("socket closed after password input? " + socket.isClosed());
 
+	            System.out.println("User entered password " + passwd);
 				Boolean validPass = AccessTools.checkCredentials(nickname, passwd);
 				
 				if (validPass == false) {
+					//System.out.println("socket alive? " + socket.isClosed());
 					serverOutput.println("Sorry, you have no access to this chat");
 					closeConnections(userInput, serverOutput, socket);
 					numSockets -= 1;
@@ -265,13 +272,12 @@ public class Server extends Thread{
 	}
 
 
-    public static void closeConnections(DataInputStream userInput, PrintStream serverOutput, Socket clientSocket) {
-    	//System.out.println("Debugging: inside closeConnections");
+    public static void closeConnections(DataInputStream userInput, PrintStream serverOutput, Socket socket) {
     	try {
 			serverOutput.println("User connection closed");
 			userInput.close();
 			serverOutput.close();
-			clientSocket.close();
+			socket.close();
 		} catch (IOException e) {
 			System.out.println("Can't close client connection");
 		}

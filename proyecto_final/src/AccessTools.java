@@ -32,15 +32,13 @@ public class AccessTools {
 		return true;
 	}
 
-	public static void SignUp (PrintStream serverOutput, DataInputStream userInput, Socket clientSocket, String nickname, int numSockets) throws IOException {
+	public static void SignUp (PrintStream serverOutput, DataInputStream userInput, Socket socket, String nickname, int numSockets) throws IOException {
 		String newNickname = null;
 		String newPassword = null;
 
 		serverOutput.print("Choose your nickname: ");
-		//newNickname = ClientHandler.RecordUserInput(userInput);
 		newNickname = userInput.readLine();
 	    serverOutput.print("Choose your password: ");
-		//newPassword = ClientHandler.RecordUserInput(userInput);
 		newPassword = userInput.readLine();
 
 
@@ -56,10 +54,7 @@ public class AccessTools {
 	
 		        	if (tries == 3) {
 		            	serverOutput.println("Too many tries... Exiting");
-		            	ClientThread.closeConnections(userInput, serverOutput, clientSocket);
-/*		        		userInput.close();
-						serverOutput.close();
-						clientSocket.close();*/
+		            	ClientThread.closeConnections(userInput, serverOutput, socket);
 						numSockets -= 1;
 		        	}
 	        		//System.out.println("LOG: " + time + " User choose invalid password " + (tries+1) + " times");
