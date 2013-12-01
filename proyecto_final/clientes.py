@@ -15,8 +15,8 @@ class write(threading.Thread):
 
 	def run(self):
 		while True:
-			self.message = raw_input(':')
-			self.ownSocket.send(self.message)
+			self.message = raw_input()
+			self.ownSocket.send(self.message + "\n")
 		self.ownSocket.close()
 
 class read(threading.Thread):
@@ -31,6 +31,7 @@ class read(threading.Thread):
 			self.message = self.ownSocket.recv(1024)
 			print self.message
 		self.ownSocket.close()
+
 
 if __name__ == "__main__":
 	mysocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
