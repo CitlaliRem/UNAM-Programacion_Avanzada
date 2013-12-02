@@ -52,3 +52,10 @@ Thu Nov 28 2013  16:56:31   Mag:
 Thu Nov 28 2013  16:56:31   Mag: 
 Thu Nov 28 2013  16:58:27   Mag: hey
 >>>>>>> 75d5e4e22ea93815c763cfed2ee0d5c2111a9b79
+null Mag: hey
+null Mag: hey
+null Mag: hallo
+Sun Dec 01 2013  18:44:11   Mag: time
+Sun Dec 01 2013  18:45:05   Mag: time 
+Sun Dec 01 2013  18:45:05   Mag: o
+Sun Dec 01 2013  18:45:05   Mag: another tiem

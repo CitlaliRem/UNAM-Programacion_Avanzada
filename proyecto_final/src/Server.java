@@ -80,11 +80,9 @@ public class Server extends Thread{
 			} 
 		}catch(Exception e) {
 			System.out.println("Server exception");
-			//TODO
 		}
 
 		finally {
-			//chatServer.close(); //TODO: no me funciona esto de momento, habría que ver por qué..
 			System.out.println("Shutting down the server");
 			if (! clientList.isEmpty()) {
 				System.out.println("Shutting down user connections");
@@ -119,14 +117,11 @@ public class Server extends Thread{
         try{
     	Server server = new Server();
 		server.start();
-
             
         }catch(Exception e){
             System.out.println("An exception ocurred");
             System.out.println(e);
         }
-        
-        
     }
         
 }
@@ -147,6 +142,7 @@ public class Server extends Thread{
 		// Constructor
 		ClientThread(Socket socket) {
 			this.socket = socket;
+			timeStamp = new SimpleDateFormat("E MMM dd yyyy  HH:mm:ss  ");
 
 			try
 			{
@@ -166,10 +162,12 @@ public class Server extends Thread{
 				serverOutput = new PrintStream(socket.getOutputStream());
 				userInput = new DataInputStream(socket.getInputStream());
 
+				String time = timeStamp.format(new Date());
+
 				serverOutput.println("**********************************");
 				serverOutput.println("*** Welcome to the Chat Server ***");
 				serverOutput.println("**********************************");
-
+				serverOutput.println("Connecting on " + time);
 	            serverOutput.print("Nick: ");
 
 	            nickname = userInput.readLine();
@@ -213,11 +211,12 @@ public class Server extends Thread{
 		            	inputString = userInput.readLine();
 		            	
 		                if (! inputString.startsWith("/")) {
-		                	time = timeStamp.format(new Date());
+		                	//time = timeStamp.format(new Date());
 		                	Server.chatLog.add(time + " " + nickname + ": " + inputString);
 			                for(int i=0; i<Server.clientList.size(); i++) {
 			                    if(Server.clientList.get(i)!=null && Server.clientList.get(i)!= this) {
-			                    	Server.clientList.get(i).serverOutput.print("\n" + time + " " + nickname +": " + inputString + "\n>> : ");
+			                    	//Server.clientList.get(i).serverOutput.println("\n" + time + " " + nickname +": " + inputString + "\n>> : ");
+			                    	Server.clientList.get(i).serverMsg(inputString);
 			                    }
 			                }
 		                } else {
@@ -239,19 +238,21 @@ public class Server extends Thread{
 	            Tools.WriteToFile(Server.chatLog, HISTORYLOG);
             
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			//closeConnections(userInput, serverOutput, socket);
-
 		}
 
 	private void serverMsg(String message) throws IOException {
 
+        String time = timeStamp.format(new Date());
+        System.out.println("Time now: " + time);
+
 		if(!socket.isConnected()) {
 			closeConnections(userInput, serverOutput, socket);;
 		}
-		serverOutput.println(message);
+
+		serverOutput.println("\n" + time + " " + nickname +": " + message + "\n>> : ");
+		serverOutput.println(time + message);
 	}
 
 
