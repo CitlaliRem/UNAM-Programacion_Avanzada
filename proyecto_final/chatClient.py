@@ -80,9 +80,6 @@ class chatClient(threading.Thread):
 			#print "Shutdown requested...(Except at read)"
 			self.socket.close()
 			sys.exit(0)
-		finally:
-			self.socket.close()
-			sys.exit(0)
 
 	def write(self):
 		try:
@@ -104,13 +101,10 @@ class chatClient(threading.Thread):
 			self.socket.send("\n")	
 			self.socket.close()
 			sys.exit(0)
-		finally:
-			#self.socket.send("\n")
-			self.socket.close()
-			sys.exit(0)
 			
 
 if __name__ == "__main__":
+	"""Main function"""
 	try:
 		client = chatClient()
 	except socket.error:
