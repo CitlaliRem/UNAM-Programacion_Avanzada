@@ -147,22 +147,23 @@ public class Server extends Thread{
 }
     class ClientThread extends Thread {
                  /* los hilos para cada cliente que se conecta */
-                Socket socket;
-                DataInputStream userInput;
-                PrintStream serverOutput;
-                private String nickname;
-            private String passwd;
-            private String inputString;
-            static int numSockets;
-            private SimpleDateFormat timeStamp = new SimpleDateFormat("E MMM dd yyyy HH:mm:ss ");
-                            
-                                private String time;
-                private static final String HISTORYLOG = "chatlog.txt";
+		private Socket socket;
+		private DataInputStream userInput;
+		private PrintStream serverOutput;
+		private String nickname;
+		private String passwd;
+		private String inputString;
+		static int numSockets;
+		private SimpleDateFormat timeStamp;
+		//private String time;
+		private static final String HISTORYLOG = "chatlog.txt";
 
 
                 // Constructor
                 ClientThread(Socket socket) {
                         this.socket = socket;
+            			timeStamp = new SimpleDateFormat("E MMM dd yyyy  HH:mm:ss  ");
+
 
                         try
                         {
@@ -179,15 +180,16 @@ public class Server extends Thread{
                 @Override
                 public void run() {
             try {
-                    System.out.println("Socket closed? " + socket.isClosed());
-                    System.out.println("Socket connected? " + socket.isConnected());
-                    
-                                serverOutput = new PrintStream(socket.getOutputStream());
-                                userInput = new DataInputStream(socket.getInputStream());
+            		serverOutput.println("Connecting on " + time);
+	
+                    serverOutput = new PrintStream(socket.getOutputStream());
+                    userInput = new DataInputStream(socket.getInputStream());
 
-                                serverMsg("**********************************");
-                                serverMsg("*** Welcome to the Chat Server ***");
-                                serverMsg("**********************************");
+                    serverMsg("**********************************");
+                    serverMsg("*** Welcome to the Chat Server ***");
+                    serverMsg("**********************************");
+    				serverOutput.println("Connecting on " + time);
+
 
                     serverMsg("Nick: ");
 
