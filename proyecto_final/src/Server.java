@@ -22,7 +22,9 @@ public class Server extends Thread{
 	private static final int PORT = 8888;
 	static Socket client;
     static ArrayList<ClientThread> clientList = new ArrayList<ClientThread>();
-    static ArrayList<String> chatLog = new ArrayList<String>(); 
+    //static ArrayList<ClientHandler> listOfClients = new ArrayList<ClientHandler>();
+    static ArrayList<String> chatLog = new ArrayList<String>();
+	static ArrayList usersOnline = new ArrayList(); 
     
 	public static void recallHistory(ArrayList<String> arrayList) {
 		Scanner historyLog = null;
@@ -266,4 +268,4 @@ public class Server extends Thread{
 			System.out.println("Can't close client connection");
 		}
     }
- }
+}
