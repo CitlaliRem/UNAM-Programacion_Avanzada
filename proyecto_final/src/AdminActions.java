@@ -5,7 +5,11 @@
 import java.io.*;
 import java.util.*;
 
-public class AdminActions{
+/*
+Esta clase es la que muestra la ventana para el panel de administracion, en ella se agregan las funciones para
+bloquear desbloquear y terminar el servidor
+*/
+public class AdminActions{//este metodo sirve para leer los usuarios que han sido bloqueados
         //ArrayList usersBanned = new ArrayList();
         private static final String BLACKLIST = "./blacklist.xml"; 
         String accion;
@@ -26,7 +30,7 @@ public class AdminActions{
         }
         
 
-        public boolean action(){
+        public boolean action(){//si el dato regresado es false el servidor concluye su funcion y termina, si regresa un true es solo por que el administrador utilizo cualquier otra funcion
                 BufferedReader order = new BufferedReader(new InputStreamReader(System.in));
                 while(true){
                         try{
@@ -37,8 +41,8 @@ public class AdminActions{
                                         String reoffending = "0";
                                         System.out.println("Name of user to be blocked: ");
                                         String blockUser = order.readLine();
-                                        //tmpAccion = blockUser.substring(blockUser.indexOf(' ')+1);
-                                        Tools.capitalizeFirstLetter(blockUser);
+                                        //tmpAccion = blockUser.substring(blockUser.indexOf(' ')+1);//ya no fue necesaria esta linea pues se le brinda al administrador la opcion de decir directo el usuario a bloquear
+                                        Tools.capitalizeFirstLetter(blockUser);//con esto hacemos que la primer letra sea convertida a mayusculas
                                         System.out.println(blockUser + " banned");
 
                                         Tools.propSetter(blockUser, reoffending, BLACKLIST , "blocked Users");
