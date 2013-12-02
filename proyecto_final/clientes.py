@@ -1,15 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-"""	Created on: Friday 29 november 2013
-	Equipo:	César Alberto Trejo Juárez     cesaralberto@yandex.com
-		Magnus Henkel
-		Oscar Díaz
-		Brenda
-"""
-
 import threading
 import socket
+import sys
 
 HOST = 'localhost'
 PORT = 8888
@@ -27,14 +21,20 @@ class write(threading.Thread):
 				self.ownSocket.send(self.message + "\n")
 		except KeyboardInterrupt:
 			#print 'KeyboardInterrupt: Exit request at write class'
-			self.ownSocket.send("/None \n")
+			self.ownSocket.send("\n")
 			self.ownSocket.close()
+			sys.exit(0)
 		except EOFError:
 			#print 'EOFError: Exite request at write class'
-			self.ownSocket.send("/None \n")
+			self.ownSocket.send("\n")
 			self.ownSocket.close()
+			sys.exit(0)
+		except:
+			self.ownSocket.close()
+			sys.exit(0)
 		finally:
 			self.ownSocket.close()
+			sys.exit(0)
 
 class read(threading.Thread):
 	"""A class wich lets read messages from Server"""
@@ -47,15 +47,20 @@ class read(threading.Thread):
 		try:
 			while True:
 				self.message = self.ownSocket.recv(1024)
+				if 'Server: Goodbye' in self.message:
+					break
 				print self.message
 		except EOFError:
 			#print 'EOFError: Exit request at class read'
 			self.ownSocket.close()
+			sys.exit(0)
 		except:
 			#print 'Except: Exit request at class read'
 			self.ownSocket.close()
+			sys.exit(0)
 		finally:
 			self.ownSocket.close()
+			sys.exit(0)
 
 
 if __name__ == "__main__":
