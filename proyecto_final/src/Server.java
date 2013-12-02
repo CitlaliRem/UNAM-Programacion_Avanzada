@@ -20,9 +20,11 @@ import java.text.SimpleDateFormat;
 public class Server extends Thread{
 
 	private static final int PORT = 8888;
+	private static final String HISTORYLOG = "./chatlog.txt";
+	private static final String BLACKLIST = "./banned.txt"; 
+
 	static Socket client;
     static ArrayList<ClientThread> clientList = new ArrayList<ClientThread>();
-    //static ArrayList<ClientHandler> listOfClients = new ArrayList<ClientHandler>();
     static ArrayList<String> chatLog = new ArrayList<String>();
     static ArrayList<String> usersBanned = new ArrayList<String>();
 	static ArrayList<String> usersOnline = new ArrayList<String>(); 
@@ -30,7 +32,7 @@ public class Server extends Thread{
 	 public static void addUsersBanned(ArrayList<String> usersBanned){
          Scanner user = null;
          try{
-             user = new Scanner(new File("./banned.txt"));
+             user = new Scanner(new File(BLACKLIST));
              user.useDelimiter("\n");
          }catch(FileNotFoundException e){
              System.out.println("File not found");
@@ -45,7 +47,7 @@ public class Server extends Thread{
 	public static void recallHistory(ArrayList<String> arrayList) {
 		Scanner historyLog = null;
 		try {
-			historyLog = new Scanner(new File("./chatLog.txt"));
+			historyLog = new Scanner(new File(HISTORYLOG));
 			historyLog.useDelimiter("\n");
 		} catch (FileNotFoundException e) {
 			System.out.println("ERROR: Logfile not found");
@@ -187,6 +189,7 @@ public class Server extends Thread{
 				serverOutput.println("*** Welcome to the Chat Server ***");
 				serverOutput.println("**********************************");
 				serverOutput.println("Connecting on " + time);
+
 	            serverOutput.print("Nick: ");
 
 	            nickname = userInput.readLine();
