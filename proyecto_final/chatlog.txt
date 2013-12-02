@@ -1,5 +1,12 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+Thu Nov 28 2013  15:44:08   Mag: formato definitivo
+Thu Nov 28 2013  15:48:55   Mag: test
+Thu Nov 28 2013  16:11:57   Mag: hi
+Thu Nov 28 2013  16:12:50   Mag: exit
+Thu Nov 28 2013  16:46:27   Mag: hey server again
+Thu Nov 28 2013  16:46:34   Mag: que pasC3?
+Thu Nov 28 2013  16:46:46   Mag: no0 acepta acentos la p****e consola de eclipse
+Thu Nov 28 2013  16:48:48   Mag: lalala
+Thu Nov 28 2013  16:58:27   Mag: hey
 Fri Nov 29 2013  21:24:35   Mag: hola log
 Fri Nov 29 2013  21:24:40   Mag: a ver si funcionas
 Fri Nov 29 2013  21:29:06   Mag: mas historia
@@ -16,59 +23,7 @@ Sat Nov 30 2013  00:09:55   Mag: hey
 Sat Nov 30 2013  00:10:19   Mag: 
 Sat Nov 30 2013  03:09:31   Magnus: hi server!
 Sat Nov 30 2013  14:57:14   Mag: hey
-=======
-02:11:52 Mag: hola
-02:12:07 Oscar: hay alguien?
-02:12:15 Mag: que onda
-02:12:24 Oscar: ya funciona nuestro chat
-02:12:37 Mag: asi es
-02:12:50 Mag: estamos checando si el chat log funciona
-02:13:05 Oscar: veo que ya tenemos el timestamp
-02:13:09 Mag: asi es
-02:13:18 Mag: te veo despues
-02:13:42 Oscar: magnus salio
-02:13:48 Oscar: yo tambien me voy
-02:15:03 Mag: a ver si despues de terminar el servidor retieen la historia
-02:15:13 Mag: si es asi
-02:15:23 Mag: se debe ver despues de que salga
-14:28:51 Mag: hola
-14:30:04 Mag: que onda?
-14:37:02 Mag: check, check
-14:37:08 Mag: test test
-15:24:46 Tim: hi server
-28-11-2013 15:38:01 Mag: hey
-28-38-13 15:38:44 Mag: date
-=======
->>>>>>> 92f694b683dd7e1f8bac368260896f2d164a8476
-Thu Nov 28 15:40:51 CST 2013 Mag: new format
-Thu Nov 28 2013  15:43:18 Mag: hi server
-Thu Nov 28 2013  15:44:08   Mag: formato definitivo
-Thu Nov 28 2013  15:48:55   Mag: test
-Thu Nov 28 2013  16:11:57   Mag: hi
-Thu Nov 28 2013  16:12:50   Mag: exit
-Thu Nov 28 2013  16:46:27   Mag: hey server again
-Thu Nov 28 2013  16:46:34   Mag: que pasC3?
-Thu Nov 28 2013  16:46:46   Mag: no0 acepta acentos la p****e consola de eclipse
-Thu Nov 28 2013  16:48:48   Mag: lalala
-Thu Nov 28 2013  16:58:27   Mag: hey
-<<<<<<< HEAD
->>>>>>> 75d5e4e22ea93815c763cfed2ee0d5c2111a9b79
-null Mag: hey
-null Mag: hey
-null Mag: hallo
 Sun Dec 01 2013  18:44:11   Mag: time
 Sun Dec 01 2013  18:45:05   Mag: time 
 Sun Dec 01 2013  18:45:05   Mag: o
 Sun Dec 01 2013  18:45:05   Mag: another tiem
-=======
-Fri Nov 29 2013  00:47:46   Mag: hallo
-Fri Nov 29 2013  18:38:07   Mag: haciendo chathistory
-Fri Nov 29 2013  18:38:13   Mag: blblabla
-Fri Nov 29 2013  18:38:16   Mag: lalala
-Fri Nov 29 2013  18:39:00   Oscar: conectado
-Fri Nov 29 2013  18:39:09   Oscar: palabras
-Fri Nov 29 2013  18:43:28   Mag: hallo
-Fri Nov 29 2013  18:43:36   Oscar: qu onda
-Fri Nov 29 2013  18:44:05   Mag: bla bla
-Fri Nov 29 2013  18:44:18   Mag: nuevo
->>>>>>> 92f694b683dd7e1f8bac368260896f2d164a8476

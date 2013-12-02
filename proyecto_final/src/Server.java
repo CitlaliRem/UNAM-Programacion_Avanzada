@@ -24,7 +24,7 @@ public class Server extends Thread{
     static ArrayList<ClientThread> clientList = new ArrayList<ClientThread>();
     //static ArrayList<ClientHandler> listOfClients = new ArrayList<ClientHandler>();
     static ArrayList<String> chatLog = new ArrayList<String>();
-	static ArrayList usersOnline = new ArrayList(); 
+	static ArrayList<String> usersOnline = new ArrayList<String>(); 
     
 	public static void recallHistory(ArrayList<String> arrayList) {
 		Scanner historyLog = null;
@@ -90,16 +90,16 @@ public class Server extends Thread{
 				System.out.println("Shutting down user connections");
 				try {
 					for(int i = 0; i < clientList.size(); ++i) {
-						ClientThread closeThread = clientList.get(i);
-						closeThread.serverOutput.println("Server shutting down in 4 seconds");
+						//ClientThread closeThread = clientList.get(i);
+						ClientThread.serverOutput.println("Server shutting down in 4 seconds");
 					}
 						Thread.sleep(4000);
 					for(int i = 0; i < clientList.size(); ++i) {
 						ClientThread closeThread = clientList.get(i);
-						closeThread.serverOutput.println("Server shutting down in 4 seconds");
+						ClientThread.serverOutput.println("Server shutting down in 4 seconds");
 						try {
-							closeThread.serverOutput.close();
-							closeThread.userInput.close();
+							ClientThread.serverOutput.close();
+							ClientThread.userInput.close();
 							closeThread.socket.close(); 
 						} catch(Exception e) {
 							e.printStackTrace();
@@ -130,14 +130,14 @@ public class Server extends Thread{
     class ClientThread extends Thread {
 		 /* los hilos para cada cliente que se conecta */
 		Socket socket;
-		DataInputStream userInput;
-		PrintStream serverOutput;
+		static DataInputStream userInput;
+		static PrintStream serverOutput;
 		private String nickname;
 	    private String passwd;
 	    private String inputString;
 	    static int numSockets;
 	    private SimpleDateFormat timeStamp;
-	    private String time;
+	    //private String time;
 		private static final String HISTORYLOG = "chatlog.txt";
 
 
@@ -203,8 +203,10 @@ public class Server extends Thread{
 	
 	
 		            for(int i=0; i< Server.clientList.size(); i++) {
-		                if(Server.clientList.get(i)!=null && Server.clientList.get(i)!= this)
-		                	Server.clientList.get(i).serverOutput.print("\n++ " + nickname  + " entered the room ++\n>> :");
+		                if(Server.clientList.get(i)!=null && Server.clientList.get(i)!= this) {
+							Server.clientList.get(i);
+							ClientThread.serverOutput.print("\n++ " + nickname  + " entered the room ++\n>> :");
+						}
 		            }
 	
 	            if(! socket.isClosed()) { 	/* si el usuario estaba registrado o se registró....*/
@@ -222,16 +224,17 @@ public class Server extends Thread{
 			                    }
 			                }
 		                } else {
-		                	if (UserActions.ExitChat(serverOutput, inputString, nickname)) break;
+		                	if (UserActions.ExitChat(inputString, nickname)) break;
 	
-		                		UserActions.CommandSwitch(serverOutput, inputString, nickname);
+		                		UserActions.CommandSwitch(inputString);
 		                }
 		            }
 	
 		            // Terminando la conxión del cliente después de /exit
 		            for(int i = 0; i < Server.clientList.size(); i++){
 		                if(Server.clientList.get(i) != null && Server.clientList.get(i) != this) {
-		                	Server.clientList.get(i).serverOutput.print("\n++ " + nickname + " left ++\n>> : ");
+		                	Server.clientList.get(i);
+							ClientThread.serverOutput.print("\n++ " + nickname + " left ++\n>> : ");
 		                	closeConnections(userInput, serverOutput, socket);
 		                }
 		            }
@@ -247,7 +250,6 @@ public class Server extends Thread{
 	private void serverMsg(String message) throws IOException {
 
         String time = timeStamp.format(new Date());
-        System.out.println("Time now: " + time);
 
 		if(!socket.isConnected()) {
 			closeConnections(userInput, serverOutput, socket);;
