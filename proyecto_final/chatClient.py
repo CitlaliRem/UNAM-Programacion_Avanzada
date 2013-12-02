@@ -10,6 +10,7 @@
 #
 #	Imports
 #
+import sys
 import threading
 import socket
 
@@ -30,36 +31,61 @@ class chatClient(threading.Thread):
 			print 'Connecting to Server...'
 			self.socket.connect(SERVER)
 		except socket.error:
-			print 'Server offline'
+			print 'Server offline',
+			print 'Try later'
 			self.socket.close()
-		while (True):
+			sys.exit(0)
+
+		try:	
 			readThreading =	threading.Thread(target = self.read)
-			#readThreading.daemon = True 	# To die automatically
-			readThreading.start()
-
 			writeThreading = threading.Thread(target = self.write)
-			#writeThreading.daemon = True	# To die automatically
+			
+			readThreading.start()
 			writeThreading.start()
-
-		readThreading.close()
-		writeThreading.close()
-		self.socket.close()
+		
+		except KeyboardInterrupt:
+			print "Shutdown requested...(KeyboardInterrupt at 1o)"
+			self.socket.close()
+		except EOFError:
+			print "Shutdown requested...(EOFError at 1o)"
+			self.socket.close()
 
 	def read(self):
 		while (True):
 			fromServer = self.socket.recv(200000)
-			if fromServer:
+			if ('Server: Goodbye' in fromServer):
 				print fromServer
+				break
+			print fromServer
 
 	def write(self):
-		while (True):
-			toServer = raw_input('Your message: ')
-			self.socket.send(toServer + "\n")
-			#if toServer == '/LOGOUT':
-			#	self.socket.close()
-			#	sys.exit(0)
-
-
+		try:
+			while (True):
+				toServer = raw_input()
+				self.socket.send(toServer + "\n")
+		except KeyboardInterrupt:
+			print "Shutdown requested...(KeyboardInterrupt at 2o)"
+			self.socket.close()
+			sys.exit(0)
+		except EOFError:
+			print "Shutdown requested...(EOFError at 2o)"
+			self.socket.close()
+			sys.exit(0)
+			
 
 if __name__ == "__main__":
-	client = chatClient()
+	try:
+		client = chatClient()
+	except socket.error:
+		print 'No Server Found at __main__'
+		sys.exit(0)
+	except EOFError:
+		print 'Ready to exit... at __main__'
+		sys.exit(0)
+	except:
+		print 'Shutdown at __main__'
+		sys.exit(0)
+
+
+
+		
