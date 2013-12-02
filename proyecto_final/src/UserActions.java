@@ -52,29 +52,38 @@ public class UserActions {
 
 	public static void ShowHelp(PrintStream serverOutput) {
 		//PrintStream serverOutput = ClientThread.serverOutput;
-		serverOutput.println("*********************************");
+		serverOutput.println("*******************************************");
 		serverOutput.println("Options:");
 		serverOutput.println("/hist\tshow chat history");
 		serverOutput.println("/users\tshow online users");
 		serverOutput.println("/help\tshow this help menu");
+		serverOutput.println("/private\tprivate message: <user> <message>");
 		serverOutput.println("/exit\tdisconnect");
-		serverOutput.println("*********************************");
+		serverOutput.println("*******************************************");
 	}
 
 	public static void PrivateMenssage(PrintStream serverOutput, String inputString, String nickname) {
 		//PrintStream serverOutput = ClientThread.serverOutput;
-		ArrayList<ClientThread> clientList = Server.clientList;
-		ArrayList<String> usersOnline = Server.usersOnline;
+		if (inputString == null || nickname == null) {
+			serverOutput.println("Usage: /private <user> <message>");
+		} else {
 
-		String tmpInputString = inputString.substring(inputString.indexOf(' ')+1);
-		tmpInputString = Tools.capitalizeFirstLetter(tmpInputString);
-
-		if (usersOnline.indexOf(tmpInputString.substring(0,tmpInputString.indexOf(' '))) == -1){
-			serverOutput.println("User not found");
+			ArrayList<ClientThread> clientList = Server.clientList;
+			ArrayList<String> usersOnline = Server.usersOnline;
+		
+			String tmpInputString = inputString.substring(inputString.indexOf(' ')+1);
+			tmpInputString = Tools.capitalizeFirstLetter(tmpInputString);
+			try {
+				if (usersOnline.indexOf(tmpInputString.substring(0,tmpInputString.indexOf(' '))) == -1){
+					serverOutput.println("User not found");
+				}
+			else{
+				clientList.get(usersOnline.indexOf(tmpInputString.substring(0,tmpInputString.indexOf(' ')))).serverOutput.println(nickname+" >> "+tmpInputString.substring(tmpInputString.indexOf(' ')));
+				}                    
+			} catch(StringIndexOutOfBoundsException e) {
+				// el mensaje no tuvo el formato correcto 
+			}
 		}
-		else{
-			clientList.get(usersOnline.indexOf(tmpInputString.substring(0,tmpInputString.indexOf(' ')))).serverOutput.println(nickname+">> "+tmpInputString.substring(tmpInputString.indexOf(' ')));
-		}                    
 
 	}
 
