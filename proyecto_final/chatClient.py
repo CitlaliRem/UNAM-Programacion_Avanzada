@@ -5,7 +5,8 @@
 	connect to a Server, after it we can 
 	send and receive messages.
 
-	author: César Alberto Trejo Juárez  cesaralberto@yandex.com or cesaratj27@gmail.com
+	authors: 
+		César Alberto Trejo Juárez  cesaralberto@yandex.com or cesaratj27@gmail.com
 		Oscar Díaz
 		Brenda
 		Magnus Henkel
@@ -63,11 +64,10 @@ class chatClient(threading.Thread):
 		try:
 			while (True):
 				fromServer = self.socket.recv(200000)
-				if fromServer:
-					if ('Server: Goodbye' in fromServer):
-						print fromServer
-						break
+				if ('Server: Goodbye' in fromServer):
 					print fromServer
+					break
+				print fromServer
 		except KeyboardInterrupt:
 			#print "Shutdown requested...(KeyboardInterrupt at 2o)"
 			self.socket.close()
@@ -80,6 +80,9 @@ class chatClient(threading.Thread):
 			#print "Shutdown requested...(Except at read)"
 			self.socket.close()
 			sys.exit(0)
+		finally:
+			self.socket.close()
+			sys.exit(0)
 
 	def write(self):
 		try:
@@ -88,17 +91,21 @@ class chatClient(threading.Thread):
 				self.socket.send(toServer + "\n")
 		except KeyboardInterrupt:
 			#print "Shutdown requested...(KeyboardInterrupt at 2o)"
-			self.socket.send("/LOGOUT \n")
+			self.socket.send("I am logging out \n")
 			self.socket.close()
 			sys.exit(0)
 		except EOFError:
 			#print "Shutdown requested...(EOFError at 2o)"
-			self.socket.send("/LOGOUT \n")
+			self.socket.send("\n")
 			self.socket.close()
 			sys.exit(0)
 		except:
 			#print 'Shutdown requested...(Except at 2o)'
-			self.socket.send("/LOGOUT \n")	
+			self.socket.send("\n")	
+			self.socket.close()
+			sys.exit(0)
+		finally:
+			#self.socket.send("\n")
 			self.socket.close()
 			sys.exit(0)
 			
@@ -107,14 +114,13 @@ if __name__ == "__main__":
 	try:
 		client = chatClient()
 	except socket.error:
-		print 'No Server Found at __main__'
-		client.socket.close()
+		#print 'No Server Found at __main__'
 		sys.exit(0)
 	except EOFError:
-		print 'Ready to exit... at __main__'
-		client.socket.close()
+		#print 'Ready to exit... at __main__'
 		sys.exit(0)
 	except:
-		print 'Shutdown at __main__'
-		client.socket.close()
+		#print 'Shutdown at __main__'
+		sys.exit(0)
+	finally:
 		sys.exit(0)
