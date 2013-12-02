@@ -11,7 +11,7 @@ public class Tools {
 	    return original.substring(0, 1).toUpperCase() + original.substring(1);
 	}
 	
-	static boolean checkFileEntry(String nick, String password, String datafile) { 
+	static boolean checkFileEntry(String nick, String datafile) { 
     	try {
 			File file = new File(datafile);
 			FileInputStream fileInput = new FileInputStream(file);
@@ -30,7 +30,7 @@ public class Tools {
         return true;  
 	}
 
-	public static void propSetter(String nick, String password, String datafile, String comment) {
+	public static void propSetter(String keyVal, String propertyVal, String datafile, String comment) {
 		try {
 			File file = new File(datafile);
 			FileInputStream fileInput = new FileInputStream(file);
@@ -38,10 +38,31 @@ public class Tools {
 			properties.loadFromXML(fileInput);
 			fileInput.close();
 
-			properties.setProperty(nick, password);
+			properties.setProperty(keyVal, propertyVal);
 
 			FileOutputStream fileOut = new FileOutputStream(file);
 			properties.storeToXML(fileOut, comment);
+			fileOut.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	  }
+
+	public static void propEraser(String keyVal, String datafile) {
+		try {
+			File file = new File(datafile);
+			FileInputStream fileInput = new FileInputStream(file);
+			Properties properties = new Properties();
+			properties.loadFromXML(fileInput);
+			fileInput.close();
+			System.out.println("keyVal"+ keyVal);
+
+			properties.remove(keyVal);
+
+			FileOutputStream fileOut = new FileOutputStream(file);
+			properties.storeToXML(fileOut, null);
 			fileOut.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

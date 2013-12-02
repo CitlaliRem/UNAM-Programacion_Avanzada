@@ -21,7 +21,8 @@ public class Server extends Thread{
 
 	private static final int PORT = 8888;
 	private static final String HISTORYLOG = "./chatlog.txt";
-	private static final String BLACKLIST = "./banned.txt"; 
+	//private static final String BLACKLIST = "./banned.txt"; 
+	private static final String BLACKLIST = "./blacklist.xml"; 
 
 	static Socket client;
     static ArrayList<ClientThread> clientList = new ArrayList<ClientThread>();
@@ -44,20 +45,20 @@ public class Server extends Thread{
          user.close();
      }
 
-	public static void recallHistory(ArrayList<String> arrayList) {
-		Scanner historyLog = null;
+	public static void readFileIntoArray(ArrayList<String> array, String file) {
+		Scanner readBuffer = null;
 		try {
-			historyLog = new Scanner(new File(HISTORYLOG));
-			historyLog.useDelimiter("\n");
+			readBuffer = new Scanner(new File(file));
+			readBuffer.useDelimiter("\n");
 		} catch (FileNotFoundException e) {
 			System.out.println("ERROR: Logfile not found");
 		}
 		
-		while (historyLog.hasNext()) {
-			String line = historyLog.next();
-			chatLog.add(line);
+		while (readBuffer.hasNext()) {
+			String line = readBuffer.next();
+			array.add(line);
 		}
-		historyLog.close();
+		readBuffer.close();
 	}
 
 	
@@ -65,10 +66,11 @@ public class Server extends Thread{
 	public void start() {
 		boolean runServer = true;
 
-		recallHistory(chatLog);
+		readFileIntoArray(chatLog, HISTORYLOG);
+		readFileIntoArray(usersBanned, BLACKLIST);
+		//addUsersBanned(usersBanned);
 
 		AdminActions admin = new AdminActions();
-		addUsersBanned(usersBanned);
         System.out.println("***Welcome to the Admin panel***");
 
 		try {
@@ -246,7 +248,7 @@ public class Server extends Thread{
 		                } else {
 		                	if (UserActions.ExitChat(inputString, nickname)) break;
 	
-		                		UserActions.CommandSwitch(inputString);
+		                		UserActions.CommandSwitch(inputString, nickname);
 		                }
 		            }
 	
