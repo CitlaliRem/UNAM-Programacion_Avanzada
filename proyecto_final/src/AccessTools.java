@@ -36,14 +36,29 @@ public class AccessTools {
 		String newNickname = null;
 		String newPassword = null;
 
-		serverOutput.print("Choose your nickname: ");
-		newNickname = userInput.readLine();
-	    serverOutput.print("Choose your password: ");
-		newPassword = userInput.readLine();
+	 	serverOutput.println(nickname + " not found in database");
+    	serverOutput.println("Do you want to register? (y/n)");
 
+    	String option = userInput.readLine();
+
+    	if(! option.equals("y")) {
+    		numSockets -= 1;
+    		
+    		ClientThread.closeConnections(userInput, serverOutput, socket);
+    		
+    	} else {
+        	System.out.println("LOG: User choose option: " + option);
+        	System.out.println("inside else: " + userInput);
+			serverOutput.print("Choose your nickname: ");
+			newNickname = userInput.readLine();
+		    serverOutput.print("Choose your password: ");
+			newPassword = userInput.readLine();
+    	}
 
 			int tries = 0;
 			while(tries < 4) {
+				try {
+					
 	        	if (AccessTools.isValid(newPassword) == true) {
 	            	Tools.propSetter(newNickname, newPassword, USER_DATABASE, "User Access");
 	            	nickname = newNickname;
@@ -66,6 +81,10 @@ public class AccessTools {
 	        		tries += 1;
 	
 	    		}
+				} catch(NullPointerException e) {
+					/* respuesta era un enter */
+					
+				}
 			} 
     }
 	

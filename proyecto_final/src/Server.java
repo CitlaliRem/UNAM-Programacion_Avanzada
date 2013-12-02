@@ -61,6 +61,7 @@ public class Server extends Thread{
 								client = chatServer.accept();
 								System.out.println("Client accepted");
 								ClientThread cThread = new ClientThread(client);
+								clientList.add(cThread);
 								cThread.start();
 			                   	}
 
@@ -162,50 +163,31 @@ public class Server extends Thread{
 		@Override
 		public void run() {
             try {
-            	System.out.println("Socket closed? " + socket.isClosed());
-            	System.out.println("Socket connected? " + socket.isConnected());
-            	
 				serverOutput = new PrintStream(socket.getOutputStream());
 				userInput = new DataInputStream(socket.getInputStream());
 
-				serverMsg("**********************************");
-				serverMsg("*** Welcome to the Chat Server ***");
-				serverMsg("**********************************");
+				serverOutput.println("**********************************");
+				serverOutput.println("*** Welcome to the Chat Server ***");
+				serverOutput.println("**********************************");
 
-	            serverMsg("Nick: ");
+	            serverOutput.print("Nick: ");
 
 	            nickname = userInput.readLine();
 	            		
 	            Boolean signedUp = AccessTools.checkSignUp(nickname);
 
 	            if (signedUp == false) {
-	            	serverMsg(nickname + " not found in database");
-	            	serverMsg("Do you want to register? (y/n)");
-
-				System.out.println("socket closed before option input? " + socket.isClosed());
-	            	String option = userInput.readLine();
-				System.out.println("socket closed after option input? " + socket.isClosed());
-
-	            	if(! option.equals("y")) {
-	            		numSockets -= 1;
-
-	            		closeConnections(userInput, serverOutput, socket);
-	            		
-	            	} else {
-		            	System.out.println("LOG: User choose option: " + option);
-		            	System.out.println("inside else: " + userInput);
 		            	AccessTools.SignUp(serverOutput, userInput, socket, nickname, numSockets);
-	            	}
 	            }
 	            
-	            if(! socket.isClosed()) {
+//	            if(! socket.isClosed()) { 	/* si el usuario estaba registrado o se registró....*/
 		            serverOutput.print("Password: ");
 	
-					System.out.println("socket closed before password input? " + socket.isClosed());
 		            passwd = userInput.readLine();
-					System.out.println("socket closed after password input? " + socket.isClosed());
 	
 		            System.out.println("User entered password " + passwd);
+
+		            /* Validación de la clave */
 					Boolean validPass = AccessTools.checkCredentials(nickname, passwd);
 					
 					System.out.println("socket closed last? " + socket.isClosed());
@@ -217,19 +199,15 @@ public class Server extends Thread{
 					}
 		            nickname = Tools.capitalizeFirstLetter(nickname);
 	
-		            serverMsg("\nSERVER:\tHi " + nickname + "\n>> : ");
+		            serverOutput.println("\nSERVER:\tHi " + nickname + "\n>> : ");
 	
-		            for(int i=0; i < Server.clientList.size(); i++) {
-		                if(Server.clientList.get(i) != null && Server.clientList.get(i) != this) {
-		                	Server.clientList.get(i).serverOutput.print("\n++ " + nickname  + " entered the room ++\n>> :");
-		                }
-		            }
 	
 		            for(int i=0; i< Server.clientList.size(); i++) {
 		                if(Server.clientList.get(i)!=null && Server.clientList.get(i)!= this)
 		                	Server.clientList.get(i).serverOutput.print("\n++ " + nickname  + " entered the room ++\n>> :");
 		            }
 	
+	            if(! socket.isClosed()) { 	/* si el usuario estaba registrado o se registró....*/
 		            while(true) {
 		            	serverOutput.print(">> : ");
 		            	inputString = userInput.readLine();
@@ -264,7 +242,7 @@ public class Server extends Thread{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			closeConnections(userInput, serverOutput, socket);
+			//closeConnections(userInput, serverOutput, socket);
 
 		}
 
