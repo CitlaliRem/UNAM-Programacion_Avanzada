@@ -4,6 +4,10 @@ import java.lang.String;
 import java.lang.Character;  
 import java.net.Socket;
 
+/*
+Esta clase es la que tiene todos los metodos que permiten al usuarios ingresar, en dado caso de que no este 
+en el archivo users.xml le brinda la opcion de registrarse o bien salir, si decide salir le manda un mensaje
+*/
 public class AccessTools { 
 
         private static final String USER_DATABASE = "users.xml";
@@ -20,7 +24,7 @@ public class AccessTools {
 
                         if(! option.equals("y")) {
                                 numSockets -= 1;
-                                serverOutput.println("SERVER:\tGoodbye");
+                                serverOutput.println("SERVER:\tGoodbye");//mensaje reqerido en el servidor para que el cliente de python cierre el hilo de recepcion de datos
                                 ClientThread.closeConnections(userInput, serverOutput, socket);
 
                         } else {
@@ -69,10 +73,10 @@ public class AccessTools {
 
         static boolean checkCredentials(String nick, String password) { 
 
-                if (password == null) return false;
+                if (password == null) return false;//si no recibe la contraseña regresa un null para que le ejecucion de este socket termine
 
                 try {
-                        File file = new File(USER_DATABASE);
+                        File file = new File(USER_DATABASE);//estas lineas nos permiten utilizar el archivo users.xml para ver las profpiedades que hay dentro de el
                         FileInputStream fileInput = new FileInputStream(file);
                         Properties properties = new Properties();
                         properties.loadFromXML(fileInput);
@@ -112,8 +116,8 @@ public class AccessTools {
                         }  
 
                         if (count < 2)   {     
-                                return false;  
-                        }     
+                                return false;  //si la contrasena no es correcta regresa el false, en caso contrarario regresa el true
+                        }                //y de esta forma permite continuar con la ejecucion del socket
                 }
                 return true;
         }
