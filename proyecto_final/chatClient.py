@@ -5,7 +5,10 @@
 	connect to a Server, after it we can 
 	send and receive messages.
 
-	author: César Alberto Trejo Juárez
+	author: César Alberto Trejo Juárez  cesaralberto@yandex.com or cesaratj27@gmail.com
+		Oscar Díaz
+		Brenda
+		Magnus Henkel
 """
 #
 #	Imports
@@ -44,19 +47,39 @@ class chatClient(threading.Thread):
 			writeThreading.start()
 		
 		except KeyboardInterrupt:
-			print "Shutdown requested...(KeyboardInterrupt at 1o)"
+			#print "Shutdown requested...(KeyboardInterrupt at 1o)"
 			self.socket.close()
+			sys.exit(0)
 		except EOFError:
-			print "Shutdown requested...(EOFError at 1o)"
+			#print "Shutdown requested...(EOFError at 1o)"
 			self.socket.close()
+			sys.exit(0)
+		except:
+			#print 'Shutdown requested...(Except at 1o)'
+			self.socket.close()
+			sys.exit(0)
 
 	def read(self):
-		while (True):
-			fromServer = self.socket.recv(200000)
-			if ('Server: Goodbye' in fromServer):
-				print fromServer
-				break
-			print fromServer
+		try:
+			while (True):
+				fromServer = self.socket.recv(200000)
+				if fromServer:
+					if ('Server: Goodbye' in fromServer):
+						print fromServer
+						break
+					print fromServer
+		except KeyboardInterrupt:
+			#print "Shutdown requested...(KeyboardInterrupt at 2o)"
+			self.socket.close()
+			sys.exit(0)
+		except EOFError:
+			#print "Shutdown requested...(EOFError at 2o)"
+			self.socket.close()
+			sys.exit(0)
+		except:
+			#print "Shutdown requested...(Except at read)"
+			self.socket.close()
+			sys.exit(0)
 
 	def write(self):
 		try:
@@ -64,11 +87,18 @@ class chatClient(threading.Thread):
 				toServer = raw_input()
 				self.socket.send(toServer + "\n")
 		except KeyboardInterrupt:
-			print "Shutdown requested...(KeyboardInterrupt at 2o)"
+			#print "Shutdown requested...(KeyboardInterrupt at 2o)"
+			self.socket.send("/LOGOUT \n")
 			self.socket.close()
 			sys.exit(0)
 		except EOFError:
-			print "Shutdown requested...(EOFError at 2o)"
+			#print "Shutdown requested...(EOFError at 2o)"
+			self.socket.send("/LOGOUT \n")
+			self.socket.close()
+			sys.exit(0)
+		except:
+			#print 'Shutdown requested...(Except at 2o)'
+			self.socket.send("/LOGOUT \n")	
 			self.socket.close()
 			sys.exit(0)
 			
@@ -78,14 +108,13 @@ if __name__ == "__main__":
 		client = chatClient()
 	except socket.error:
 		print 'No Server Found at __main__'
+		client.socket.close()
 		sys.exit(0)
 	except EOFError:
 		print 'Ready to exit... at __main__'
+		client.socket.close()
 		sys.exit(0)
 	except:
 		print 'Shutdown at __main__'
+		client.socket.close()
 		sys.exit(0)
-
-
-
-		
