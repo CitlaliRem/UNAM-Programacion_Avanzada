@@ -24,8 +24,24 @@ public class Server extends Thread{
     static ArrayList<ClientThread> clientList = new ArrayList<ClientThread>();
     //static ArrayList<ClientHandler> listOfClients = new ArrayList<ClientHandler>();
     static ArrayList<String> chatLog = new ArrayList<String>();
+    static ArrayList<String> usersBanned = new ArrayList<String>();
 	static ArrayList<String> usersOnline = new ArrayList<String>(); 
     
+	 public static void addUsersBanned(ArrayList<String> usersBanned){
+         Scanner user = null;
+         try{
+             user = new Scanner(new File("./banned.txt"));
+             user.useDelimiter("\n");
+         }catch(FileNotFoundException e){
+             System.out.println("File not found");
+         }
+         while(user.hasNext()){
+             String contact = user.next();
+             usersBanned.add(contact.substring(contact.indexOf('*')+1,contact.indexOf('#')));
+         }
+         user.close();
+     }
+
 	public static void recallHistory(ArrayList<String> arrayList) {
 		Scanner historyLog = null;
 		try {
@@ -48,6 +64,10 @@ public class Server extends Thread{
 		boolean runServer = true;
 
 		recallHistory(chatLog);
+
+		AdminActions admin = new AdminActions();
+		addUsersBanned(usersBanned);
+        System.out.println("***Welcome to the Admin panel***");
 
 		try {
 			final ServerSocket chatServer = new ServerSocket(PORT);
@@ -72,13 +92,10 @@ public class Server extends Thread{
 	                    }
 	                }
 	            }).start();
+				
+				
 
-				System.out.println("Press 'q' for quitting the server");
-				Scanner scanner = new Scanner(System.in);
-				String adminAction1 = scanner.nextLine();
-				if (adminAction1.equals("q")) {
-					runServer = false;
-				}
+				runServer = admin.action();
 			} 
 		}catch(Exception e) {
 			System.out.println("Server exception");
