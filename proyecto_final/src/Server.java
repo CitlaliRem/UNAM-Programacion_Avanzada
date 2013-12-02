@@ -8,8 +8,9 @@
  *        4. mensajes privados (/msg)
  *        5. Bloqueo de usuarios
  *        6. cliente automático (opcional)
- *
- *
+ Esta clase es la que atiende al cliente y brinda todo el trato que este va a tener con los demás clientes
+ son 2 clases en una, pero la segunda clase no es más que una extencion de lo que el servidor hace
+ 
  */
 
 import java.io.*;
@@ -82,7 +83,7 @@ public class Server extends Thread{
                         while(runServer == true) {
                                 System.out.println("Server waiting for Clients on port " + PORT + ".");
 
-                                new Thread(new Runnable() {
+                                new Thread(new Runnable() { //se manda a "segundo plano" para que así siga sin interrupcion aceptando clientes
                                         @Override
                                         public void run() {
                                                 try {
@@ -102,8 +103,8 @@ public class Server extends Thread{
 
 
 
-                                runServer = admin.action();
-                        } 
+                                runServer = admin.action();//si e administrador lo decide est clase regresará un false
+                        }                                  //lo cual tirará al servidor
                 }catch(Exception e) {
                         System.out.println("Server exception");
                 }
@@ -138,7 +139,7 @@ public class Server extends Thread{
                 }
         }
 
-
+//es Obio pero con esto hechamos a andar el servidor
         public static void main(String args[]){
 
                 try{
@@ -153,7 +154,7 @@ public class Server extends Thread{
 
 
 
-}
+}//esta clase es la que permite toda la interacion entre los clientes
 class ClientThread extends Thread {
         /* los hilos para cada cliente que se conecta */
         Socket socket;
@@ -240,7 +241,7 @@ class ClientThread extends Thread {
                                 nickname = Tools.capitalizeFirstLetter(nickname);
         
 
-                                if (Server.usersOnline.contains(nickname)){
+                                if (Server.usersOnline.contains(nickname)){//si el nombre de usuario ya esta en linea termina la conexion con ese socket
                                         serverOutput.println(nickname + " is already online");
                                         serverOutput.println("SERVER:\tGoodbye ");
                                         closeConnections(userInput, serverOutput, socket);
@@ -283,7 +284,7 @@ class ClientThread extends Thread {
                                                         UserActions.CommandSwitch(serverOutput, inputString, nickname);
         
                                                         if (UserActions.ExitChat(serverOutput, inputString, nickname)) {
-                                                                Server.usersOnline.remove(nickname);
+                                                                Server.usersOnline.remove(nickname);//como el usuario ya no estará en linea lo removerá de la lista de usuarios en linea
                                                                 closeConnections(userInput, serverOutput, socket);
                                                                 break;
                                                         }
@@ -307,7 +308,7 @@ class ClientThread extends Thread {
                         e.printStackTrace();
                 }
         }
-
+//metodo que manda la hora al chat
         private void serverMsg(String message) throws IOException {
 
                 String timeChat = timeStampChat.format(new Date());
@@ -320,7 +321,7 @@ class ClientThread extends Thread {
                 serverOutput.println(timeChat + message);
         }
 
-
+//con este metodo se cierran los sockets
         public static void closeConnections(DataInputStream userInput, PrintStream serverOutput, Socket socket) {
                 try {
                         serverOutput.println("User connection closed");
