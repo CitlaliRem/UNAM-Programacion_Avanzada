@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Properties;
 
 
@@ -11,7 +13,7 @@ public class Tools {
 	    return original.substring(0, 1).toUpperCase() + original.substring(1);
 	}
 	
-	static boolean checkFileEntry(String nick, String datafile) { 
+	static boolean checkFileEntry(String searchItem, String datafile) { 
     	try {
 			File file = new File(datafile);
 			FileInputStream fileInput = new FileInputStream(file);
@@ -19,7 +21,10 @@ public class Tools {
 			properties.loadFromXML(fileInput);
 			fileInput.close();
 
-			if (properties.getProperty(nick) == null) return false;
+			if (properties.getProperty(searchItem) == null) {
+					System.out.println(searchItem + " does not exist");
+					return false;
+			}
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -28,6 +33,32 @@ public class Tools {
 		}
 		
         return true;  
+	}
+	
+	public static void readPropsToArray(HashSet<String> usersBanned, String datafile) {
+		try {
+			File file = new File(datafile);
+			FileInputStream fileInput = new FileInputStream(file);
+			Properties properties = new Properties();
+			properties.loadFromXML(fileInput);
+			fileInput.close();
+
+	      Enumeration<?> enumeration = properties.propertyNames();
+
+	      while (enumeration.hasMoreElements()) {
+	    	  usersBanned.add((String) enumeration.nextElement());
+	      }
+/* 
+	      for (int i = 0; i < usersBanned.size(); i++) {
+				System.out.println(usersBanned.get(i));
+			}
+*/
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void propSetter(String keyVal, String propertyVal, String datafile, String comment) {
@@ -57,7 +88,7 @@ public class Tools {
 			Properties properties = new Properties();
 			properties.loadFromXML(fileInput);
 			fileInput.close();
-			System.out.println("keyVal"+ keyVal);
+			//System.out.println("keyVal "+ keyVal);
 
 			properties.remove(keyVal);
 

@@ -8,30 +8,6 @@ public class AccessTools {
 
 	private static final String USER_DATABASE = "users.xml";
 
-	static boolean checkSignUp(String nick) {
-
-			try {
-				File file = new File(USER_DATABASE);
-				FileInputStream fileInput = new FileInputStream(file);
-				Properties properties = new Properties();
-				properties.loadFromXML(fileInput);
-				fileInput.close();
-	
-				String userName = properties.getProperty(nick);
-
-				if(userName == null) {
-					System.out.println("LOG: Nickname does not exist");
-					return false;
-				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		return true;
-	}
-
 	public static void SignUp (PrintStream serverOutput, DataInputStream userInput, Socket socket, String nickname, int numSockets) throws IOException {
 		String newNickname = null;
 		String newPassword = null;
@@ -73,17 +49,18 @@ public class AccessTools {
 						numSockets -= 1;
 		        	}
 	        		//System.out.println("LOG: " + time + " User choose invalid password " + (tries+1) + " times");
-	        		serverOutput.println("Password should be min 8 characters long and contain min 2 digits");
-	            	serverOutput.print("Choose your password: ");
-	            	//newPassword = ClientHandler.RecordUserInput(userInput);
-	            	newPassword = userInput.readLine();
-	
-	        		tries += 1;
+		        	if (! socket.isClosed()) {
+		        		serverOutput.println("Password should be min 8 characters long and contain min 2 digits");
+		            	serverOutput.print("Choose your password: ");
+		            	//newPassword = ClientHandler.RecordUserInput(userInput);
+		            	newPassword = userInput.readLine();
+		
+		        		tries += 1;
+		        	}
 	
 	    		}
 				} catch(NullPointerException e) {
 					/* respuesta era un enter */
-					
 				}
 			} 
     }

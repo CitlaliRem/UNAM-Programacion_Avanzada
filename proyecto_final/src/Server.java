@@ -26,9 +26,10 @@ public class Server extends Thread{
 	static Socket client;
 	static ArrayList<ClientThread> clientList = new ArrayList<ClientThread>();
 	static ArrayList<String> chatLog = new ArrayList<String>();
-	static ArrayList<String> usersBanned = new ArrayList<String>();
+	//static ArrayList<String> usersBanned = new ArrayList<String>();
+	static HashSet<String> usersBanned = new HashSet<String>();
 	static ArrayList<String> usersOnline = new ArrayList<String>(); 
-
+/*j
 	public static void addUsersBanned(ArrayList<String> usersBanned){
 		Scanner user = null;
 		try{
@@ -43,8 +44,13 @@ public class Server extends Thread{
 		}
 		user.close();
 	}
+*/
 
-	public static void readFileIntoArray(ArrayList<String> array, String file) {
+	/**
+	 * @param usersBanned2
+	 * @param blacklist2
+	 */
+	public static void readFileIntoArray(HashSet<String> hashSet, String file) {
 		Scanner readBuffer = null;
 		try {
 			readBuffer = new Scanner(new File(file));
@@ -55,7 +61,24 @@ public class Server extends Thread{
 
 		while (readBuffer.hasNext()) {
 			String line = readBuffer.next();
-			array.add(line);
+			hashSet.add(line);
+		}
+		readBuffer.close();
+	}
+
+	/* utilizamos esto para el historial */
+	public static void readFileIntoArray(ArrayList<String> chatLog2, String file) {
+		Scanner readBuffer = null;
+		try {
+			readBuffer = new Scanner(new File(file));
+			readBuffer.useDelimiter("\n");
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR: Logfile not found");
+		}
+
+		while (readBuffer.hasNext()) {
+			String line = readBuffer.next();
+			chatLog2.add(line);
 		}
 		readBuffer.close();
 	}
@@ -66,11 +89,11 @@ public class Server extends Thread{
 		boolean runServer = true;
 
 		readFileIntoArray(chatLog, HISTORYLOG);
-		readFileIntoArray(usersBanned, BLACKLIST);
+		Tools.readPropsToArray(usersBanned, BLACKLIST);
 		//addUsersBanned(usersBanned);
 
 		AdminActions admin = new AdminActions();
-		System.out.println("***Welcome to the Admin panel***");
+		System.out.println("*** Welcome to the Admin panel ***");
 
 		try {
 			final ServerSocket chatServer = new ServerSocket(PORT);
@@ -147,6 +170,8 @@ public class Server extends Thread{
 		}
 	}
 
+
+
 }
 class ClientThread extends Thread {
 	/* los hilos para cada cliente que se conecta */
@@ -161,6 +186,7 @@ class ClientThread extends Thread {
 	private SimpleDateFormat timeStampChat;
 	//private String time;
 	private static final String HISTORYLOG = "chatlog.txt";
+	private static final String USERDATABASE = "users.xml";
 
 
 	// Constructor
@@ -198,13 +224,14 @@ class ClientThread extends Thread {
 
 			nickname = userInput.readLine();
 
-			Boolean signedUp = AccessTools.checkSignUp(nickname);
+			//Boolean signedUp = AccessTools.checkSignUp(nickname);
+			Boolean signedUp = Tools.checkFileEntry(nickname, USERDATABASE );
 
 			if (signedUp == false) {
 				AccessTools.SignUp(serverOutput, userInput, socket, nickname, numSockets);
 			}
 
-			//if(! socket.isClosed()) { 	/* si el usuario estaba registrado o se registró....*/
+			/* si el usuario estaba registrado o se registró....*/
 			serverOutput.print("Password: ");
 
 			passwd = userInput.readLine();
@@ -214,9 +241,7 @@ class ClientThread extends Thread {
 			/* Validación de la clave */
 			Boolean validPass = AccessTools.checkCredentials(nickname, passwd);
 
-			//System.out.println("socket closed last? " + socket.isClosed());
 			if (validPass == false) {
-				//System.out.println("socket alive? " + socket.isClosed());
 				serverOutput.println("Sorry, you have no access to this chat");
 				closeConnections(userInput, serverOutput, socket);
 				numSockets -= 1;
@@ -228,7 +253,6 @@ class ClientThread extends Thread {
 				closeConnections(userInput, serverOutput, socket);
 			} else {
 				Server.usersOnline.add(nickname);
-				//break;
 				serverOutput.println("\nSERVER:\tHi " + nickname + "\n>> : ");
 
 				for(int i=0; i< Server.clientList.size(); i++) {
@@ -276,7 +300,7 @@ class ClientThread extends Thread {
 					}
 				}
 
-				//Tools.WriteToFile(Server.chatLog, HISTORYLOG);
+				Tools.WriteToFile(Server.chatLog, HISTORYLOG);
 			}
 
 		} catch (IOException e) {
