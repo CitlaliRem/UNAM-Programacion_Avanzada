@@ -2,12 +2,14 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>User Access</comment>
+<entry key="oscar">1</entry>
+<entry key="bunny">12qweasd</entry>
+<entry key="jos">23qwertyu</entry>
 <entry key="mag">1</entry>
+<entry key="hell">12qweasd</entry>
+<entry key="bobo">34qazxsw</entry>
+<entry key="bert">123qweasd</entry>
 <entry key="henk">12qwertyuop</entry>
 <entry key="tim">23qwerasdf</entry>
-<entry key="bunny">12qweasd</entry>
-<entry key="hell">12qweasd</entry>
-<entry key="jos">23qwertyu</entry>
-<entry key="oscar">1</entry>
-<entry key="bobo">34qazxsw</entry>
+<entry key="mart">12qwaszx</entry>
 </properties>
