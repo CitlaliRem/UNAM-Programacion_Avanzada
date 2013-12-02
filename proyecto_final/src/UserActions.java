@@ -1,6 +1,7 @@
 import java.io.PrintStream;
 import java.util.ArrayList;
-
+//esta clase es la que se encarga de escuchar los comandos de los usuarios unicamente entra en accion si el comentario
+//o dato escrito por el usuario comeinza con /
 public class UserActions {
         private static final String HISTORYLOG = "./chatlog.txt";
 
@@ -61,7 +62,7 @@ public class UserActions {
                 serverOutput.println("/exit\tdisconnect");
                 serverOutput.println("*******************************************");
         }
-
+//este metodo es el que permite mandar mensajes privados(obiamente)
         public static void PrivateMenssage(PrintStream serverOutput, String inputString, String nickname) {
                 //PrintStream serverOutput = ClientThread.serverOutput;
                 System.out.println("private message");
@@ -69,20 +70,20 @@ public class UserActions {
                         serverOutput.println("Usage: /private <user> <message>");
                 } else {
 
-                        ArrayList<ClientThread> clientList = Server.clientList;
-                        ArrayList<String> usersOnline = Server.usersOnline;
+                        ArrayList<ClientThread> clientList = Server.clientList;  //como el mensaje tiene un formato en especifico 
+                        ArrayList<String> usersOnline = Server.usersOnline;//generamos varias condiciones que evitan que se envie un mensaje sin destinatario o sin mensaje
                 
-                        String tmpInputString = inputString.substring(inputString.indexOf(' ')+1);
-                        tmpInputString = Tools.capitalizeFirstLetter(tmpInputString);
+                        String tmpInputString = inputString.substring(inputString.indexOf(' ')+1);//generamos otro string en el cual ya solo estará el usuario y el mensaje que se va a enviar
+                        tmpInputString = Tools.capitalizeFirstLetter(tmpInputString);//pasamos el substring para que capitalize la primer letra y así encuentre al usuario pues todos tienen la primer letra en mayuscula
                         try {
-                                if (Server.usersOnline.indexOf(tmpInputString.substring(0,tmpInputString.indexOf(' '))) == -1){
+                                if (Server.usersOnline.indexOf(tmpInputString.substring(0,tmpInputString.indexOf(' '))) == -1){//con esto capturamos solo la parte del string donde se contiene al usuario que se va a mandar
                                         serverOutput.println("User not found");
                                 }
                         else{
                                 if(tmpInputString.indexOf(' ')==-1){
                                         serverOutput.println("Menssage is missing");
                                 }else{
-
+//la siguiente linea consite en lo siguiente se dirigirá al cliente que esta en la posicion que nos brinda users online igual se divide el string para que solo sea la parte del usuario y del mensaje, la parte del usuario la utilizamos para que nos mande al inice donde será enviado el mensaeje
                                         Server.clientList.get(Server.usersOnline.indexOf(tmpInputString.substring(0,tmpInputString.indexOf(' ')))).serverOutput.println(nickname+">> "+tmpInputString.substring(tmpInputString.indexOf(' ')));
                                 }               
                         }                    
