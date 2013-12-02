@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Properties;
-
-
+/*esta clase es la que se encarga de la mayoría de utilizades, como pasar letras a mayusculas, leer archivos para comparar y demás acciones por el estilo
+*/
 public class Tools {
 
         public static String capitalizeFirstLetter(String original){
@@ -34,7 +34,7 @@ public class Tools {
                 
         return true;  
         }
-        
+        //para leer la lista de usuarios bloqueados
         public static void readPropsToArray(HashSet<String> usersBanned, String datafile) {
                 try {
                         File file = new File(datafile);
@@ -60,7 +60,7 @@ public class Tools {
                         e.printStackTrace();
                 }
         }
-
+//los siguientes metodos actualizan los datos en el archivo, hay que recordar que se utiliza properties no un archivo .txt
         public static void propSetter(String keyVal, String propertyVal, String datafile, String comment) {
                 try {
                         File file = new File(datafile);
