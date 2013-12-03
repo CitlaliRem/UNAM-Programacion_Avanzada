@@ -57,7 +57,7 @@ public class UserActions {
                 serverOutput.println("/hist\t\tshow chat history");
                 serverOutput.println("/users\t\tshow online users");
                 serverOutput.println("/help\t\tshow this help menu");
-                serverOutput.println("/private\t\tprivate message: <user> <message>");
+                serverOutput.println("/private\tprivate message: <user> <message>");
                 serverOutput.println("/exit\t\tdisconnect");
                 serverOutput.println("*******************************************");
         }
