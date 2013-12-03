@@ -53,7 +53,7 @@ public class AdminActions{
                                         String reoffending = "0"; // variable que se podría usar para la cuenta cuantas veces fue bloqueado
 
                                         //tmpAccion = unBlockUser.substring(unBlockUser.indexOf(' ')+1);
-                                        System.out.println("unblock user after tmpAction" + unBlockUser);
+                                        //System.out.println("unblock user after tmpAction" + unBlockUser);
                                         String tmpAccionCap = Tools.capitalizeFirstLetter(unBlockUser);
 
                                         if(Server.usersBanned.contains(unBlockUser)) {
