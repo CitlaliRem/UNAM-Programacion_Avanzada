@@ -54,11 +54,11 @@ public class UserActions {
                 //PrintStream serverOutput = ClientThread.serverOutput;
                 serverOutput.println("*******************************************");
                 serverOutput.println("Options:");
-                serverOutput.println("/hist\tshow chat history");
-                serverOutput.println("/users\tshow online users");
-                serverOutput.println("/help\tshow this help menu");
-                serverOutput.println("/private\tprivate message: <user> <message>");
-                serverOutput.println("/exit\tdisconnect");
+                serverOutput.println("/hist\t\tshow chat history");
+                serverOutput.println("/users\t\tshow online users");
+                serverOutput.println("/help\t\tshow this help menu");
+                serverOutput.println("/private\t\tprivate message: <user> <message>");
+                serverOutput.println("/exit\t\tdisconnect");
                 serverOutput.println("*******************************************");
         }
 
